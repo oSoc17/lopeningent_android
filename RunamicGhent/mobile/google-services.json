@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "582876495114",
+    "firebase_url": "https://drig-56997.firebaseio.com",
+    "project_id": "drig-56997",
+    "storage_bucket": "drig-56997.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582876495114:android:a8bf66536615a50a",
+        "android_client_info": {
+          "package_name": "com.dp16.dynamicrunninginghent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "582876495114-cc3i1bs09em38p25c96utino1lfdegul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtQTf4DTnLSRXCKeeG2FnyGkGb1poCtrw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

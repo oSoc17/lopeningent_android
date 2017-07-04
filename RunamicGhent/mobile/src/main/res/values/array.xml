@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017 Hendrik Depauw
+  ~ Copyright (c) 2017 Lorenz van Herwaarden
+  ~ Copyright (c) 2017 Nick Aelterman
+  ~ Copyright (c) 2017 Olivier Cammaert
+  ~ Copyright (c) 2017 Maxim Deweirdt
+  ~ Copyright (c) 2017 Gerwin Dox
+  ~ Copyright (c) 2017 Simon Neuville
+  ~ Copyright (c) 2017 Stiaan Uyttersprot
+  ~
+  ~ This software may be modified and distributed under the terms of the MIT license.  See the LICENSE file for details.
+  -->
+
+<resources>
+    <!-- Preferences Screen -->
+    <string-array name="pref_entries_velocity">
+        <item>km/h</item>
+        <item>min/km</item>
+    </string-array>
+
+    <string-array name="pref_values_velocity">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+
+</resources>

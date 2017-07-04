@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017 Hendrik Depauw
+  ~ Copyright (c) 2017 Lorenz van Herwaarden
+  ~ Copyright (c) 2017 Nick Aelterman
+  ~ Copyright (c) 2017 Olivier Cammaert
+  ~ Copyright (c) 2017 Maxim Deweirdt
+  ~ Copyright (c) 2017 Gerwin Dox
+  ~ Copyright (c) 2017 Simon Neuville
+  ~ Copyright (c) 2017 Stiaan Uyttersprot
+  ~
+  ~ This software may be modified and distributed under the terms of the MIT license.  See the LICENSE file for details.
+  -->
+
+<android.support.wearable.view.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccentDarker"
+    tools:context="com.dp16.runamicghent.WearActivity"
+    tools:deviceIds="wear">
+
+    <LinearLayout
+        android:layout_width="120dip"
+        android:background="@color/colorPrimary"
+        android:layout_height="match_parent"></LinearLayout>
+
+    <ImageView
+        android:id="@+id/navigationview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:maxWidth="50dp"
+        android:adjustViewBounds="true"
+        android:layout_gravity="center"
+
+        android:layout_marginTop="30pt"
+        android:visibility="invisible"
+        android:src="@drawable/arrowstraight" />
+    <ImageView
+        android:id="@+id/runner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:maxWidth="50dp"
+        android:adjustViewBounds="true"
+        android:layout_gravity="center"
+        android:layout_marginLeft="-30dip"
+        android:layout_marginTop="-30pt"
+        android:visibility="invisible"
+        android:src="@drawable/runner" />
+
+    <TextView
+        android:id="@+id/speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="23pt"
+        android:layout_marginTop="-15pt"
+        android:ems="8"
+        android:gravity="center"
+        android:text="--"
+        android:textSize="10pt"
+        android:textColor="@color/colorPrimaryText" />
+
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="23pt"
+        android:layout_marginTop="-30pt"
+        android:ems="8"
+        android:gravity="center"
+        android:text="--"
+        android:textSize="10pt"
+        android:textColor="@color/colorPrimaryText" />
+
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="-20pt"
+        android:ems="8"
+        android:gravity="center"
+        android:text="0:00"
+        android:textSize="14pt"
+        android:textColor="@color/colorPrimaryText" />
+
+    <TextView
+        android:id="@+id/heartrate"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16pt"
+        android:ems="3"
+        android:textSize="14pt"
+        android:textColor="@color/colorPrimaryText"
+        android:text="--" />
+
+    <ImageView
+        android:id="@+id/heartIcon"
+        android:scaleType="fitXY"
+        android:maxWidth="25dp"
+        android:adjustViewBounds="true"
+        android:layout_marginLeft="30pt"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/hearticon" />
+
+    <TextView
+        android:id="@+id/simButton"
+        android:layout_width="wrap_content"
+        android:layout_height="34dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15pt"
+        android:background="@android:color/transparent"
+        android:textColor="@color/colorPrimaryText"
+        android:text="Runamic" />
+    <Button
+        android:id="@+id/addSimButton"
+        android:layout_width="32dp"
+        android:layout_height="34dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10pt"
+        android:layout_marginRight="-15pt"
+        android:background="@android:color/transparent"
+        android:textColor="@color/colorPrimaryText"
+        android:visibility="invisible"
+        android:clickable="false"
+        android:text="+" />
+    <Button
+        android:id="@+id/decSimButton"
+        android:layout_width="32dp"
+        android:layout_height="34dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10pt"
+        android:layout_marginLeft="-15pt"
+        android:background="@android:color/transparent"
+        android:textColor="@color/colorPrimaryText"
+        android:visibility="invisible"
+        android:clickable="false"
+        android:text="-" />
+
+
+</android.support.wearable.view.BoxInsetLayout>

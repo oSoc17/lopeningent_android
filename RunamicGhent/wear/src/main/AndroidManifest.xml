@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017 Hendrik Depauw
+  ~ Copyright (c) 2017 Lorenz van Herwaarden
+  ~ Copyright (c) 2017 Nick Aelterman
+  ~ Copyright (c) 2017 Olivier Cammaert
+  ~ Copyright (c) 2017 Maxim Deweirdt
+  ~ Copyright (c) 2017 Gerwin Dox
+  ~ Copyright (c) 2017 Simon Neuville
+  ~ Copyright (c) 2017 Stiaan Uyttersprot
+  ~
+  ~ This software may be modified and distributed under the terms of the MIT license.  See the LICENSE file for details.
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.dp16.runamicghent">
+
+    <uses-feature android:name="android.hardware.type.watch" />
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.BODY_SENSORS"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@android:style/Theme.DeviceDefault">
+        <uses-library
+            android:name="com.google.android.wearable"
+            android:required="false" />
+
+        <activity
+            android:name="com.dp16.runamicghent.WearActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.DeviceDefault.Light">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service android:name="com.dp16.runamicghent.WearComm">
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/startMessageWear" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/pauseMessageWear" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/heartRateMessageWear" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/requestStateMessageWear" />
+
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/measureHeartRate" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/stopMeasure" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/startRun" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/stopRun" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/pauseRun" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/navigateLeft" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/navigateRight" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/navigateStraight" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/navigateUTurn" />
+
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/runStateStart" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/runStateStop" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/timeUpdate" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/speedUpdate" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/distanceUpdate" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

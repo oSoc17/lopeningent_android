@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017 Hendrik Depauw
+  ~ Copyright (c) 2017 Lorenz van Herwaarden
+  ~ Copyright (c) 2017 Nick Aelterman
+  ~ Copyright (c) 2017 Olivier Cammaert
+  ~ Copyright (c) 2017 Maxim Deweirdt
+  ~ Copyright (c) 2017 Gerwin Dox
+  ~ Copyright (c) 2017 Simon Neuville
+  ~ Copyright (c) 2017 Stiaan Uyttersprot
+  ~
+  ~ This software may be modified and distributed under the terms of the MIT license.  See the LICENSE file for details.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:preference="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true">
+
+    <PreferenceCategory
+        android:key="pref_key_units"
+        android:title="@string/pref_title_units">
+
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/pref_entries_velocity"
+            android:entryValues="@array/pref_values_velocity"
+            android:key="pref_key_speed_pace"
+            android:summary="@string/pref_summary_velocity"
+            android:title="@string/pref_title_velocity" />
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        android:title="@string/pref_title_dynamic_routing"
+        android:key="pref_key_dynamic_routing">
+
+       <CheckBoxPreference
+           android:key="pref_key_dynamic_heart_routing_on_off"
+           android:title="@string/pref_title_dynamic_routing_on_off"
+           android:summaryOff="@string/pref_summary_off_dynamic_routing_on_off"
+           android:summaryOn="@string/pref_summary_on_dynamic_routing_on_off"
+           android:defaultValue="true"/>
+
+        <com.dp16.runamicghent.Activities.MainScreen.CustomSettings.RangebarPreference
+            android:dependency="pref_key_dynamic_heart_routing_on_off"
+            android:key="pref_key_heart_rate"
+            android:title="@string/pref_title_dynamic_routing_heartrate"
+            android:summary="@string/pref_summary_dynamic_routing_heartrate"/>
+
+        <com.dp16.runamicghent.Activities.MainScreen.CustomSettings.ParkPreference
+            android:key="pref_key_park"/>
+
+        <com.dp16.runamicghent.Activities.MainScreen.CustomSettings.WaterPreference
+            android:key="pref_key_water"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="pref_key_audio_category"
+        android:title="Audio">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="pref_key_audio"
+            android:summaryOff="Disabled"
+            android:summaryOn="Enabled"
+            android:title="Audio" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:dependency="pref_key_audio"
+            android:key="pref_key_audio_directions"
+            android:summaryOff="Disabled"
+            android:summaryOn="Enabled"
+            android:title="Audio directions" />
+
+        <PreferenceScreen
+            android:title="Audio feedback"
+            android:key="@+id/contact_button"
+            android:dependency="pref_key_audio">
+
+            <PreferenceCategory
+                android:title="Feedback moments">
+
+                <SwitchPreference
+                    android:defaultValue="true"
+                    android:key="pref_key_audio_feedback_distance"
+                    android:summaryOff="Disabled"
+                    android:summaryOn="Enabled"
+                    android:title="After certain distance" />
+
+                <com.dp16.runamicghent.Activities.MainScreen.CustomSettings.NumberPickerPreference
+                    android:defaultValue="1"
+                    android:dependency="pref_key_audio_feedback_distance"
+                    android:key="pref_key_audio_feedback_distance_interval"
+                    android:title="Distance feedback interval"
+                    preference:maxValue="10"
+                    preference:minValue="1"
+                    preference:wrapSelectorWheel="true"
+                    preference:unit="km"/>
+
+                <SwitchPreference
+                    android:defaultValue="false"
+                    android:key="pref_key_audio_feedback_duration"
+                    android:summaryOff="Disabled"
+                    android:summaryOn="Enabled"
+                    android:title="After certain duration" />
+
+                <com.dp16.runamicghent.Activities.MainScreen.CustomSettings.NumberPickerPreference
+                    android:defaultValue="5"
+                    android:dependency="pref_key_audio_feedback_duration"
+                    android:key="pref_key_audio_feedback_duration_interval"
+                    android:title="Duration feedback interval"
+                    preference:maxValue="60"
+                    preference:minValue="1"
+                    preference:wrapSelectorWheel="true"
+                    preference:unit="minutes"/>
+            </PreferenceCategory>
+
+            <PreferenceCategory
+                android:title="Feedback contents">
+
+                <CheckBoxPreference
+                    android:key="pref_key_audio_feedback_contents_distance"
+                    android:title="Total distance"
+                    android:defaultValue="true"/>
+
+                <CheckBoxPreference
+                    android:key="pref_key_audio_feedback_contents_duration"
+                    android:title="Total duration"
+                    android:defaultValue="true"/>
+
+                <CheckBoxPreference
+                    android:key="pref_key_audio_feedback_contents_avg_speed"
+                    android:title="Average speed"
+                    android:defaultValue="true"/>
+
+                <CheckBoxPreference
+                    android:key="pref_key_audio_feedback_contents_avg_heartrate"
+                    android:title="Average heart rate"
+                    android:defaultValue="false"/>
+
+            </PreferenceCategory>
+
+        </PreferenceScreen>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="pref_reset_tourguide_category"
+        android:title="Reset introduction Tooltips">
+
+        <com.dp16.runamicghent.Activities.MainScreen.CustomSettings.ResetTooltipDialogPreference
+            android:title="@string/pref_title_reset_tooltip_dialog"
+            android:key="pref_reset_tooltip_dialog"
+            android:dialogTitle="@string/pref_dialogtitle_reset_tooltip_dialog"
+            android:dialogMessage="@string/pref_msg_reset_tooltip_dialog"
+            android:positiveButtonText="@string/reset"
+            android:negativeButtonText="@string/decline" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/pref_about">
+        <PreferenceScreen android:title="@string/contact_button"
+            android:key="@+id/contact_button">
+            <intent android:action="com.dp16.dynamicrunninginghent.Activities.MainScreen.ContactActivity"/>
+        </PreferenceScreen>
+
+        <PreferenceScreen android:title="@string/open_source_libraries"
+            android:key="@+id/licence_button">
+            <intent android:action="com.dp16.dynamicrunninginghent.Activities.MainScreen.LicenceActivity"/>
+        </PreferenceScreen>
+
+
+        <Preference
+            android:title="@string/pref_about_build_number"
+            android:key="pref_about_build_number"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="pref_key_debug"
+        android:title="Debug">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="pref_key_debug_inghentchecker"
+            android:summaryOff="Disabled"
+            android:summaryOn="Enabled"
+            android:title="Use inGhentChecker" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="pref_key_debug_location_mock"
+            android:summaryOff="Disabled"
+            android:summaryOn="Enabled"
+            android:title="Use location mock" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="pref_key_debug_fake_latlng_locationprovider"
+            android:summaryOff="Disabled"
+            android:summaryOn="Enabled"
+            android:title="Fake LatLng for LocationProvider" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="pref_key_debug_heartbeat_mock"
+            android:summaryOff="Disabled"
+            android:summaryOn="Enabled"
+            android:title="Use heartrate mock" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

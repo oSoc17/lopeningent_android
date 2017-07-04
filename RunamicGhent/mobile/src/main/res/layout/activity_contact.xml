@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017 Hendrik Depauw
+  ~ Copyright (c) 2017 Lorenz van Herwaarden
+  ~ Copyright (c) 2017 Nick Aelterman
+  ~ Copyright (c) 2017 Olivier Cammaert
+  ~ Copyright (c) 2017 Maxim Deweirdt
+  ~ Copyright (c) 2017 Gerwin Dox
+  ~ Copyright (c) 2017 Simon Neuville
+  ~ Copyright (c) 2017 Stiaan Uyttersprot
+  ~
+  ~ This software may be modified and distributed under the terms of the MIT license.  See the LICENSE file for details.
+  -->
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dp16.runamicghent.Activities.MainScreen.ContactActivity">
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/contact_logos">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/contact_logo_description"
+                    android:src="@drawable/ic_splash" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/contact_logo_description"
+                    android:src="@mipmap/ic_ugent" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/contact_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Runamic Ghent"
+                android:textColor="@color/colorAccent"
+                android:textSize="37sp"
+                android:layout_below="@id/contact_logos"
+                android:layout_centerHorizontal="true"/>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="@color/colorAccent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@id/contact_title"
+                android:id="@+id/contact_title_fading_line"/>
+
+            <TextView
+                android:id="@+id/contact_intro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contact_intro"
+                android:elegantTextHeight="true"
+                android:layout_below="@id/contact_title_fading_line"
+                android:gravity="center"
+                android:paddingBottom="20dp"
+                android:paddingTop="20dp"/>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/contact_intro"
+                android:stretchColumns="0,2"
+                android:shrinkColumns="0,2">
+                <!-- Developers -->
+                <TableRow>
+                    <TextView android:text="@string/contact_creators" android:textAllCaps="true" android:textStyle="bold" android:paddingBottom="3dp" android:textColor="@color/colorAccent"/>
+                    <TextView android:text="   "/>
+                    <TextView android:text="   "/>
+                </TableRow>
+                <TableRow android:padding="1dp">
+                    <TextView android:text="@string/person_hendrik_depauw"/>
+                    <android.support.v4.widget.Space />
+                    <TextView android:text="@string/person_hendrik_depauw_email" android:textIsSelectable="true"/>
+                </TableRow>
+                <TableRow android:padding="1dp">
+                    <TextView android:text="@string/person_lorenz_vanherwaarden"/>
+                    <android.support.v4.widget.Space />
+                    <TextView android:text="@string/person_lorenz_vanherwaarden_email" android:textIsSelectable="true"/>
+                </TableRow >
+                <TableRow android:padding="1dp">
+                    <TextView android:text="@string/person_nick_aelterman"/>
+                    <android.support.v4.widget.Space />
+                    <TextView android:text="@string/person_nick_aelterman_email" android:textIsSelectable="true"/>
+                </TableRow>
+                <TableRow android:padding="1dp">
+                    <TextView android:text="@string/person_olivier_cammaert"/>
+                    <android.support.v4.widget.Space />
+                    <TextView android:text="@string/person_olivier_cammaert_email" android:textIsSelectable="true"/>
+                </TableRow>
+                <TableRow android:padding="1dp">
+                    <TextView android:text="@string/person_maxim_deweirdt"/>
+                    <android.support.v4.widget.Space />
+                    <TextView android:text="@string/person_maxim_deweirdt_email" android:textIsSelectable="true"/>
+                </TableRow>
+                <TableRow android:padding="1dp">
+                    <TextView android:text="@string/person_gerwin_dox"/>
+                    <android.support.v4.widget.Space />
+                    <TextView android:text="@string/person_gerwin_dox_email" android:textIsSelectable="true"/>
+                </TableRow>
+                <TableRow android:padding="1dp">
+                    <TextView android:text="@string/person_simon_neuville"/>
+                    <android.support.v4.widget.Space />
+                    <TextView android:text="@string/person_simon_neuville_email" android:textIsSelectable="true"/>
+                </TableRow>
+                <TableRow android:padding="1dp">
+                    <TextView android:text="@string/person_stiaan_uyttersprot"/>
+                    <android.support.v4.widget.Space />
+                    <TextView android:text="@string/person_stiaan_uyttersprot_email" android:textIsSelectable="true"/>
+                </TableRow>
+
+                <!-- Promotors -->
+                <TableRow android:padding="1dp">
+                    <TextView android:text="@string/contact_promotors" android:textAllCaps="true" android:textStyle="bold" android:paddingBottom="3dp" android:paddingTop="15dp" android:textColor="@color/colorAccent" />
+                </TableRow>
+                <TableRow android:padding="1dp">
+                    <TextView android:text="@string/person_filip_deturck"/>
+                    <android.support.v4.widget.Space />
+                    <TextView android:text="@string/person_filip_deturck_email"/>
+                </TableRow>
+
+                <!-- Supervisors -->
+                <TableRow android:padding="1dp">
+                    <TextView android:text="@string/contact_supervisors" android:textAllCaps="true" android:textStyle="bold" android:paddingBottom="3dp" android:paddingTop="15dp" android:textColor="@color/colorAccent" />
+                </TableRow>
+                <TableRow android:padding="1dp">
+                    <TextView android:text="@string/person_femke_debackere"/>
+                    <android.support.v4.widget.Space />
+                    <TextView android:text="@string/person_femke_debackere_email"/>
+                </TableRow>
+                <TableRow android:padding="1dp">
+                    <TextView android:text="@string/person_stijn_depestel"/>
+                    <android.support.v4.widget.Space />
+                    <TextView android:text="@string/person_stijn_depestel_email"/>
+                </TableRow>
+                <TableRow android:padding="1dp">
+                    <TextView android:text="@string/person_jelle_nelis"/>
+                    <android.support.v4.widget.Space />
+                    <TextView android:text="@string/person_jelle_nelis_email"/>
+                </TableRow>
+
+            </TableLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>

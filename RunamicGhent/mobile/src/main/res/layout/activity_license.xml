@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017 Hendrik Depauw
+  ~ Copyright (c) 2017 Lorenz van Herwaarden
+  ~ Copyright (c) 2017 Nick Aelterman
+  ~ Copyright (c) 2017 Olivier Cammaert
+  ~ Copyright (c) 2017 Maxim Deweirdt
+  ~ Copyright (c) 2017 Gerwin Dox
+  ~ Copyright (c) 2017 Simon Neuville
+  ~ Copyright (c) 2017 Stiaan Uyttersprot
+  ~
+  ~ This software may be modified and distributed under the terms of the MIT license.  See the LICENSE file for details.
+  -->
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dp16.runamicghent.Activities.MainScreen.LicenseActivity">
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/license_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/license_page_title"
+                android:textAlignment="center"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:textSize="15pt"
+                android:layout_marginStart="5dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="2dp"/>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="@color/colorAccent"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="80dp"
+                android:layout_below="@id/license_title"/>
+
+
+            <!-- MaterialView License -->
+            <TextView
+                android:id="@+id/license_title_materialviewshowcase"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/license_materialview_title"
+                android:layout_below="@id/license_title"
+                style="@style/licenseTitleStyle"
+                android:paddingTop="30dp"/>
+
+            <TextView
+                android:id="@+id/license_text_materialview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/licenseTextStyle"
+                android:layout_below="@id/license_title_materialviewshowcase"/>
+
+            <!-- Apache 2 License -->
+            <TextView
+                android:id="@+id/license_title_apache2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/license_apache2_title"
+                android:layout_below="@id/license_text_materialview"
+                style="@style/licenseTitleStyle"/>
+
+            <TextView
+                android:id="@+id/license_text_apache2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/license_title_apache2"
+                style="@style/licenseTextStyle"/>
+
+
+            <!-- PeekAndPop License -->
+            <TextView
+                android:id="@+id/license_title_peekandpop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/license_peekandpop_title"
+                android:layout_below="@id/license_text_apache2"
+                style="@style/licenseTitleStyle"/>
+
+            <TextView
+                android:id="@+id/license_text_peekandpop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/license_title_peekandpop"
+                style="@style/licenseTextStyle"/>
+
+            <!-- Picasso -->
+            <TextView
+                android:id="@+id/license_title_picasso"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/license_picasso_title"
+                android:layout_below="@id/license_text_peekandpop"
+                style="@style/licenseTitleStyle"/>
+
+            <TextView
+                android:id="@+id/license_text_picasso"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/license_title_picasso"
+                style="@style/licenseTextStyle"/>
+
+            <!-- Mongo Java driver -->
+            <TextView
+                android:id="@+id/license_title_mongo_java_driver"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/license_mongo_java_driver_title"
+                android:layout_below="@id/license_text_picasso"
+                style="@style/licenseTitleStyle"/>
+
+            <TextView
+                android:id="@+id/license_text_mongo_java_driver"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/license_title_mongo_java_driver"
+                style="@style/licenseTextStyle"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+
+</android.support.constraint.ConstraintLayout>
+
+

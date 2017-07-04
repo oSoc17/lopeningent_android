@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017 Hendrik Depauw
+  ~ Copyright (c) 2017 Lorenz van Herwaarden
+  ~ Copyright (c) 2017 Nick Aelterman
+  ~ Copyright (c) 2017 Olivier Cammaert
+  ~ Copyright (c) 2017 Maxim Deweirdt
+  ~ Copyright (c) 2017 Gerwin Dox
+  ~ Copyright (c) 2017 Simon Neuville
+  ~ Copyright (c) 2017 Stiaan Uyttersprot
+  ~
+  ~ This software may be modified and distributed under the terms of the MIT license.  See the LICENSE file for details.
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dp16.runamicghent.Activities.MainScreen.Fragments.ProfileFragment">
+
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/colorPrimary"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:id="@+id/profile_picture"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:layout_gravity="center"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/photo_edit"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_edit_white" />
+            </RelativeLayout>
+
+
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.percent.PercentRelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="200dp"
+            android:background="?android:attr/activatedBackgroundIndicator">
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Name"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textSize="20dp"
+                    android:textColor="#212121" />
+
+                <EditText
+                    android:id="@+id/editName"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100dp"
+                    android:hint="Update name"
+                    android:inputType="text" />
+                <TextView
+                    android:id="@+id/email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_below="@id/name"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Email"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textSize="20dp"
+                    android:textColor="#212121"
+                    android:layout_marginTop="30dp"/>
+
+                <EditText
+                    android:id="@+id/editEmail"
+                    android:layout_width="fill_parent"
+                    android:layout_below="@id/editName"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100dp"
+                    android:hint="Update email"
+                    android:inputType="text"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/oldPw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Password"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textSize="20dp"
+                    android:layout_below="@+id/email"
+                    android:textColor="#212121"
+                    android:layout_marginTop="30dp"/>
+
+                <EditText
+                    android:id="@+id/editOldPw"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100dp"
+                    android:hint="Old password"
+                    android:inputType="textPassword"
+                    android:layout_below="@+id/editEmail"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/pw1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Password"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textSize="20dp"
+                    android:textColor="#212121"
+                    android:layout_below="@+id/oldPw"
+                    android:layout_marginTop="30dp"/>
+
+                <EditText
+                    android:id="@+id/editPw1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100dp"
+                    android:hint="Update password"
+                    android:inputType="textPassword"
+                    android:layout_below="@+id/editOldPw"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/pw2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Password"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textSize="20dp"
+                    android:layout_below="@+id/pw1"
+                    android:textColor="#212121"
+                    android:layout_marginTop="30dp"/>
+
+                <EditText
+                    android:id="@+id/editPw2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100dp"
+                    android:hint="Confirm password"
+                    android:inputType="textPassword"
+                    android:layout_below="@+id/editPw1"
+                    android:layout_marginTop="10dp"/>
+
+                <Button
+                    android:id="@+id/saveButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="bottom|right"
+                    android:text="Save"
+                    android:textSize="20dp"
+                    android:textColor="#fff"
+                    android:background="@color/colorAccent" />
+        </android.support.percent.PercentRelativeLayout>
+</FrameLayout>

@@ -1,0 +1,65 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven { url 'https://maven.fabric.io/public' }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'io.fabric.tools:gradle:1.+'
+        classpath 'com.google.gms:google-services:3.0.0'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+plugins {
+    id "org.sonarqube" version "2.3"
+}
+
+sonarqube {
+    properties {
+        def jenkinsJobName = System.getenv('JOB_NAME')
+        def jenkinsJobBuild = System.getenv('BUILD_NUMBER')
+
+        def projectVersion = "nonJenkinsBuild_0.2"
+        def projectName = "DRIGClient"
+        def projectKey = "DRIGClient:DRIGClient"
+        def branch = "master"
+
+        if (jenkinsJobName && jenkinsJobBuild) {
+            jenkinsJobName = jenkinsJobName.replace(" ", "_")
+            projectVersion = jenkinsJobName + '_' + jenkinsJobBuild
+        }
+
+        //change url if sonarqube is not at localhost:9000
+        // "http://193.190.127.140:9000/sonar"
+        property "sonar.host.url", "http://193.190.127.140:9000/sonar"
+        property "sonar.login", "jenkins"
+        property "sonar.password", "jenkins"
+        property "sonar.projectKey", projectKey // some shortcut name
+        property "sonar.projectName", projectName
+        property "sonar.projectVersion", projectVersion
+        property "sonar.branch", branch
+        property "sonar.sources", "src/main/java/"
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.scm.provider", "git"
+        property "sonar.exclusions", "**/*.xml"
+        property "sonar.coverage.exclusions", "**/Activities/**/*, **/MockUp/**/*, **/Debug/**/*, **/DataProvider/AndroidWearProvider.java, **/ConstantsWatch.java, **/HeartRateSensor.java, **/WearActivity.java, **/WearComm.java, **/RunningMapLocationSource.java, **/Constants.java"
+        property "sonar.jacoco.reportPaths", "build/jacoco/testDebugUnitTest.exec"
+        property "sonar.junit.reportsPath", "build/test-results/testDebugUnitTest"
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
+        maven { url 'https://maven.fabric.io/public' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

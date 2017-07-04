@@ -1,0 +1,115 @@
+<!--
+  ~ Copyright (c) 2017 Hendrik Depauw
+  ~ Copyright (c) 2017 Lorenz van Herwaarden
+  ~ Copyright (c) 2017 Nick Aelterman
+  ~ Copyright (c) 2017 Olivier Cammaert
+  ~ Copyright (c) 2017 Maxim Deweirdt
+  ~ Copyright (c) 2017 Gerwin Dox
+  ~ Copyright (c) 2017 Simon Neuville
+  ~ Copyright (c) 2017 Stiaan Uyttersprot
+  ~
+  ~ This software may be modified and distributed under the terms of the MIT license.  See the LICENSE file for details.
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.dp16.runamicghent.Activities.MainScreen.Fragments.StartFragment">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:clipToPadding="false"
+            android:fitsSystemWindows="true">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/myLocationButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:fitsSystemWindows="true"
+                android:src="@drawable/ic_location"
+                android:tint="@color/colorAccent"
+                app:backgroundTint="@color/colorIcons"
+                app:borderWidth="0dp"
+                app:elevation="2dp"
+                app:fabSize="mini"
+                app:rippleColor="@color/colorIcons" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:paddingTop="8dp"
+            android:clipToPadding="false">
+
+            <com.dp16.runamicghent.Activities.MainScreen.DistanceNumberPicker
+                android:id="@+id/route_length"
+                android:layout_width="56dp"
+                android:layout_height="112dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/picker_rounded"
+                android:descendantFocusability="blocksDescendants"
+                android:divider="@android:color/transparent"
+                android:elevation="1dp"
+                android:showDividers="none"
+                android:theme="@style/AppTheme.Picker" />
+
+            <Button
+                android:id="@+id/generate_route"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:background="@drawable/button_rounded_right"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:layout_weight="0.47"
+                android:elevation="1dp"
+                android:backgroundTint="@drawable/generate_route_button"
+                android:text="@string/generate_route"
+                android:textColor="@drawable/button_text_color" />
+
+            <Button
+                android:id="@+id/free_running"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:background="@drawable/button_rounded"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center"
+                android:layout_weight="0.53"
+                android:elevation="1dp"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@drawable/button_text_color"
+                android:text="@string/free_running" />
+
+        </LinearLayout>
+
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/snackbarlocation">
+        </android.support.design.widget.CoordinatorLayout>
+    </RelativeLayout>
+</FrameLayout>
