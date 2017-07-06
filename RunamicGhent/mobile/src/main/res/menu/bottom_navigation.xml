@@ -21,6 +21,12 @@
         android:title="@string/navigation_text_start"
         app:showAsAction="ifRoom" />
     <item
+        android:id="@+id/action_routesettings"
+        android:enabled="true"
+        android:icon="@drawable/ic_distance"
+        android:title="Route Settings"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/action_history"
         android:enabled="true"
         android:icon="@drawable/ic_navigation_history"

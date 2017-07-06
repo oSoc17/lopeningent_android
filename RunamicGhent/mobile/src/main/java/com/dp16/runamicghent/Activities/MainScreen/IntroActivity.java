@@ -7,6 +7,7 @@
  * Copyright (c) 2017 Gerwin Dox
  * Copyright (c) 2017 Simon Neuville
  * Copyright (c) 2017 Stiaan Uyttersprot
+ * Copyright (c) 2017 Redouane Arroubai
  *
  * This software may be modified and distributed under the terms of the MIT license.  See the LICENSE file for details.
  */
@@ -38,6 +39,7 @@ import android.widget.TextView;
 
 import com.dp16.runamicghent.Activities.MainScreen.Fragments.HistoryFragment;
 import com.dp16.runamicghent.Activities.MainScreen.Fragments.ProfileFragment;
+import com.dp16.runamicghent.Activities.MainScreen.Fragments.RouteSettingsFragment;
 import com.dp16.runamicghent.Activities.MainScreen.Fragments.StartFragment;
 import com.dp16.runamicghent.Constants;
 import com.dp16.runamicghent.DataProvider.LocationProvider;
@@ -82,6 +84,7 @@ public class IntroActivity extends AppCompatActivity implements EventListener{
     private StartFragment startFragment = null;
     private HistoryFragment historyFragment = null;
     private ProfileFragment profileFragment = null;
+    private RouteSettingsFragment routeSettingsFragment = null;
 
     BottomNavigationView bottomNavigationView = null;
 
@@ -108,6 +111,7 @@ public class IntroActivity extends AppCompatActivity implements EventListener{
           1: StartFragment (default)
           2: HistoryFragment
           3: ProfileFragment
+          4: RouteSettingsFragment
          */
         int fragmentToStart = getIntent().getIntExtra("Fragment", 1);
         final Fragment fragment;
@@ -130,6 +134,12 @@ public class IntroActivity extends AppCompatActivity implements EventListener{
                     this.profileFragment = new ProfileFragment();
                 }
                 fragment = this.profileFragment;
+                break;
+            case 4:
+                if (this.routeSettingsFragment == null) {
+                    this.routeSettingsFragment = new RouteSettingsFragment();
+                }
+                fragment = this.routeSettingsFragment;
                 break;
             default:
                 fragment = null;
@@ -188,6 +198,12 @@ public class IntroActivity extends AppCompatActivity implements EventListener{
                         this.profileFragment = new ProfileFragment();
                     }
                     replaceFragment(this.profileFragment, ProfileFragment.TAG);
+                    break;
+                case R.id.action_routesettings:
+                    if (this.routeSettingsFragment == null) {
+                        this.routeSettingsFragment = new RouteSettingsFragment();
+                    }
+                    replaceFragment(this.routeSettingsFragment, RouteSettingsFragment.TAG);
                     break;
 
                 default:
