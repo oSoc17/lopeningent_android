@@ -19,6 +19,8 @@ import android.preference.PreferenceManager;
 
 import com.dp16.runamicghent.Activities.Utils;
 import com.dp16.runamicghent.Constants;
+import com.dp16.runamicghent.GuiController.GuiController;
+import com.dp16.runamicghent.R;
 import com.dp16.runamicghent.RunData.RunAudio;
 import com.dp16.runamicghent.RunData.RunHeartRate;
 import com.dp16.eventbroker.EventBroker;
@@ -134,7 +136,7 @@ public class HeartRateChecker implements EventListener, EventPublisher {
             EventBroker.getInstance().addEvent(Constants.EventTypes.ABNORMAL_HEART_RATE, limitTag, this);
 
             // Create string to send to AudioPlayer
-            String textToSpeek = limitTag.equals(Constants.DynamicRouting.TAG_UPPER) ? "Your heart rate has been too high for a while. The route will be made shorter." : "Your heart rate has been too low for a while. The route will be made longer.";
+            String textToSpeek = limitTag.equals(Constants.DynamicRouting.TAG_UPPER) ? GuiController.getInstance().getContext().getString(R.string.audio_heartrate_high) : GuiController.getInstance().getContext().getString(R.string.audio_heartrate_low);
             RunAudio runAudio = new RunAudio(textToSpeek);
             EventBroker.getInstance().addEvent(Constants.EventTypes.AUDIO, runAudio, this);
 

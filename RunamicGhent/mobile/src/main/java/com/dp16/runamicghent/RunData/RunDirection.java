@@ -13,6 +13,11 @@
 
 package com.dp16.runamicghent.RunData;
 
+import android.app.Activity;
+
+import com.dp16.runamicghent.GuiController.GuiController;
+import com.dp16.runamicghent.R;
+
 /**
  * This class can contain a direction and is used for navigation purposes.
  * Its purpose is to be stored in a RunRoutePoint object.
@@ -104,13 +109,13 @@ public class RunDirection {
     public String toString(){
         switch (direction) {
             case LEFT:
-                return "left";
+                return GuiController.getInstance().getContext().getString(R.string.audio_left);
             case RIGHT:
-                return "right";
+                return GuiController.getInstance().getContext().getString(R.string.audio_right);
             case UTURN:
-                return "turnaround";
+                return GuiController.getInstance().getContext().getString(R.string.audio_uturn);
             case FORWARD:
-                return "forward";
+                return GuiController.getInstance().getContext().getString(R.string.audio_forward);
             default:
                 return "";
         }

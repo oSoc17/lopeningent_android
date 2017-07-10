@@ -13,6 +13,12 @@
 
 package com.dp16.runamicghent.RunData;
 
+import android.app.Activity;
+
+import com.dp16.runamicghent.Constants;
+import com.dp16.runamicghent.GuiController.GuiController;
+import com.dp16.runamicghent.R;
+
 import static com.dp16.runamicghent.RunData.RunDirection.Direction.*;
 
 /**
@@ -27,6 +33,7 @@ import static com.dp16.runamicghent.RunData.RunDirection.Direction.*;
 
 public class RunAudio {
     private String audioString;
+
 
     /**
      * Just a normal navigation direction. Forward and none are not played.
@@ -50,10 +57,10 @@ public class RunAudio {
      * @param newRunDirection Direction to follow the new route.
      */
     public RunAudio(RunDirection normalRunDirection, RunDirection newRunDirection){
-        audioString = "for the new route, ".concat(makeSentence(newRunDirection));
 
+        audioString = GuiController.getInstance().getContext().getString(R.string.audio_new_route).concat(makeSentence(newRunDirection));
         if (normalRunDirection.getDirection() != NONE){
-            audioString = audioString.concat(". Else, ");
+            audioString = audioString.concat(GuiController.getInstance().getContext().getString(R.string.audio_else));
             audioString = audioString.concat(makeSentence(normalRunDirection));
         }
     }
@@ -86,12 +93,12 @@ public class RunAudio {
     private String makeSentence(RunDirection runDirection){
         switch (runDirection.getDirection()){
             case UTURN:
-                return "please ".concat(runDirection.toString());
+                return GuiController.getInstance().getContext().getString(R.string.audio_couple_meters).concat(GuiController.getInstance().getContext().getString(R.string.audio_please).concat(runDirection.toString()));
             case RIGHT:
             case LEFT:
-                return "turn ".concat(runDirection.toString());
+                return GuiController.getInstance().getContext().getString(R.string.audio_couple_meters).concat(GuiController.getInstance().getContext().getString(R.string.audio_turn).concat(runDirection.toString()));
             case FORWARD:
-                return "go ".concat(runDirection.toString());
+                return GuiController.getInstance().getContext().getString(R.string.audio_go).concat(runDirection.toString());
             default:
                 return "";
         }
