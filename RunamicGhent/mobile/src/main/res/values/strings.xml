@@ -33,6 +33,19 @@
     <string name="location_inaccurate_message">Your location hasn\'t been accurately defined yet. You need to be outdoors. Without a good accuracy your run might not be tracked very well. Do you want to wait for a better signal or continue?</string>
     <string name="internet_connection">No internet connection</string>
 
+    <!-- Route Settings Fragment -->
+    <string name="distance">Distance</string>
+    <string name="time">Time</string>
+    <string name="nature">Nature</string>
+    <string name="city">City</string>
+    <string name="unpaved">Unpaved</string>
+    <string name="paved">Paved</string>
+    <string name="hills">Hills</string>
+    <string name="flat">Flat</string>
+    <string name="safety">Safety</string>
+    <string name="action">Action</string>
+    <string name="around">Around:</string>
+
     <!-- Running Card Labels -->
     <string name="speed_label">Speed</string>
     <string name="avg_speed_label">Avg Speed</string>
