@@ -43,6 +43,7 @@ import java.util.Map;
 public class GuiController {
     private static final GuiController ourInstance = new GuiController();
     private Map<String, Class> mapping = new HashMap<>();
+    private Context mContext;
 
     private GuiController() {
     }
@@ -186,4 +187,18 @@ public class GuiController {
     public void emptyState() {
         mapping.clear();
     }
+
+    /**
+     * To easily acces strings from the resources a Context is needed.
+     * This method gives out the last known context.
+     *
+     */
+
+    public Context getContext(){
+        return mContext;
+    }
+    public void setContext(Context context){
+        this.mContext = context;
+    }
+
 }

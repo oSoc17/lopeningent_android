@@ -20,6 +20,8 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.dp16.runamicghent.Constants;
+import com.dp16.runamicghent.GuiController.GuiController;
+import com.dp16.runamicghent.R;
 import com.dp16.runamicghent.RunData.RunAudio;
 import com.dp16.runamicghent.RunData.RunDistance;
 import com.dp16.runamicghent.RunData.RunDuration;
@@ -407,14 +409,15 @@ public class AndroidWearProvider extends WearableListenerService implements Even
          * @param message RunDirection object containing a direction
          */
         private void sendNavigationMessage(RunAudio message) {
+            String start =  GuiController.getInstance().getContext().getString(R.string.audio_couple_meters).concat(GuiController.getInstance().getContext().getString(R.string.audio_turn));
 
-            if ("turn left".equals(message.getAudioString())) {
+            if ((start.concat(GuiController.getInstance().getContext().getString(R.string.audio_left))).equals(message.getAudioString())) {
                 //tell the wearable to show navigation arrow left
                 sendMessage(Constants.WearMessageTypes.NAVIGATE_LEFT, "");
-            } else if ("turn right".equals(message.getAudioString())) {
+            } else if ((start.concat(GuiController.getInstance().getContext().getString(R.string.audio_right))).equals(message.getAudioString())) {
                 //tell the wearable to show navigation arrow right
                 sendMessage(Constants.WearMessageTypes.NAVIGATE_RIGHT, "");
-            } else if ("please turnaround".equals(message.getAudioString())) {
+            } else if ((GuiController.getInstance().getContext().getString(R.string.audio_please)).concat(GuiController.getInstance().getContext().getString(R.string.audio_uturn)).equals(message.getAudioString())) {
                 //tell the wearable to show navigation arrow right
                 sendMessage(Constants.WearMessageTypes.NAVIGATE_UTURN, "");
             }

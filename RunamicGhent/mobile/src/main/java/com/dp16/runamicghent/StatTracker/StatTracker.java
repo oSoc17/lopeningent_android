@@ -23,6 +23,8 @@ import com.dp16.runamicghent.DataProvider.DistanceProvider;
 import com.dp16.runamicghent.DataProvider.MockUp.HeartBeatProviderMock;
 import com.dp16.runamicghent.DataProvider.SpeedProvider;
 import com.dp16.runamicghent.DataProvider.TimingProvider;
+import com.dp16.runamicghent.GuiController.GuiController;
+import com.dp16.runamicghent.R;
 import com.dp16.runamicghent.RunData.RunAudio;
 import com.dp16.runamicghent.RunData.RunDistance;
 import com.dp16.runamicghent.RunData.RunDuration;
@@ -305,16 +307,16 @@ public class StatTracker implements EventListener, EventPublisher {
             String string = "";
 
             if(PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext()).getBoolean("pref_key_audio_feedback_contents_distance", true)){
-                string = string.concat("Total distance: " + runningStatistics.getTotalDistance().toAudioString() + ". ");
+                string = string.concat(GuiController.getInstance().getContext().getString(R.string.audio_totaldistance) + runningStatistics.getTotalDistance().toAudioString() + ". ");
             }
             if(PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext()).getBoolean("pref_key_audio_feedback_contents_duration", true)){
-                string = string.concat("Total duration: " + lastRunDuration.toAudioString() + ". ");
+                string = string.concat(GuiController.getInstance().getContext().getString(R.string.audio_totalduration) + lastRunDuration.toAudioString() + ". ");
             }
             if(PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext()).getBoolean("pref_key_audio_feedback_contents_avg_speed", true)){
-                string = string.concat("Average speed: " + runningStatistics.getAverageSpeed().toString(activity.getApplicationContext()) + ". ");
+                string = string.concat(GuiController.getInstance().getContext().getString(R.string.audio_average_speed) + runningStatistics.getAverageSpeed().toString(activity.getApplicationContext()) + ". ");
             }
             if(PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext()).getBoolean("pref_key_audio_feedback_contents_avg_heartrate", false)){
-                string = string.concat("Average heart rate: " + runningStatistics.getAverageHeartRate().toString() + ". ");
+                string = string.concat(GuiController.getInstance().getContext().getString(R.string.audio_average_heartrate) + runningStatistics.getAverageHeartRate().toString() + ". ");
             }
 
             RunAudio runAudio = new RunAudio(string);

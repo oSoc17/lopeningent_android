@@ -82,6 +82,31 @@
     <string name="discard_run">Afdanken</string>
     <string name="rating_label">Rate your run</string>
 
+    <!-- Audio Instructions -->
+    <string name="audio_please">gelieve</string>
+    <string name="audio_turn">neem de afslag</string>
+    <string name="audio_go">ga</string>
+    <string name="audio_new_route">voor de nieuwe route, </string>
+    <string name="audio_else">. Anderzijds, </string>
+    <string name="audio_left">links</string>
+    <string name="audio_right">rechts</string>
+    <string name="audio_forward">vooruit</string>
+    <string name="audio_uturn">terug te keren</string>
+    <string name="audio_couple_meters">over een paar meter</string>
+    <string name="audio_totaldistance">Totale afstand: </string>
+    <string name="audio_totalduration">Totale tijd: </string>
+    <string name="audio_average_speed">Gemiddelde snelheid: </string>
+    <string name="audio_average_heartrate">Gemiddelde hartslag: </string>
+    <string name="audio_meters"> meter</string>
+    <string name="audio_kilometers"> kilometer</string>
+    <string name="audio_heartrate_high">Uw hartslag is al voor een tijdje te hoog. De route zal korter worden gemaakt.</string>
+    <string name="audio_heartrate_low">Uw hartslag is al voor een tijdje te laag. De route zal langer worden gemaakt.</string>
+    <string name="audio_hour"> uur, </string>
+    <string name="audio_hours"> uren, </string>
+    <string name="audio_minute"> minuut en </string>
+    <string name="audio_minutes"> minuten en </string>
+    <string name="audio_second"> seconde.</string>
+    <string name="audio_seconds"> secondes.</string>
 
     <!-- Preferences Screen -->
     <string name="pref_title_units">Units</string>

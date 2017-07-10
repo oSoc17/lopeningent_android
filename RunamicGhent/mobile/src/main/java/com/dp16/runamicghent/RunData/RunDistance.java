@@ -13,6 +13,9 @@
 
 package com.dp16.runamicghent.RunData;
 
+import com.dp16.runamicghent.GuiController.GuiController;
+import com.dp16.runamicghent.R;
+
 import java.io.Serializable;
 import java.text.DecimalFormat;
 
@@ -75,11 +78,11 @@ public class RunDistance implements Serializable {
         String returnString;
 
         if (distance < 1000) {
-            returnString = String.valueOf(distance) + " meters";
+            returnString = String.valueOf(distance) + GuiController.getInstance().getContext().getString(R.string.audio_meters);
         } else {
             DecimalFormat df = new DecimalFormat("#.##");
             returnString = df.format(((double) distance) / 1000);
-            returnString = returnString.concat(" kilometers");
+            returnString = returnString.concat(GuiController.getInstance().getContext().getString(R.string.audio_kilometers));
         }
 
         return returnString;

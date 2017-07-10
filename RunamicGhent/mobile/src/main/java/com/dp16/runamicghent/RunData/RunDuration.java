@@ -13,6 +13,9 @@
 
 package com.dp16.runamicghent.RunData;
 
+import com.dp16.runamicghent.GuiController.GuiController;
+import com.dp16.runamicghent.R;
+
 import java.io.Serializable;
 
 /**
@@ -114,21 +117,21 @@ public class RunDuration implements Serializable {
         String returnString = "";
 
         if (hours == 1) {
-            returnString = returnString.concat(hours + " hour, ");
+            returnString = returnString.concat(hours + GuiController.getInstance().getContext().getString(R.string.audio_hour));
         } else if (hours > 1) {
-            returnString = returnString.concat(hours + " hours, ");
+            returnString = returnString.concat(hours + GuiController.getInstance().getContext().getString(R.string.audio_hours));
         }
 
         if (minutes == 1) {
-            returnString = returnString.concat(minutes + " minute and ");
+            returnString = returnString.concat(minutes + GuiController.getInstance().getContext().getString(R.string.audio_minute));
         } else {
-            returnString = returnString.concat(minutes + " minutes and ");
+            returnString = returnString.concat(minutes + GuiController.getInstance().getContext().getString(R.string.audio_minutes));
         }
 
         if (seconds == 1) {
-            returnString = returnString.concat(seconds + " second.");
+            returnString = returnString.concat(seconds + GuiController.getInstance().getContext().getString(R.string.audio_second));
         } else {
-            returnString = returnString.concat(seconds + " seconds.");
+            returnString = returnString.concat(seconds + GuiController.getInstance().getContext().getString(R.string.audio_seconds));
         }
 
         return returnString;

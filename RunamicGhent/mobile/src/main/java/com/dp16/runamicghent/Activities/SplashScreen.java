@@ -64,6 +64,7 @@ public class SplashScreen extends AppCompatActivity {
 
         // Register the activities with the GuiController
         GuiController controller = GuiController.getInstance();
+        controller.setContext(this);
         try {
             controller.register(Constants.ActivityTypes.MAINMENU, IntroActivity.class);
             controller.register(Constants.ActivityTypes.RUNNINGVIEW, RunningActivity.class);
