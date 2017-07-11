@@ -45,6 +45,11 @@
     <string name="safety">Safety</string>
     <string name="action">Action</string>
     <string name="around">Around:</string>
+    <string name="select_poi">Select POI:</string>
+
+    <string name="tourism">Tourism</string>
+    <string name="art">Art</string>
+
 
     <!-- Running Card Labels -->
     <string name="speed_label">Speed</string>
