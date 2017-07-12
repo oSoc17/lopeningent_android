@@ -18,7 +18,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:id="@+id/rootLL">
+
+
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -31,8 +34,8 @@
                     android:layout_height="34dp"
                     android:layout_below="@+id/linearLayout"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginRight="50dp"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginRight="85dp"
                     android:layout_marginTop="33dp"
                     android:layout_weight="0.07"
                     android:background="@drawable/button_round_corners"
@@ -43,11 +46,8 @@
                         android:id="@+id/rdbDistance"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="1dp"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginTop="1dp"
                         android:layout_weight="1"
-                        android:background="@drawable/toggle_button_background"
+                        android:background="@drawable/toggle_button_background_left"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/distance"
@@ -57,55 +57,57 @@
                         android:id="@+id/rdbTime"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="1dp"
-                        android:layout_marginRight="1dp"
-                        android:layout_marginTop="1dp"
                         android:layout_weight="1"
-                        android:background="@drawable/toggle_button_background"
+                        android:background="@drawable/toggle_button_background_right"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/time"
-                        android:textColor="@color/cardview_shadow_start_color" />
+                        android:textColor="@color/cardview_shadow_start_color"
+                        android:transitionName="rdbtime" />
 
                 </RadioGroup>
             </FrameLayout>
+
             <TextView
                 android:id="@+id/editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="10dp"
+                android:elevation="1dp"
                 android:inputType="textPersonName"
+                android:paddingRight="50dp"
                 android:text="@string/around"
                 android:textAlignment="center"
-                android:textColor="@color/cardview_shadow_start_color"
                 android:textSize="18sp" />
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="36dp"
+                android:layout_marginLeft="25dp"
                 android:paddingLeft="10dp">
 
                 <LinearLayout
-                    android:layout_width="312dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="25dp"
+                    android:layout_marginLeft="0dp"
                     android:orientation="horizontal"
                     android:textAlignment="center">
 
                     <Button
                         android:id="@+id/btnSubsDTValue"
-                        android:layout_width="55dp"
+                        android:layout_width="50dp"
                         android:layout_height="match_parent"
-                        android:background="@color/colorAccentDarker"
+                        android:background="@drawable/button_corners_left"
                         android:text="-"
                         android:textColor="@color/cardview_light_background"
                         android:textSize="30sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:layout_weight="0.21" />
 
                     <TextView
                         android:id="@+id/tvDTValue"
-                        android:layout_width="149dp"
+                        android:layout_width="131dp"
                         android:layout_height="match_parent"
                         android:background="@color/colorAccent"
                         android:text="0.0"
@@ -116,9 +118,10 @@
 
                     <Button
                         android:id="@+id/btnAddDTValue"
-                        android:layout_width="59dp"
+                        android:layout_width="50dp"
                         android:layout_height="match_parent"
-                        android:background="@color/colorAccentDarker"
+                        android:layout_weight="0.53"
+                        android:background="@drawable/button_corners_right"
                         android:text="+"
                         android:textColor="@color/cardview_light_background"
                         android:textSize="30sp" />
@@ -127,7 +130,7 @@
                         android:id="@+id/tvDT"
                         android:layout_width="wrap_content"
                         android:layout_height="31dp"
-                        android:layout_weight="1.53"
+                        android:layout_weight="3.34"
                         android:text="km"
                         android:textAlignment="center"
                         android:textSize="18sp" />
@@ -135,13 +138,42 @@
                 </LinearLayout>
             </FrameLayout>
 
-            <FrameLayout
-                android:id="@+id/insert"
+            <Spinner
+                android:id="@+id/spDifficulty"
+                android:textColor="@color/cardview_light_background"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="85dp"
+                android:layout_marginTop="33dp"
+                android:layout_weight="0.00"
+                android:background="@drawable/corners_spinner"
+                android:drawableEnd="@drawable/quantum_ic_keyboard_arrow_down_white_36"
+                android:dropDownSelector="@color/cardview_light_background" />
+
+            <TextView
+                android:id="@+id/editText2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.00">
+                android:layout_marginTop="5dp"
+                android:layout_weight="0.00"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:paddingRight="50dp"
+                android:text="@string/select_poi"
+                android:textAlignment="center"
+                android:textSize="18sp" />
 
-            </FrameLayout>
+            <Spinner
+                android:id="@+id/spPOI"
+                android:textColor="@color/cardview_light_background"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="85dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/corners_spinner"
+                android:dropDownSelector="@color/cardview_light_background" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -153,8 +185,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="34dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginRight="50dp"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginRight="85dp"
                     android:layout_marginTop="33dp"
                     android:background="@drawable/button_round_corners"
                     android:checkedButton="@+id/rdbNature"
@@ -164,11 +196,8 @@
                         android:id="@+id/rdbNature"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="1dp"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginTop="1dp"
                         android:layout_weight="1"
-                        android:background="@drawable/toggle_button_background"
+                        android:background="@drawable/toggle_button_background_left"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/nature"
@@ -178,11 +207,8 @@
                         android:id="@+id/rdbCity"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="1dp"
-                        android:layout_marginRight="1dp"
-                        android:layout_marginTop="1dp"
                         android:layout_weight="1"
-                        android:background="@drawable/toggle_button_background"
+                        android:background="@drawable/toggle_button_background_right"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/city"
@@ -200,8 +226,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="34dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginRight="50dp"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginRight="85dp"
                     android:layout_marginTop="33dp"
                     android:background="@drawable/button_round_corners"
                     android:checkedButton="@+id/rdbUnpaved"
@@ -211,11 +237,8 @@
                         android:id="@+id/rdbUnpaved"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="1dp"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginTop="1dp"
                         android:layout_weight="1"
-                        android:background="@drawable/toggle_button_background"
+                        android:background="@drawable/toggle_button_background_left"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/paved"
@@ -225,11 +248,8 @@
                         android:id="@+id/rdbPaved"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="1dp"
-                        android:layout_marginRight="1dp"
-                        android:layout_marginTop="1dp"
                         android:layout_weight="1"
-                        android:background="@drawable/toggle_button_background"
+                        android:background="@drawable/toggle_button_background_right"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/unpaved"
@@ -248,8 +268,8 @@
                     android:layout_height="34dp"
                     android:layout_below="@+id/linearLayout"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginRight="50dp"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginRight="85dp"
                     android:layout_marginTop="33dp"
                     android:layout_weight="0.07"
                     android:background="@drawable/button_round_corners"
@@ -260,11 +280,8 @@
                         android:id="@+id/rdbHills"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="1dp"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginTop="1dp"
                         android:layout_weight="1"
-                        android:background="@drawable/toggle_button_background"
+                        android:background="@drawable/toggle_button_background_left"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/hills"
@@ -274,11 +291,8 @@
                         android:id="@+id/rdbFlat"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="1dp"
-                        android:layout_marginRight="1dp"
-                        android:layout_marginTop="1dp"
                         android:layout_weight="1"
-                        android:background="@drawable/toggle_button_background"
+                        android:background="@drawable/toggle_button_background_right"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/flat"
@@ -297,8 +311,8 @@
                     android:layout_height="34dp"
                     android:layout_below="@+id/linearLayout"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginRight="50dp"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginRight="85dp"
                     android:layout_marginTop="33dp"
                     android:layout_weight="0.07"
                     android:background="@drawable/button_round_corners"
@@ -309,11 +323,8 @@
                         android:id="@+id/rdbSafety"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="1dp"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginTop="1dp"
                         android:layout_weight="1"
-                        android:background="@drawable/toggle_button_background"
+                        android:background="@drawable/toggle_button_background_left"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/safety"
@@ -323,11 +334,8 @@
                         android:id="@+id/rdbAction"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="1dp"
-                        android:layout_marginRight="1dp"
-                        android:layout_marginTop="1dp"
                         android:layout_weight="1"
-                        android:background="@drawable/toggle_button_background"
+                        android:background="@drawable/toggle_button_background_right"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/action"
@@ -335,29 +343,6 @@
 
                 </RadioGroup>
             </FrameLayout>
-
-            <TextView
-                android:id="@+id/editText2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_weight="0.00"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="@string/select_poi"
-                android:textAlignment="center"
-                android:textColor="@color/cardview_shadow_start_color"
-                android:textSize="18sp" />
-
-            <Spinner
-                android:id="@+id/spPOI"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:layout_marginTop="10dp"
-                android:background="@android:color/transparent"
-                android:dropDownSelector="@color/cardview_light_background" />
 
         </LinearLayout>
 </ScrollView>

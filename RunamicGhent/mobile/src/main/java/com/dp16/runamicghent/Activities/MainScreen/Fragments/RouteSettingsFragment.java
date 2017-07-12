@@ -6,12 +6,19 @@
 package com.dp16.runamicghent.Activities.MainScreen.Fragments;
 
 import android.content.Context;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -26,11 +33,16 @@ import com.dp16.eventbroker.EventListener;
 import com.dp16.eventbroker.EventPublisher;
 import com.dp16.runamicghent.R;
 
+import static android.support.constraint.R.id.parent;
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 public class RouteSettingsFragment extends Fragment {
 
 
     public static final String TAG = RouteSettingsFragment.class.getSimpleName();
     private View view;
+    boolean initialDisplay = true;
+    boolean addDificulty = false;
 
     /*
     *
@@ -42,6 +54,9 @@ public class RouteSettingsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         getCurrentSettings();
 
+
+
+
     }
 
     @Override
@@ -49,66 +64,175 @@ public class RouteSettingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_routesettings, container, false);
-        final TextView tvDT = (TextView)view.findViewById(R.id.tvDT);
-        final TextView tvDTValue = (TextView)view.findViewById(R.id.tvDTValue);
+        //POI dropdownlist
         Spinner spinner = (Spinner) view.findViewById(R.id.spPOI);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),R.array.poi, R.layout.spinner_item_view);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        checkChecked();
+        //difficulty dropdownlist
+        Spinner spinnerDif = (Spinner) view.findViewById(R.id.spDifficulty);
+        ArrayAdapter<CharSequence> adapterDif = ArrayAdapter.createFromResource(getContext(),R.array.difficulty, R.layout.spinner_item_view);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerDif.setAdapter(adapterDif);
         //Radiogroups
         RadioGroup rdgDistanceTime = (RadioGroup) view.findViewById(R.id.parDistanceTime);
+        RadioGroup rdgNatureCity = (RadioGroup) view.findViewById(R.id.parNatureCity);
+        RadioGroup rdgPaved = (RadioGroup) view.findViewById(R.id.parPaved);
+        RadioGroup rdgHillsFlat = (RadioGroup) view.findViewById(R.id.parHillsFlat);
+        RadioGroup rdgSafetyAction = (RadioGroup) view.findViewById(R.id.parSafetyAction);
+        //get preferences
+        getPreference(rdgDistanceTime);
+        getPreference(rdgNatureCity);
+        getPreference(rdgPaved);
+        getPreference(rdgHillsFlat);
+        getPreference(rdgSafetyAction);
+        //Set buttons
+        setButtons();
+        //Preference changed
         rdgDistanceTime.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                checkChecked();
-                if (checkedId == view.findViewById(R.id.rdbTime).getId()){
-                    tvDT.setText("h:m");
-                    tvDTValue.setText("00:00");
-
-                }
-                else {
-                    tvDTValue.setText("0.0");
-                    tvDT.setText("km");
-                }
+                changePreference(group);
+                setButtons();
             }
+        });
+        rdgNatureCity.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                changePreference(group);
+            }
+        });
+        rdgPaved.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                changePreference(group);
+            }
+        });
+        rdgHillsFlat.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                changePreference(group);
+            }
+        });
+        rdgSafetyAction.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                changePreference(group);
+            }
+        });
+        //preference combobox
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // your code here
+                /*Spinner SelectedListener excecutes TWICE:
+                   1: execute on build
+                   2: execute when user select
+                   Use boolean initialDisplay to be able to differentiate between those 2 executions
+                 */
+                if (initialDisplay)
+                {
+                    getPoi();
+                    initialDisplay = false;
+                }
+                else
+                {
+                    savePoi();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+
+        spinnerDif.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // your code here
+                if (initialDisplay)
+                {
+                    getDifficulty();
+                    initialDisplay = false;
+                }
+                else
+                {
+                    saveDifficulty();
+                }
+
+               /* String item = (String) parentView.getItemAtPosition(position);
+                ((TextView) parentView.getChildAt(0)).setTextColor(getResources().getColorStateList(R.color.cardview_light_background));*/
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
         });
 
         return view;
     }
-    public void checkChecked(){
+    //Set buttons method (Distance or Time methods)
+    public void setButtons(){
+        final TextView tvDT = (TextView)view.findViewById(R.id.tvDT);
+        final TextView tvDTValue = (TextView)view.findViewById(R.id.tvDTValue);
         RadioButton rdbDistance = (RadioButton)view.findViewById(R.id.rdbDistance);
         Button btnSubstract =  (Button)view.findViewById(R.id.btnSubsDTValue);
         Button btnAdd = (Button)view.findViewById(R.id.btnAddDTValue);
         if (rdbDistance.isChecked()){
+            //Hide spinner
+            hideSpinner();
+            //SetButtons
+            //Set add distance
             btnAdd.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public  void onClick(View v){
                         addKm();
+                        saveDistanceValue();
                 }
             });
+            //set substract distance
             btnSubstract.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public  void onClick(View v){
                     substractKm();
+                    saveDistanceValue();
                 }
             });
+            //Set value
+            tvDT.setText("km");
+            getDistanceValue();
         }
         else {
+            //Add spinner
+            //Test add Spinner
+            addSpinner();
+            //set add time
             btnAdd.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public  void onClick(View v){
                     addTime();
+                    saveTimeValue();
                 }
             });
+            //set substract time
             btnSubstract.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public  void onClick(View v){
-
+                    substractTime();
+                    saveTimeValue();
                 }
             });
+            tvDT.setText("h:m");
+            getTimeValue();
         }
+
     }
+    //Substract distance method
     public void substractKm(){
         TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
         double value = Double.parseDouble(tvValue.getText().toString());
@@ -124,14 +248,16 @@ public class RouteSettingsFragment extends Fragment {
         tvValue.setText(String.valueOf(value));
 
     }
+    //Add distance method
     public void addKm(){
         TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
         double value = Double.parseDouble(tvValue.getText().toString());
-        value += 1;
+        value += 0.1;
         value = (double) Math.round(((value * 100) * 10) / 10)/100;
         tvValue.setText(String.valueOf(value));
 
     }
+    //Add time method
      public void addTime(){
          TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
          String time = tvValue.getText().toString();
@@ -145,7 +271,7 @@ public class RouteSettingsFragment extends Fragment {
          String newtime = String.format("%02d", h)+":"+String.format("%02d", m);
          tvValue.setText(newtime);
      }
-
+    //Substract time method
     public void substractTime(){
         TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
         String time = tvValue.getText().toString();
@@ -164,6 +290,125 @@ public class RouteSettingsFragment extends Fragment {
         String newtime = String.format("%02d", h)+":"+String.format("%02d", m);
         tvValue.setText(newtime);
     }
+    //Get preference method
+    public void  getPreference(RadioGroup radioGroup){
+        boolean checked = false;
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        RadioButton radioButton = (RadioButton)radioGroup.getChildAt(1);
+        RadioButton radioButton2 = (RadioButton)radioGroup.getChildAt(0);
+        checked = preferences.getBoolean(radioButton.getText().toString(),false);
+        if (checked){
+            radioButton.setChecked(true);
+            radioButton.setTextColor(getResources().getColorStateList(R.color.cardview_light_background));
+            radioButton2.setTextColor(getResources().getColorStateList(R.color.cardview_shadow_start_color));
+        }
+        else {
+            radioButton.setTextColor(getResources().getColorStateList(R.color.cardview_shadow_start_color));
+            radioButton2.setTextColor(getResources().getColorStateList(R.color.cardview_light_background));
+        }
+    }
+    //Change preference method
+    public void changePreference(RadioGroup radioGroup){
+        RadioButton radioButton = (RadioButton)radioGroup.getChildAt(1);
+        RadioButton radioButton2 = (RadioButton)radioGroup.getChildAt(0);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        SharedPreferences.Editor editor = preferences.edit();
+
+        if (radioButton.isChecked())
+        {
+            editor.putBoolean(radioButton.getText().toString(), true);
+            radioButton.setTextColor(getResources().getColorStateList(R.color.cardview_light_background));
+            radioButton2.setTextColor(getResources().getColorStateList(R.color.cardview_shadow_start_color));
+        }
+
+        else
+        {
+            editor.putBoolean(radioButton.getText().toString(),false);
+            radioButton.setTextColor(getResources().getColorStateList(R.color.cardview_shadow_start_color));
+            radioButton2.setTextColor(getResources().getColorStateList(R.color.cardview_light_background));
+        }
+
+        editor.apply();
+    }
+    //Store and get preference value
+    public void getTimeValue(){
+        TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String getValue;
+        getValue = preferences.getString("timeValue", "00:00");
+        tvValue.setText(getValue);
+    }
+    public void getDistanceValue(){
+        TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String getValue;
+        getValue = preferences.getString("distanceValue", "0.0");
+        tvValue.setText(getValue);
+    }
+    public void saveDistanceValue(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        SharedPreferences.Editor editor = preferences.edit();
+        TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
+        String value = tvValue.getText().toString();
+        editor.putString("distanceValue",value);
+        editor.apply();
+    }
+    public void saveTimeValue(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        SharedPreferences.Editor editor = preferences.edit();
+        TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
+        String value = tvValue.getText().toString();
+        editor.putString("timeValue",value);
+        editor.apply();
+    }
+    //get and set combobox value
+    public void savePoi(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        SharedPreferences.Editor editor = preferences.edit();
+        Spinner spinner = (Spinner)view.findViewById(R.id.spPOI);
+        int index = spinner.getSelectedItemPosition();
+        editor.putInt("poi",index);
+        editor.apply();
+    }
+    public void getPoi(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        SharedPreferences.Editor editor = preferences.edit();
+        Spinner spinner = (Spinner)view.findViewById(R.id.spPOI);
+        int index = preferences.getInt("poi",0);
+        spinner.setSelection(index);
+    }
+
+    public void saveDifficulty(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        SharedPreferences.Editor editor = preferences.edit();
+        Spinner spinner = (Spinner)view.findViewById(R.id.spDifficulty);
+        int index = spinner.getSelectedItemPosition();
+        editor.putInt("difficulty",index);
+        editor.apply();
+    }
+
+    public void getDifficulty(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        SharedPreferences.Editor editor = preferences.edit();
+        Spinner spinner = (Spinner)view.findViewById(R.id.spDifficulty);
+        int index = preferences.getInt("difficulty",0);
+        spinner.setSelection(index);
+    }
+
+
+
+    //Dynamically add and remove spinner
+    public void addSpinner(){
+        Spinner spinner = (Spinner) view.findViewById(R.id.spDifficulty);
+        spinner.setVisibility(View.VISIBLE);
+
+    }
+
+    public void hideSpinner(){
+        Spinner spinner = (Spinner) view.findViewById(R.id.spDifficulty);
+        spinner.setVisibility(View.GONE);
+    }
+
 
     /**
      * Retrieves the route settings that have been defined
