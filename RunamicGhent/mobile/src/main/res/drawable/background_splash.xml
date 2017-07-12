@@ -18,7 +18,9 @@
         android:drawable="@color/colorIcons"/>
     <item>
         <bitmap
-            android:gravity="center"
-            android:src="@drawable/ic_splash"/>
+            android:src="@drawable/ic_splash_icons"
+            android:gravity="center"/>
+
     </item>
+
 </layer-list>
