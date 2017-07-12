@@ -1,0 +1,251 @@
+<!--
+  ~ Copyright (c) 2017 Hendrik Depauw
+  ~ Copyright (c) 2017 Lorenz van Herwaarden
+  ~ Copyright (c) 2017 Nick Aelterman
+  ~ Copyright (c) 2017 Olivier Cammaert
+  ~ Copyright (c) 2017 Maxim Deweirdt
+  ~ Copyright (c) 2017 Gerwin Dox
+  ~ Copyright (c) 2017 Simon Neuville
+  ~ Copyright (c) 2017 Stiaan Uyttersprot
+  ~
+  ~ This software may be modified and distributed under the terms of the MIT license.  See the LICENSE file for details.
+  -->
+
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Runamic Gent</string>
+
+    <!-- Login Activity -->
+    <string name="pw_not_correct">De wachtwoorden komen niet overeen</string>
+    <string name="empt_field">Leeg veld</string>
+
+    <!-- Intro Activity -->
+    <string name="navigation_text_start">Start</string>
+    <string name="navigation_text_history">Geschiedenis</string>
+    <string name="navigation_text_settings">Profiel</string>
+
+    <!-- Start Fragment -->
+    <string name="generate_route">Genereer Route</string>
+    <string name="free_running">Geen Route</string>
+    <string name="location_inaccurate_title">Location inaccuracy</string>
+    <string name="location_inaccurate_wait">Wacht</string>
+    <string name="location_inaccurate_continue">Continue</string>
+    <string name="location_inaccurate_message">Your location hasn\'t been accurately defined yet. You need to be outdoors. Without a good accuracy your run might not be tracked very well. Do you want to wait for a better signal or continue?</string>
+    <string name="internet_connection">No internet connection</string>
+
+    <!-- Running Card Labels -->
+    <string name="speed_label">Speed</string>
+    <string name="avg_speed_label">Gem. Snelheid</string>
+    <string name="heart_rate_label">Heart Rate</string>
+    <string name="avg_heart_rate_label">Gem. Hartslag</string>
+    <string name="total_distance_label">Total Distance</string>
+    <string name="distance_label">Distance</string>
+    <string name="total_route_length_label">/ </string>
+    <string name="total_duration_label">Total Duration</string>
+    <string name="duration_label">Duration</string>
+
+    <!-- History Fragment -->
+    <string name="delete">Verwijder</string>
+    <string name="your_rating_label">Your Rating</string>
+    <string name="no_runs">You haven\'t run or saved a run yet.</string>
+    <string name="go_for_run">Go for a run!</string>
+    <string name="string_divider">•</string>
+
+    <!-- Profile Fragment -->
+    <string name="settings">Settings</string>
+    <string name="greeting">Hi, </string>
+    <string name="wrong_old_pw">Wrong old password</string>
+    <string name="pw_to_weak">Password to weak, length minimum 6</string>
+    <string name="changepicture">Geef URL van de afbeelding</string>
+
+    <!-- Running Fragment -->
+    <string name="generating_route">Generating Route…</string>
+    <string name="generate_alternative">Generate Alternative</string>
+    <string name="start_running">Start Running</string>
+    <string name="pause_run">Pause</string>
+    <string name="resume_run">Resume</string>
+    <string name="stop_run">Stop</string>
+
+    <string name="off_route">Off Route</string>
+    <string name="on_route">On Route</string>
+    <string name="heart_rate_null">-</string>
+    <string name="distance_null">0 m</string>
+    <string name="duration_null">00:00</string>
+    <string name="wrong_message">Something went wrong</string>
+    <string name="try_again">Try again</string>
+
+    <string name="shorter_route">A shorter route has been requested</string>
+    <string name="longer_route">A longer route has been requested</string>
+
+    <!-- End Run Activity -->
+    <string name="save_run">Save</string>
+    <string name="discard_run">Afdanken</string>
+    <string name="rating_label">Rate your run</string>
+
+    <!-- Audio Instructions -->
+    <string name="audio_please">gelieve</string>
+    <string name="audio_turn">neem de afslag</string>
+    <string name="audio_go">ga</string>
+    <string name="audio_new_route">voor de nieuwe route, </string>
+    <string name="audio_else">. Anderzijds, </string>
+    <string name="audio_left">links</string>
+    <string name="audio_right">rechts</string>
+    <string name="audio_forward">vooruit</string>
+    <string name="audio_uturn">terug te keren</string>
+    <string name="audio_couple_meters">over een paar meter</string>
+    <string name="audio_totaldistance">Totale afstand: </string>
+    <string name="audio_totalduration">Totale tijd: </string>
+    <string name="audio_average_speed">Gemiddelde snelheid: </string>
+    <string name="audio_average_heartrate">Gemiddelde hartslag: </string>
+    <string name="audio_meters"> meter</string>
+    <string name="audio_kilometers"> kilometer</string>
+    <string name="audio_heartrate_high">Uw hartslag is al voor een tijdje te hoog. De route zal korter worden gemaakt.</string>
+    <string name="audio_heartrate_low">Uw hartslag is al voor een tijdje te laag. De route zal langer worden gemaakt.</string>
+    <string name="audio_hour"> uur, </string>
+    <string name="audio_hours"> uren, </string>
+    <string name="audio_minute"> minuut en </string>
+    <string name="audio_minutes"> minuten en </string>
+    <string name="audio_second"> seconde.</string>
+    <string name="audio_seconds"> secondes.</string>
+
+    <!-- Preferences Screen -->
+    <string name="pref_title_units">Units</string>
+    <string name="pref_title_velocity">Velocity units</string>
+    <string name="pref_summary_velocity">Choose whether your velocity is displayed in km/h or min/km</string>
+
+    <string name="pref_title_dynamic_routing">Dynamic routing</string>
+    <string name="pref_title_dynamic_routing_on_off">Enable dynamic heart rate routing</string>
+    <string name="pref_summary_off_dynamic_routing_on_off">Dynamic heart rate routing is turned off</string>
+    <string name="pref_summary_on_dynamic_routing_on_off">Dynamic heart rate routing is turned on</string>
+
+    <string name="pref_title_dynamic_routing_heartrate">Pick your desired heart rate range</string>
+    <string name="pref_summary_dynamic_routing_heartrate">If your heart rate goes under or above your desired range, the route will be dynamically adjusted</string>
+
+    <string name="pref_title_dynamic_routing_park">Importance of parks</string>
+    <string name="pref_summary_dynamic_routing_park">Determine how much the route generation favors routes through parks</string>
+
+    <string name="pref_title_dynamic_routing_water">Importance of water</string>
+    <string name="pref_summary_dynamic_routing_water">Determine how much the route generation favors routes next to water</string>
+
+    <string name="pref_about_build_number">Version Number</string>
+
+
+    <!-- Audio Settings -->
+    <string name="pref_title_audio">Audio Settings</string>
+    <string name="pref_title_audio_directions">Audio directions</string>
+    <string name="pref_title_audio_custom_sound">Voice directions</string>
+    <string name="pref_title_audio_left_sound">Left audio sound</string>
+    <string name="pref_title_audio_right_source">Right audio sound</string>
+    <string name="pref_title_audio_situational_volume">Left/Right situational volume</string>
+    <string name="pref_summaryOn_audio_situational_volume">Left and right volume are the same.</string>
+    <string name="pref_summaryOff_audio_situational_volume">For left turns, the left-ear volume will be higher. For right turns, the right-ear volume will be higher.</string>
+    <string name="pref_audio_right_sound">The sound that will be played when the route you are following goes right.</string>
+    <string name="pref_audio_left_sound">The sound that will be played when the route you are following goes left.</string>
+    <string name="pref_summaryOff_audio_custom_sound">Self-chosen sounds are used to guide you while running.</string>
+    <string name="pref_summaryOn_audio_custom_sound">Instead of sounds, spoken instructions are used to guide you while running.</string>
+    <string name="pref_summaryOff_audio_directions">No audio instructions will be provided while running.</string>
+    <string name="pref_audio_customOn_audio_directions">You will be guided on your route by audio instructions.</string>
+
+    <!-- Reset Tooltip Preference-->
+    <string name="pref_dialogtitle_reset_tooltip_dialog">Reset Tooltips?</string>
+    <string name="pref_msg_reset_tooltip_dialog">This will reset the tutorial highlighting app features.</string>
+
+    <!-- Authentication -->
+    <string name="auth0_client_id">do7eTT5FgTtK4VVH7yqxgGJkCHFriyDv</string>
+    <string name="auth0_domain">dynamicrunningingent.eu.auth0.com</string>
+    <string name="fb_login_protocol_scheme">1213083112144814</string>
+
+    <!-- Answers labels -->
+    <string name="duration_answers">Duration [min]</string>
+    <string name="distance_answers">Distance [km]</string>
+    <string name="avg_speed_answers">Gem. Snelheid [km/h]</string>
+    <string name="rating_answers">rating</string>
+    <string name="title_activity_change_profile">ChangeProfile</string>
+    <string name="title_activity_changeprofile">ChangeprofileActivity</string>
+    <string name="pref_title_reset_tooltip_dialog">Reset feature highlights</string>
+
+    <!-- Tooltip strings -->
+    <string name="tooltip_start_generate_route_explanation">Tap this button to generate routes.</string>
+    <string name="tooltip_start_generate_route_got_it">› Ok!</string>
+    <string name="tooltip_start_snapto_explanation">Tapping this button will center the map onto yourself.</string>
+    <string name="tooltip_start_snapto_got_it">› Got it!</string>
+    <string name="tooltip_start_distancepicker_explanation">Use this slider to configure the length you wish to run.</string>
+    <string name="tooltip_start_distancepicker_got_it">› Ok, got it!</string>
+    <string name="tooltip_bottombar_got_it">› Next!</string>
+    <string name="tooltip_welcome_explanation">Before you get started, we\'d like to highlight some of our features for you. \n</string>
+    <string name="tooltip_welcome_tile">Welcome to\nRunamic Ghent!</string>
+    <string name="tooltip_bottombar_explanation">The area below is the Navigation Bar, which lets you access every window of the application. \n\n\ </string>
+    <string name="tooltip_start_bottombar_explanation">The current tab is the \"Start Running\" tab. Set your desired route length and get going!</string>
+    <string name="tooltip_start_bottombar_got_it">› Continue.</string>
+    <string name="tooltip_history_bottombar_got_it">› Ok, next!</string>
+    <string name="tooltip_history_bottombar_explanation">In the history tab, you\'ll find all your previous runs along with extra info such as average running time, run distance, and so on.</string>
+    <string name="tooltip_settings_bottombar_got_it">› Start running.</string>
+    <string name="tooltip_settings_bottombar_explanation">In the Profile tab, you\'ll be able to see and edit your personal information. The preferences are also located there.</string>
+    <string name="tooltip_settings_button_edit_explanation">You can edit your profile here.</string>
+    <string name="tooltip_settings_button_edit_got_it">› Ok!</string>
+    <string name="tooltip_settings_button_settings_got_it">› Ok!</string>
+    <string name="tooltip_settings_button_settings_explanation">Here, you can change your preferences.</string>
+    <string name="tooltip_settings_profile_picture_got_it">› Ok.</string>
+    <string name="tooltip_settings_profile_picture_explanation">In the Profile screen, you\'ll find your personal information, as well as general running statistics. \n\nIn the right top corner you can edit your profile and your preferences.</string>
+    <string name="tooltip_settings_statistics_got_it">› Ok.</string>
+    <string name="tooltip_settings_statistics_explanation">Below, your personal information and some aggregated statistics are shown, based on previous runs.</string>
+    <string name="tooltip_history_explanation">Here, in the History tab, you\'ll find all runs that you saved previously.\n\nTap one of your previous runs to get more detailed information on it.\n\nTapping and holding one of your runs for a longer time will show a preview of the route.</string>
+    <string name="tooltip_history_got_it">› Ok!</string>
+    <string name="tooltip_history_expanded_got_it">› Ok.</string>
+    <string name="tooltip_history_expanded_pager_explanation">This screen will give you more in-depth information about the run you have just selected. Average speed, duration, heart rate, distance and your rating are shown.</string>
+    <string name="tooltip_history_expanded_tabs_got_it">› Ok.</string>
+    <string name="tooltip_history_expanded_tabs_explanation">Use these tabs or swipe right to switch to detailed view.</string>
+    <string name="tooltip_history_expanded_detail_pager_explanation">In the \"Details\" tab, you\'ll find more momentarily information about your run. Use the slider below to see information of your run at a specific point in time.</string>
+    <string name="tooltip_start_free_running_explanation">And finally, this button will let you run without a route. Your route and other running statistics will - of course - still be tracked.</string>
+    <string name="tooltip_start_free_running_got_it">› Ok!</string>
+    <string name="tooltip_postrunning_ratingbar_got_it">› Ok.</string>
+    <string name="tooltip_postrunning_raringbar_explanation">Congratulations on finishing your first run!\n\nBy sliding your finger over the stars, you can rate your route.</string>
+    <string name="tooltip_postrunning_savebutton_got_it">› OK.</string>
+    <string name="tooltip_postrunning_savebutton_explanation">After you\'ve rated your run you can save it using this button. Otherwise, just discard it.</string>
+    <string name="pref_about">About</string>
+    <string name="open_source_libraries">Open Source Libraries</string>
+    <string name="reset">reset</string>
+    <string name="decline">afwijzen</string>
+
+    <!-- License -->
+    <string name="license_page_title">List of Licences</string>
+    <string name="license_materialview_title">MaterialViewShowcase</string>
+    <string name="license_apache2_title">Apache 2 Licence</string>
+    <string name="license_peekandpop_title">PeekAndPop</string>
+    <string name="license_mongo_java_driver_title">MongoDB Java Driver</string>
+    <string name="license_picasso_title">Picasso</string>
+    <string name="contact_button">Contact</string>
+    <string name="contact_logo_description">Runamic logo</string>
+    <string name="contact_intro">Runamic Gent was gemaakt door acht studenten Computerwetenschappen aan de Universiteit Gent, gedurende een vak waar een complete agile ontwikkelingscyclus werd gesimuleerd.</string>
+    <string name="person_simon_neuville">Simon Neuville</string>
+    <string name="person_hendrik_depauw">Hendrik Depauw</string>
+    <string name="person_lorenz_vanherwaarden">Lorenz van Herwaarden</string>
+    <string name="person_simon_neuville_email">Simon.Neuville@UGent.be</string>
+    <string name="person_hendrik_depauw_email">Hendrik.Depauw@UGent.be</string>
+    <string name="person_lorenz_vanherwaarden_email">Lorenz.vanHerwaarden@UGent.be</string>
+    <string name="person_olivier_cammaert">Olivier Cammaert</string>
+    <string name="person_olivier_cammaert_email">Olivier.Cammaert@UGent.Be</string>
+    <string name="person_nick_aelterman">Nick Aelterman</string>
+    <string name="person_nick_aelterman_email">Nick.Aelterman@UGent.be</string>
+    <string name="person_stiaan_uyttersprot">Stiaan Uyttersprot</string>
+    <string name="person_stiaan_uyttersprot_email">Stiaan.Uyttersprot@UGent.be</string>
+    <string name="person_maxim_deweirdt">Maxim Deweirdt</string>
+    <string name="person_maxim_deweirdt_email">Maxim.Deweirdt@UGent.be</string>
+    <string name="person_gerwin_dox">Gerwin Dox</string>
+    <string name="person_gerwin_dox_email">Gerwin.Dox@UGent.be</string>
+    <string name="contact_creators">Auteurs</string>
+    <string name="contact_promotors">Promotors</string>
+    <string name="person_filip_deturck">Filip De Turck</string>
+    <string name="person_filip_deturck_email">Filip.DeTurck@UGent.be</string>
+    <string name="person_femke_debackere_email">Femke.DeBackere@UGent.be</string>
+    <string name="person_femke_debackere">Femke De Backere</string>
+    <string name="person_stijn_depestel">Stijn De Pestel</string>
+    <string name="person_stijn_depestel_email">Stijn.DePestel@UGent.be</string>
+    <string name="person_jelle_nelis">Jelle Nelis</string>
+    <string name="person_jelle_nelis_email">Jelle.Nelis@intec.ugent.be</string>
+    <string name="contact_supervisors">Leidinggevenden</string>
+    <string name="tooltip_whilerunning_title">Your first run!</string>
+    <string name="tooltip_whilerunning_explanation">If you configured audio directions, be sure to put your volume up! If you\'re running with music, we\'ll dim it slightly while playing the directions.</string>
+    <string name="tooltip_whilerunning_dynamic_buttons_explanation">Use these buttons to request a shorter or slower route while you are running.\n\n\nHave a good run!</string>
+
+</resources>

@@ -43,6 +43,7 @@ import com.dp16.runamicghent.Activities.MainScreen.Fragments.RouteSettingsFragme
 import com.dp16.runamicghent.Activities.MainScreen.Fragments.StartFragment;
 import com.dp16.runamicghent.Constants;
 import com.dp16.runamicghent.DataProvider.LocationProvider;
+import com.dp16.runamicghent.GuiController.GuiController;
 import com.dp16.runamicghent.R;
 import com.dp16.eventbroker.EventBroker;
 import com.dp16.eventbroker.EventListener;
@@ -96,6 +97,7 @@ public class IntroActivity extends AppCompatActivity implements EventListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
+        GuiController.getInstance().setContext(this);
 
         // Initialize the preferences with default settings if
         // this is the first time the application is ever opened

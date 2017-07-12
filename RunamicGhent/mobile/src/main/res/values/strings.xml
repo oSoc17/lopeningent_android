@@ -104,6 +104,34 @@
     <string name="discard_run">Discard</string>
     <string name="rating_label">Rate your run</string>
 
+    <!-- Audio Instructions -->
+    <string name="audio_please">please</string>
+    <string name="audio_turn">turn</string>
+    <string name="audio_go">go</string>
+    <string name="audio_new_route">for the new route, </string>
+    <string name="audio_else">. Else, </string>
+    <string name="audio_left">left</string>
+    <string name="audio_right">right</string>
+    <string name="audio_forward">forward</string>
+    <string name="audio_uturn">turnaround</string>
+    <string name="audio_couple_meters">in a couple of meters</string>
+    <string name="audio_totaldistance">Total distance: </string>
+    <string name="audio_totalduration">Total duration: </string>
+    <string name="audio_average_speed">Average speed: </string>
+    <string name="audio_average_heartrate">Average heart rate: </string>
+    <string name="audio_meters"> meters</string>
+    <string name="audio_kilometers"> kilometers</string>
+    <string name="audio_heartrate_high">Your heart rate has been too high for a while. The route will be made shorter.</string>
+    <string name="audio_heartrate_low">Your heart rate has been too low for a while. The route will be made longer.</string>
+    <string name="audio_hour"> hour, </string>
+    <string name="audio_hours"> hours, </string>
+    <string name="audio_minute"> minute and </string>
+    <string name="audio_minutes"> minutes and </string>
+    <string name="audio_second"> second.</string>
+    <string name="audio_seconds"> seconds.</string>
+
+
+
 
     <!-- Preferences Screen -->
     <string name="pref_title_units">Units</string>

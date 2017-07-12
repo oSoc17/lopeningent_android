@@ -21,6 +21,7 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 import android.util.Log;
 
+import com.dp16.runamicghent.GuiController.GuiController;
 import com.dp16.runamicghent.RunData.RunAudio;
 import com.dp16.eventbroker.EventBroker;
 import com.dp16.eventbroker.EventListener;
@@ -70,7 +71,7 @@ public class AudioPlayer implements EventListener{
             @Override
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS) {
-                    int result = mTts.setLanguage(Locale.US);
+                    int result = mTts.setLanguage(Locale.getDefault());
                     if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Log.e("error", "This Language is not supported");
                     }
@@ -117,7 +118,7 @@ public class AudioPlayer implements EventListener{
              * reason it just does not do it. Online they suggested doing it like this. So I did.
              */
             String audioString = runAudio.getAudioString();
-            BreakIterator iterator = BreakIterator.getSentenceInstance(Locale.US);
+            BreakIterator iterator = BreakIterator.getSentenceInstance(Locale.getDefault());
             iterator.setText(audioString);
             int start = iterator.first();
             for (int end = iterator.next(); end != BreakIterator.DONE; start = end, end = iterator.next()) {
