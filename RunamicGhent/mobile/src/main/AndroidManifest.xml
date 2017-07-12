@@ -26,6 +26,10 @@
 
     <uses-feature android:name="android.hardware.location.gps" />
 
+    <uses-feature
+        android:name="android.hardware.type.watch"
+        android:required="false" />
+
     <!-- Maps API needs OpenGL ES 2.0. -->
     <uses-feature
         android:glEsVersion="0x00020000"
