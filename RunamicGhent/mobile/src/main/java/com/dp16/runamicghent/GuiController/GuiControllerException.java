@@ -19,5 +19,4 @@ package com.dp16.runamicghent.GuiController;
  */
 
 public class GuiControllerException extends Exception {
-public class GuiControllerException extends Exception {
 }
