@@ -71,9 +71,9 @@ public class RouteSettingsFragment extends Fragment {
         spinner.setAdapter(adapter);
         //difficulty dropdownlist
         Spinner spinnerDif = (Spinner) view.findViewById(R.id.spDifficulty);
-        ArrayAdapter<CharSequence> adapterDif = ArrayAdapter.createFromResource(getContext(),R.array.difficulty, R.layout.spinner_item_view);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerDif.setAdapter(adapterDif);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getContext(),R.array.difficulty, R.layout.spinner_item_view);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerDif.setAdapter(adapter2);
         //Radiogroups
         RadioGroup rdgDistanceTime = (RadioGroup) view.findViewById(R.id.parDistanceTime);
         RadioGroup rdgNatureCity = (RadioGroup) view.findViewById(R.id.parNatureCity);
@@ -140,6 +140,8 @@ public class RouteSettingsFragment extends Fragment {
                     savePoi();
                 }
 
+               /* String item = (String) parentView.getItemAtPosition(position);
+                ((TextView) parentView.getChildAt(0)).setTextColor(getResources().getColorStateList(R.color.cardview_light_background));*/
             }
 
             @Override
@@ -153,6 +155,11 @@ public class RouteSettingsFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // your code here
+                /*Spinner SelectedListener excecutes TWICE:
+                   1: execute on build
+                   2: execute when user select
+                   Use boolean initialDisplay to be able to differentiate between those 2 executions
+                 */
                 if (initialDisplay)
                 {
                     getDifficulty();
@@ -163,7 +170,7 @@ public class RouteSettingsFragment extends Fragment {
                     saveDifficulty();
                 }
 
-               /* String item = (String) parentView.getItemAtPosition(position);
+                /*String item = (String) parentView.getItemAtPosition(position);
                 ((TextView) parentView.getChildAt(0)).setTextColor(getResources().getColorStateList(R.color.cardview_light_background));*/
             }
 
@@ -401,7 +408,6 @@ public class RouteSettingsFragment extends Fragment {
     public void addSpinner(){
         Spinner spinner = (Spinner) view.findViewById(R.id.spDifficulty);
         spinner.setVisibility(View.VISIBLE);
-
     }
 
     public void hideSpinner(){

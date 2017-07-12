@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="difficulty">
-        <item>Beginner</item>
-        <item>Average</item>
-        <item>Expert</item>
+        <item>@string/beginner</item>
+        <item>@string/average</item>
+        <item>@string/expert</item>
     </string-array>
 </resources>
