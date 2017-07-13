@@ -249,7 +249,7 @@ public class RouteProvider implements EventListener, EventPublisher, DataProvide
          * second element is maximal length
          */
         private double[] calculateDistanceBounds() {
-            int preferredDistance = trackRequest.getDistance().getDistance();
+            double preferredDistance = trackRequest.getDistance().getDistance()/1000.0;
             double[] bounds = new double[2];
 
             if (preferredDistance < Constants.RouteGenerator.FIRST_BORDER) {

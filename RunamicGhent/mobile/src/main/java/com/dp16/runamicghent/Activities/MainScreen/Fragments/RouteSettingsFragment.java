@@ -415,6 +415,7 @@ public class RouteSettingsFragment extends Fragment {
         spinner.setVisibility(View.GONE);
     }
 
+    
 
     /**
      * Retrieves the route settings that have been defined

@@ -50,9 +50,9 @@
     <string name="tourism">Tourism</string>
     <string name="art">Art</string>
 
-    <string name="beginner">beginner</string>
-    <string name="average">average</string>
-    <string name="expert">expert</string>
+    <string name="beginner">Beginner</string>
+    <string name="average">Average</string>
+    <string name="expert">Expert</string>
 
 
     <!-- Running Card Labels -->

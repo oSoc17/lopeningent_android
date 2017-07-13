@@ -344,6 +344,10 @@ public class Constants {
         public static final int MAX_LENGTH = 50;
         public static final int DEFAULT_LENGTH = 5;
 
+        public static final double BEGINNER_SPEED = 8;
+        public static final double AVERAGE_SPEED = 10;
+        public static final double EXPERT_SPEED = 12;
+
         private RouteGenerator() {
             throw new IllegalAccessError(UTILITY_CLASS_ERROR);
         }
