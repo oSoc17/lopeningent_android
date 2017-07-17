@@ -5,17 +5,21 @@
  */
 package com.dp16.runamicghent.Activities.MainScreen.Fragments;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -42,7 +46,11 @@ public class RouteSettingsFragment extends Fragment {
     public static final String TAG = RouteSettingsFragment.class.getSimpleName();
     private View view;
     boolean initialDisplay = true;
-    boolean addDificulty = false;
+
+    private boolean mAutoIncrement = false;
+    private boolean mAutoDecrement = false;
+    private static int REP_DELAY = 50;
+    private Handler repeatUpdateHandler = new Handler();
 
     /*
     *
@@ -61,7 +69,7 @@ public class RouteSettingsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_routesettings, container, false);
         //POI dropdownlist
@@ -87,12 +95,16 @@ public class RouteSettingsFragment extends Fragment {
         getPreference(rdgHillsFlat);
         getPreference(rdgSafetyAction);
         //Set buttons
+        getDTvalue();
         setButtons();
         //Preference changed
         rdgDistanceTime.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 changePreference(group);
+                //First save value then get new value of corresponding parameter
+                saveDTvalue();
+                getDTvalue();
                 setButtons();
             }
         });
@@ -185,117 +197,60 @@ public class RouteSettingsFragment extends Fragment {
     }
     //Set buttons method (Distance or Time methods)
     public void setButtons(){
-        final TextView tvDT = (TextView)view.findViewById(R.id.tvDT);
-        final TextView tvDTValue = (TextView)view.findViewById(R.id.tvDTValue);
-        RadioButton rdbDistance = (RadioButton)view.findViewById(R.id.rdbDistance);
-        Button btnSubstract =  (Button)view.findViewById(R.id.btnSubsDTValue);
-        Button btnAdd = (Button)view.findViewById(R.id.btnAddDTValue);
-        if (rdbDistance.isChecked()){
-            //Hide spinner
-            hideSpinner();
-            //SetButtons
-            //Set add distance
-            btnAdd.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public  void onClick(View v){
-                        addKm();
-                        saveDistanceValue();
-                }
-            });
-            //set substract distance
-            btnSubstract.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public  void onClick(View v){
-                    substractKm();
-                    saveDistanceValue();
-                }
-            });
-            //Set value
-            tvDT.setText("km");
-            getDistanceValue();
-        }
-        else {
-            //Add spinner
-            //Test add Spinner
-            addSpinner();
-            //set add time
-            btnAdd.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public  void onClick(View v){
-                    addTime();
-                    saveTimeValue();
-                }
-            });
-            //set substract time
-            btnSubstract.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public  void onClick(View v){
-                    substractTime();
-                    saveTimeValue();
-                }
-            });
-            tvDT.setText("h:m");
-            getTimeValue();
-        }
+        final Button btnSubstract =  (Button)view.findViewById(R.id.btnSubsDTValue);
+        final Button btnAdd = (Button)view.findViewById(R.id.btnAddDTValue);
+        //SetButtons
+        //Set add
+        btnAdd.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v){
+                increment();
+            }
+        });
+        btnAdd.setOnLongClickListener(new View.OnLongClickListener(){
+            @Override
+            public  boolean onLongClick(View v){
+                mAutoIncrement = true;
+                repeatUpdateHandler.post(new RptUpdater());
+                return false;
 
-    }
-    //Substract distance method
-    public void substractKm(){
-        TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
-        double value = Double.parseDouble(tvValue.getText().toString());
-        if (value - 0.1 <0 )
-        {
-            value = 0;
-        }
-        else {
-            value -= 0.1;
-            value = (double) Math.round(((value * 100) * 10) / 10)/100;
-        }
+            }
+        });
+        btnAdd.setOnTouchListener(new View.OnTouchListener(){
+            public boolean onTouch(View v, MotionEvent event) {
+                if( (event.getAction()==MotionEvent.ACTION_UP || event.getAction()==MotionEvent.ACTION_CANCEL)
+                        && mAutoIncrement ){
+                    mAutoIncrement = false;
+                }
+                return false;
+            }
+        });
+        //set substract
+        btnSubstract.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v){
+                decrement();
+            }
+        });
+        btnSubstract.setOnLongClickListener(new View.OnLongClickListener(){
+            @Override
+            public  boolean onLongClick(View v){
+                mAutoDecrement = true;
+                repeatUpdateHandler.post(new RptUpdater());
+                return false;
 
-        tvValue.setText(String.valueOf(value));
+            }
+        });
+        btnSubstract.setOnTouchListener(new View.OnTouchListener(){
+            public boolean onTouch(View v, MotionEvent event) {
+                if( (event.getAction()==MotionEvent.ACTION_UP || event.getAction()==MotionEvent.ACTION_CANCEL)
+                        && mAutoDecrement ){
 
-    }
-    //Add distance method
-    public void addKm(){
-        TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
-        double value = Double.parseDouble(tvValue.getText().toString());
-        value += 0.1;
-        value = (double) Math.round(((value * 100) * 10) / 10)/100;
-        tvValue.setText(String.valueOf(value));
-
-    }
-    //Add time method
-     public void addTime(){
-         TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
-         String time = tvValue.getText().toString();
-         int h = Integer.parseInt(time.substring(0,2));
-         int m = Integer.parseInt(time.substring(3,5));
-         m += 1;
-         if(m >= 60){
-             m = 00;
-             h += 1;
-         }
-         String newtime = String.format("%02d", h)+":"+String.format("%02d", m);
-         tvValue.setText(newtime);
-     }
-    //Substract time method
-    public void substractTime(){
-        TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
-        String time = tvValue.getText().toString();
-        int h = Integer.parseInt(time.substring(0,2));
-        int m = Integer.parseInt(time.substring(3,5));
-        m -= 1;
-        if(m < 0){
-           if (h>0){
-               h--;
-               m=59;
-           }
-           else {
-               m = 0;
-           }
-        }
-        String newtime = String.format("%02d", h)+":"+String.format("%02d", m);
-        tvValue.setText(newtime);
+                    mAutoDecrement = false;
+                }
+                return false;
+            }
+        });
     }
     //Get preference method
     public void  getPreference(RadioGroup radioGroup){
@@ -338,36 +293,41 @@ public class RouteSettingsFragment extends Fragment {
         editor.apply();
     }
     //Store and get preference value
-    public void getTimeValue(){
+    public void getDTvalue(){
+        final TextView tvDT = (TextView)view.findViewById(R.id.tvDT);
         TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
+        RadioButton rdbDistance = (RadioButton)view.findViewById(R.id.rdbDistance);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         String getValue;
-        getValue = preferences.getString("timeValue", "00:00");
+        if (rdbDistance.isChecked()){
+            hideSpinner();
+            getValue = preferences.getString("distanceValue", "0.0");
+            tvDT.setText("km");
+        }
+        else {
+            addSpinner();
+            getValue = preferences.getString("timeValue", "00:00");
+            tvDT.setText("h:m");
+        }
         tvValue.setText(getValue);
     }
-    public void getDistanceValue(){
+    //Save DTvalue
+    public void saveDTvalue(){
         TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        String getValue;
-        getValue = preferences.getString("distanceValue", "0.0");
-        tvValue.setText(getValue);
-    }
-    public void saveDistanceValue(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         SharedPreferences.Editor editor = preferences.edit();
-        TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
+        RadioButton rdbDistance = (RadioButton)view.findViewById(R.id.rdbDistance);
         String value = tvValue.getText().toString();
-        editor.putString("distanceValue",value);
+        if (rdbDistance.isChecked()){
+            editor.putString("timeValue",value);
+
+        }
+        else{
+            editor.putString("distanceValue",value);
+        }
         editor.apply();
     }
-    public void saveTimeValue(){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        SharedPreferences.Editor editor = preferences.edit();
-        TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
-        String value = tvValue.getText().toString();
-        editor.putString("timeValue",value);
-        editor.apply();
-    }
+
     //get and set combobox value
     public void savePoi(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -415,7 +375,79 @@ public class RouteSettingsFragment extends Fragment {
         spinner.setVisibility(View.GONE);
     }
 
-    
+    //Class for on button pressed check
+    class RptUpdater implements Runnable {
+        public void run() {
+            if( mAutoIncrement ){
+                increment();
+                repeatUpdateHandler.postDelayed( new RptUpdater(), REP_DELAY );
+            } else if( mAutoDecrement ){
+                decrement();
+                repeatUpdateHandler.postDelayed( new RptUpdater(), REP_DELAY );
+            }
+        }
+    }
+
+    //button pressed increment/decrement
+   public void increment(){
+       RadioButton rdbDistance = (RadioButton)view.findViewById(R.id.rdbDistance);
+       TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
+       if (rdbDistance.isChecked()){
+           double value = Double.parseDouble(tvValue.getText().toString());
+           value += 0.1;
+           value = (double) Math.round(((value * 100) * 10) / 10)/100;
+           tvValue.setText(String.valueOf(value));
+       }
+       else {
+           String time = tvValue.getText().toString();
+           int h = Integer.parseInt(time.substring(0,2));
+           int m = Integer.parseInt(time.substring(3,5));
+           m += 1;
+           if(m >= 60){
+               m = 00;
+               h += 1;
+           }
+           String newtime = String.format("%02d", h)+":"+String.format("%02d", m);
+           tvValue.setText(newtime);
+       }
+
+   }
+
+   public void decrement(){
+       RadioButton rdbDistance = (RadioButton)view.findViewById(R.id.rdbDistance);
+       TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
+       if (rdbDistance.isChecked()){
+           double value = Double.parseDouble(tvValue.getText().toString());
+           if (value - 0.1 <0 )
+           {
+               value = 0;
+           }
+           else {
+               value -= 0.1;
+               value = (double) Math.round(((value * 100) * 10) / 10)/100;
+           }
+
+           tvValue.setText(String.valueOf(value));
+
+       }
+       else {
+           String time = tvValue.getText().toString();
+           int h = Integer.parseInt(time.substring(0,2));
+           int m = Integer.parseInt(time.substring(3,5));
+           m -= 1;
+           if(m < 0){
+               if (h>0){
+                   h--;
+                   m=59;
+               }
+               else {
+                   m = 0;
+               }
+           }
+           String newtime = String.format("%02d", h)+":"+String.format("%02d", m);
+           tvValue.setText(newtime);
+       }
+   }
 
     /**
      * Retrieves the route settings that have been defined

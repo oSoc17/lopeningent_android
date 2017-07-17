@@ -103,7 +103,9 @@
                         android:textColor="@color/cardview_light_background"
                         android:textSize="30sp"
                         android:textStyle="bold"
-                        android:layout_weight="0.21" />
+                        android:layout_weight="0.21"
+                        android:scaleX="1"
+                        android:scaleY="1"/>
 
                     <TextView
                         android:id="@+id/tvDTValue"
@@ -124,7 +126,9 @@
                         android:background="@drawable/button_corners_right"
                         android:text="+"
                         android:textColor="@color/cardview_light_background"
-                        android:textSize="30sp" />
+                        android:textSize="30sp"
+                        android:scaleX="1"
+                        android:scaleY="1"/>
 
                     <TextView
                         android:id="@+id/tvDT"
