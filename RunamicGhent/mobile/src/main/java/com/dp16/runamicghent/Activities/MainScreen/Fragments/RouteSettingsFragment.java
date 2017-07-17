@@ -294,7 +294,7 @@ public class RouteSettingsFragment extends Fragment {
     }
     //Store and get preference value
     public void getDTvalue(){
-        final TextView tvDT = (TextView)view.findViewById(R.id.tvDT);
+       // final TextView tvDT = (TextView)view.findViewById(R.id.tvDT);
         TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
         RadioButton rdbDistance = (RadioButton)view.findViewById(R.id.rdbDistance);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -302,12 +302,12 @@ public class RouteSettingsFragment extends Fragment {
         if (rdbDistance.isChecked()){
             hideSpinner();
             getValue = preferences.getString("distanceValue", "0.0");
-            tvDT.setText("km");
+           // tvDT.setText("km");
         }
         else {
             addSpinner();
             getValue = preferences.getString("timeValue", "00:00");
-            tvDT.setText("h:m");
+           // tvDT.setText("h:m");
         }
         tvValue.setText(getValue);
     }

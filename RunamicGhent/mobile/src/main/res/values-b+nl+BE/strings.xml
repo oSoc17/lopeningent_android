@@ -27,59 +27,90 @@
     <!-- Start Fragment -->
     <string name="generate_route">Genereer Route</string>
     <string name="free_running">Geen Route</string>
-    <string name="location_inaccurate_title">Location inaccuracy</string>
+    <string name="location_inaccurate_title">Locatie onnauwkeurig</string>
     <string name="location_inaccurate_wait">Wacht</string>
-    <string name="location_inaccurate_continue">Continue</string>
-    <string name="location_inaccurate_message">Your location hasn\'t been accurately defined yet. You need to be outdoors. Without a good accuracy your run might not be tracked very well. Do you want to wait for a better signal or continue?</string>
-    <string name="internet_connection">No internet connection</string>
+    <string name="location_inaccurate_continue">Doorgaan</string>
+    <string name="location_inaccurate_message">Uw locatie is nog niet nauwkeurig gedefinieerd. U moet buiten zijn om een pad te definiëren. Uw pad kan niet goed getraceerd worden zonder goede nauwkeurigheid. Wilt u wachten op een beter signaal of doorgaan?</string>
+    <string name="internet_connection">Geen internet connectie</string>
+
+    <!-- Route Settings Fragment -->
+    <string name="distance">Afstand</string>
+    <string name="time">Tijd</string>
+    <string name="nature">Natuur</string>
+    <string name="city">Stad</string>
+    <string name="unpaved">Onverharde wegen</string>
+    <string name="paved">Verharde wegen</string>
+    <string name="hills">Heuvels</string>
+    <string name="flat">Plat</string>
+    <string name="safety">Veilig</string>
+    <string name="action">Actie</string>
+    <string name="around">Rond:</string>
+    <string name="select_poi">Selecteer POI:</string>
+
+    <string name="tourism">Toerisme</string>
+    <string name="art">Kunst</string>
+
+    <string name="beginner">Beginner</string>
+    <string name="average">Gemiddeld</string>
+    <string name="expert">Expert</string>
 
     <!-- Running Card Labels -->
-    <string name="speed_label">Speed</string>
+    <string name="speed_label">Snelheid</string>
     <string name="avg_speed_label">Gem. Snelheid</string>
-    <string name="heart_rate_label">Heart Rate</string>
+    <string name="heart_rate_label">Hartslag</string>
     <string name="avg_heart_rate_label">Gem. Hartslag</string>
-    <string name="total_distance_label">Total Distance</string>
-    <string name="distance_label">Distance</string>
-    <string name="total_route_length_label">/ </string>
-    <string name="total_duration_label">Total Duration</string>
-    <string name="duration_label">Duration</string>
+    <string name="total_distance_label">Totale Afstand</string>
+    <string name="distance_label">Afstand</string>
+    <string name="total_route_length_label">Totale route lengte</string>
+    <string name="total_duration_label">Totale duur</string>
+    <string name="duration_label">Duur</string>
 
     <!-- History Fragment -->
     <string name="delete">Verwijder</string>
     <string name="your_rating_label">Your Rating</string>
-    <string name="no_runs">You haven\'t run or saved a run yet.</string>
-    <string name="go_for_run">Go for a run!</string>
+    <string name="no_runs">Je hebt nog niet geloopt of er zijn nog geen lopen opgeslagen </string>
+    <string name="go_for_run">Ga voor een loop!</string>
     <string name="string_divider">•</string>
 
     <!-- Profile Fragment -->
-    <string name="settings">Settings</string>
-    <string name="greeting">Hi, </string>
-    <string name="wrong_old_pw">Wrong old password</string>
-    <string name="pw_to_weak">Password to weak, length minimum 6</string>
+    <string name="settings">Instellingen</string>
+    <string name="greeting">Hallo, </string>
+    <string name="wrong_old_pw">Verkeerd oude wachtwoord</string>
+    <string name="pw_to_weak">Wachtwoord te zwak, minimumlengte 6</string>
     <string name="changepicture">Geef URL van de afbeelding</string>
+    <!--content_profile-->
+    <string name="name">Naam</string>
+    <string name="total_distance_ran">Totale gelopen afstand</string>
+    <string name="average_distance">Gemiddelde afstand</string>
+    <string name="total_duration">Totale duur</string>
+    <string name="average_duration">Gemiddelde duur</string>
+    <string name="average_running_speed">Gemiddelde snelheid</string>
+    <string name="number_of_runs">Aantal lopen</string>
+    <string name="average_heart_rate">Gemiddelde hartslag</string>
+    <string name="logout">LOG UIT</string>
 
     <!-- Running Fragment -->
-    <string name="generating_route">Generating Route…</string>
-    <string name="generate_alternative">Generate Alternative</string>
-    <string name="start_running">Start Running</string>
+    <string name="generating_route">Genereren van route…</string>
+    <string name="generate_alternative">Alternatieven genereren</string>
+    <string name="start_running">Start loop</string>
     <string name="pause_run">Pause</string>
-    <string name="resume_run">Resume</string>
+    <string name="resume_run">Hervatten</string>
     <string name="stop_run">Stop</string>
 
-    <string name="off_route">Off Route</string>
-    <string name="on_route">On Route</string>
+    <string name="off_route">Buiten de weg</string>
+    <string name="on_route">Op de weg</string>
     <string name="heart_rate_null">-</string>
     <string name="distance_null">0 m</string>
     <string name="duration_null">00:00</string>
-    <string name="wrong_message">Something went wrong</string>
-    <string name="try_again">Try again</string>
+    <string name="wrong_message">Er is iets misgegaan</string>
+    <string name="try_again">probeer opnieuw</string>
 
-    <string name="shorter_route">A shorter route has been requested</string>
-    <string name="longer_route">A longer route has been requested</string>
+    <string name="shorter_route">Er werd een kortere route aangevraagd</string>
+    <string name="longer_route">Er werd een langere route aangevraagd</string>
 
     <!-- End Run Activity -->
     <string name="save_run">Save</string>
-    <string name="discard_run">Afdanken</string>
+    <string name="discard_run">Afwijzen</string>
     <string name="rating_label">Rate your run</string>
 
     <!-- Audio Instructions -->
@@ -109,46 +140,46 @@
     <string name="audio_seconds"> secondes.</string>
 
     <!-- Preferences Screen -->
-    <string name="pref_title_units">Units</string>
-    <string name="pref_title_velocity">Velocity units</string>
-    <string name="pref_summary_velocity">Choose whether your velocity is displayed in km/h or min/km</string>
+    <string name="pref_title_units">Eenheden</string>
+    <string name="pref_title_velocity">Snelheid eenheden</string>
+    <string name="pref_summary_velocity">Snelheid in km/h of min/km weergeven</string>
 
-    <string name="pref_title_dynamic_routing">Dynamic routing</string>
-    <string name="pref_title_dynamic_routing_on_off">Enable dynamic heart rate routing</string>
-    <string name="pref_summary_off_dynamic_routing_on_off">Dynamic heart rate routing is turned off</string>
-    <string name="pref_summary_on_dynamic_routing_on_off">Dynamic heart rate routing is turned on</string>
+    <string name="pref_title_dynamic_routing">Dynamische routing</string>
+    <string name="pref_title_dynamic_routing_on_off">Activeer dynamishce routing met hartslag.</string>
+    <string name="pref_summary_off_dynamic_routing_on_off">Dynamische hartslag routing is uitgeschakelt.</string>
+    <string name="pref_summary_on_dynamic_routing_on_off">Dynamische hartslag routing is ingeschakeld</string>
 
-    <string name="pref_title_dynamic_routing_heartrate">Pick your desired heart rate range</string>
-    <string name="pref_summary_dynamic_routing_heartrate">If your heart rate goes under or above your desired range, the route will be dynamically adjusted</string>
+    <string name="pref_title_dynamic_routing_heartrate">Kies uw gewenste hartslag</string>
+    <string name="pref_summary_dynamic_routing_heartrate">Als uw hartlag boven of onder uw gewenste hartslag limiet ligt, Dan wordt de route dynamisch aangepast</string>
 
-    <string name="pref_title_dynamic_routing_park">Importance of parks</string>
-    <string name="pref_summary_dynamic_routing_park">Determine how much the route generation favors routes through parks</string>
+    <string name="pref_title_dynamic_routing_park">Belangstelling van parken</string>
+    <string name="pref_summary_dynamic_routing_park">Bepaal hoeveel de route generator, routes met parken verkiest</string>
 
-    <string name="pref_title_dynamic_routing_water">Importance of water</string>
-    <string name="pref_summary_dynamic_routing_water">Determine how much the route generation favors routes next to water</string>
+    <string name="pref_title_dynamic_routing_water">Belangstelling van water</string>
+    <string name="pref_summary_dynamic_routing_water">Bepaal hoeveel de route generator, routes met water verkiest</string>
 
-    <string name="pref_about_build_number">Version Number</string>
+    <string name="pref_about_build_number">Versie nummer</string>
 
 
     <!-- Audio Settings -->
     <string name="pref_title_audio">Audio Settings</string>
-    <string name="pref_title_audio_directions">Audio directions</string>
-    <string name="pref_title_audio_custom_sound">Voice directions</string>
-    <string name="pref_title_audio_left_sound">Left audio sound</string>
-    <string name="pref_title_audio_right_source">Right audio sound</string>
+    <string name="pref_title_audio_directions">Audio instructies</string>
+    <string name="pref_title_audio_custom_sound">Voice instructies</string>
+    <string name="pref_title_audio_left_sound">Linker audio geluid</string>
+    <string name="pref_title_audio_right_source">Rechter audio geluid</string>
     <string name="pref_title_audio_situational_volume">Left/Right situational volume</string>
-    <string name="pref_summaryOn_audio_situational_volume">Left and right volume are the same.</string>
-    <string name="pref_summaryOff_audio_situational_volume">For left turns, the left-ear volume will be higher. For right turns, the right-ear volume will be higher.</string>
-    <string name="pref_audio_right_sound">The sound that will be played when the route you are following goes right.</string>
-    <string name="pref_audio_left_sound">The sound that will be played when the route you are following goes left.</string>
-    <string name="pref_summaryOff_audio_custom_sound">Self-chosen sounds are used to guide you while running.</string>
-    <string name="pref_summaryOn_audio_custom_sound">Instead of sounds, spoken instructions are used to guide you while running.</string>
-    <string name="pref_summaryOff_audio_directions">No audio instructions will be provided while running.</string>
-    <string name="pref_audio_customOn_audio_directions">You will be guided on your route by audio instructions.</string>
+    <string name="pref_summaryOn_audio_situational_volume">Linker en rechter volume is gelijk.</string>
+    <string name="pref_summaryOff_audio_situational_volume">Voor linkse bochten, linker volume hoger, bij rechtse bochten, rechter volume hoger.</string>
+    <string name="pref_audio_right_sound">Het geluid dat zich afspeelt wanneer de route die je volgt rechts afslaat.</string>
+    <string name="pref_audio_left_sound">Het geluid dat zich afspeelt wanneer de route die je volgt links afslaat.</string>
+    <string name="pref_summaryOff_audio_custom_sound">Zelfgekozen geluiden worden gebruikt om jou te leiden tijdens het lopen.</string>
+    <string name="pref_summaryOn_audio_custom_sound">In plaats van geluiden worden er ingesproken instructies gebruikt om jou te leiden tijdens het lopen.</string>
+    <string name="pref_summaryOff_audio_directions">Geen audio instructies tijdens het lopen.</string>
+    <string name="pref_audio_customOn_audio_directions">Je wordt geholpen via audio instructies tijdens het lopen.</string>
 
     <!-- Reset Tooltip Preference-->
-    <string name="pref_dialogtitle_reset_tooltip_dialog">Reset Tooltips?</string>
-    <string name="pref_msg_reset_tooltip_dialog">This will reset the tutorial highlighting app features.</string>
+    <string name="pref_dialogtitle_reset_tooltip_dialog">Reset tutorial?</string>
+    <string name="pref_msg_reset_tooltip_dialog">Dit zal de tutorial resetten.</string>
 
     <!-- Authentication -->
     <string name="auth0_client_id">do7eTT5FgTtK4VVH7yqxgGJkCHFriyDv</string>
@@ -162,47 +193,47 @@
     <string name="rating_answers">rating</string>
     <string name="title_activity_change_profile">ChangeProfile</string>
     <string name="title_activity_changeprofile">ChangeprofileActivity</string>
-    <string name="pref_title_reset_tooltip_dialog">Reset feature highlights</string>
+    <string name="pref_title_reset_tooltip_dialog">Reset tutorial</string>
 
     <!-- Tooltip strings -->
-    <string name="tooltip_start_generate_route_explanation">Tap this button to generate routes.</string>
+    <string name="tooltip_start_generate_route_explanation">Klik op deze knop om een route te genereren.</string>
     <string name="tooltip_start_generate_route_got_it">› Ok!</string>
-    <string name="tooltip_start_snapto_explanation">Tapping this button will center the map onto yourself.</string>
+    <string name="tooltip_start_snapto_explanation">Klikken op deze knop zal de map op jezelf centreren.</string>
     <string name="tooltip_start_snapto_got_it">› Got it!</string>
-    <string name="tooltip_start_distancepicker_explanation">Use this slider to configure the length you wish to run.</string>
-    <string name="tooltip_start_distancepicker_got_it">› Ok, got it!</string>
-    <string name="tooltip_bottombar_got_it">› Next!</string>
-    <string name="tooltip_welcome_explanation">Before you get started, we\'d like to highlight some of our features for you. \n</string>
-    <string name="tooltip_welcome_tile">Welcome to\nRunamic Ghent!</string>
-    <string name="tooltip_bottombar_explanation">The area below is the Navigation Bar, which lets you access every window of the application. \n\n\ </string>
-    <string name="tooltip_start_bottombar_explanation">The current tab is the \"Start Running\" tab. Set your desired route length and get going!</string>
-    <string name="tooltip_start_bottombar_got_it">› Continue.</string>
-    <string name="tooltip_history_bottombar_got_it">› Ok, next!</string>
-    <string name="tooltip_history_bottombar_explanation">In the history tab, you\'ll find all your previous runs along with extra info such as average running time, run distance, and so on.</string>
-    <string name="tooltip_settings_bottombar_got_it">› Start running.</string>
-    <string name="tooltip_settings_bottombar_explanation">In the Profile tab, you\'ll be able to see and edit your personal information. The preferences are also located there.</string>
-    <string name="tooltip_settings_button_edit_explanation">You can edit your profile here.</string>
+   <!-- <string name="tooltip_start_distancepicker_explanation">Use this slider to configure the length you wish to run.</string>
+    <string name="tooltip_start_distancepicker_got_it">› Ok, got it!</string>-->
+    <string name="tooltip_bottombar_got_it">› Volgende!</string>
+    <string name="tooltip_welcome_explanation">Voor we gaan starten, zouden we graag enkele eigenschappen highlighten. \n</string>
+    <string name="tooltip_welcome_tile">Welkom bij\nRunamic Gent!</string>
+    <string name="tooltip_bottombar_explanation">Het gebied onderaan is de navigatie balk, die je toegang biedt tot de verschillende vensters van deze applicatie. \n\n\ </string>
+    <string name="tooltip_start_bottombar_explanation">De huidige tab is de \"Start lopen\" tab. Stel je gewenste routelengte in en ga van start!</string>
+    <string name="tooltip_start_bottombar_got_it">› Doorgaan.</string>
+    <string name="tooltip_history_bottombar_got_it">› Ok, volgende!</string>
+    <string name="tooltip_history_bottombar_explanation">In de geschiedenis tab vind je alle vorige lopen samen met extra info zoals gemiddelde snelheid en afstand.</string>
+    <string name="tooltip_settings_bottombar_got_it">› Start lopen.</string>
+    <string name="tooltip_settings_bottombar_explanation">In the profiel tab zal je jou persoonlijke informatie vinden en kunnen wijzigen. Jou voorkeur settings bevinden zich daar ook.</string>
+    <string name="tooltip_settings_button_edit_explanation">Je kan jou profiel hier wijzigen.</string>
     <string name="tooltip_settings_button_edit_got_it">› Ok!</string>
     <string name="tooltip_settings_button_settings_got_it">› Ok!</string>
-    <string name="tooltip_settings_button_settings_explanation">Here, you can change your preferences.</string>
+    <string name="tooltip_settings_button_settings_explanation">Hier kun je jou voorkeuren wijzigen.</string>
     <string name="tooltip_settings_profile_picture_got_it">› Ok.</string>
-    <string name="tooltip_settings_profile_picture_explanation">In the Profile screen, you\'ll find your personal information, as well as general running statistics. \n\nIn the right top corner you can edit your profile and your preferences.</string>
+    <string name="tooltip_settings_profile_picture_explanation">Op het profielscherm vind je jou persoonlijke informatie als ook jou loop statistieken. \n\nIn de rechter bovenhoek kun je jou profiel en voorkeuren aanpassen.</string>
     <string name="tooltip_settings_statistics_got_it">› Ok.</string>
-    <string name="tooltip_settings_statistics_explanation">Below, your personal information and some aggregated statistics are shown, based on previous runs.</string>
-    <string name="tooltip_history_explanation">Here, in the History tab, you\'ll find all runs that you saved previously.\n\nTap one of your previous runs to get more detailed information on it.\n\nTapping and holding one of your runs for a longer time will show a preview of the route.</string>
+    <string name="tooltip_settings_statistics_explanation">Onderaan zie je jou persoonlijke informatie en enkele statistieken gebaseerd op vorige lopen.</string>
+    <string name="tooltip_history_explanation">Hier in de geschiedenis tab vind je alle lopen die je hebt opgeslaan.\n\nKlik op één van je opgeslagen lopen voor meer informatie.\n\n Een opgeslagen loop een tijdje ingedrukt houden, zal een voorbeeld geven van die route.</string>
     <string name="tooltip_history_got_it">› Ok!</string>
     <string name="tooltip_history_expanded_got_it">› Ok.</string>
-    <string name="tooltip_history_expanded_pager_explanation">This screen will give you more in-depth information about the run you have just selected. Average speed, duration, heart rate, distance and your rating are shown.</string>
+    <string name="tooltip_history_expanded_pager_explanation">Dit scherm zal jou meer informatie geven over de loop die je geselecteerd hebt. Gemiddelde snelheid, duur, hartslag, afstand en jou rating worden weergegeven.</string>
     <string name="tooltip_history_expanded_tabs_got_it">› Ok.</string>
-    <string name="tooltip_history_expanded_tabs_explanation">Use these tabs or swipe right to switch to detailed view.</string>
-    <string name="tooltip_history_expanded_detail_pager_explanation">In the \"Details\" tab, you\'ll find more momentarily information about your run. Use the slider below to see information of your run at a specific point in time.</string>
-    <string name="tooltip_start_free_running_explanation">And finally, this button will let you run without a route. Your route and other running statistics will - of course - still be tracked.</string>
+    <string name="tooltip_history_expanded_tabs_explanation">Gebruik deze tabs of swipe rechts om te wisselen naar een gedetaileerde scherm.</string>
+    <string name="tooltip_history_expanded_detail_pager_explanation">In de \"Details\" tab vind je meer information over je huidige loop. Gebruik de slider onderaan om informatie te zien op een bepaald tijdstip.</string>
+    <string name="tooltip_start_free_running_explanation">Uiteindelijk zal deze knop je laten lopen zonder een route. Jou route en andere statistieken worden natuurlijk nog steeds bijgehouden.</string>
     <string name="tooltip_start_free_running_got_it">› Ok!</string>
     <string name="tooltip_postrunning_ratingbar_got_it">› Ok.</string>
-    <string name="tooltip_postrunning_raringbar_explanation">Congratulations on finishing your first run!\n\nBy sliding your finger over the stars, you can rate your route.</string>
+    <string name="tooltip_postrunning_raringbar_explanation">Gefeliciteerd bij het afronden van je eerste loop!\n\nBy door te sliden met je vinger over de sterren kun je een rating geven aan deze route.</string>
     <string name="tooltip_postrunning_savebutton_got_it">› OK.</string>
-    <string name="tooltip_postrunning_savebutton_explanation">After you\'ve rated your run you can save it using this button. Otherwise, just discard it.</string>
-    <string name="pref_about">About</string>
+    <string name="tooltip_postrunning_savebutton_explanation">Nadat je een rating ingediendt hebt, kun je dit opslaan door behulp van deze knop, anderzijds wordt het weggegooid.</string>
+    <string name="pref_about">Over</string>
     <string name="open_source_libraries">Open Source Libraries</string>
     <string name="reset">reset</string>
     <string name="decline">afwijzen</string>
@@ -244,8 +275,8 @@
     <string name="person_jelle_nelis">Jelle Nelis</string>
     <string name="person_jelle_nelis_email">Jelle.Nelis@intec.ugent.be</string>
     <string name="contact_supervisors">Leidinggevenden</string>
-    <string name="tooltip_whilerunning_title">Your first run!</string>
-    <string name="tooltip_whilerunning_explanation">If you configured audio directions, be sure to put your volume up! If you\'re running with music, we\'ll dim it slightly while playing the directions.</string>
-    <string name="tooltip_whilerunning_dynamic_buttons_explanation">Use these buttons to request a shorter or slower route while you are running.\n\n\nHave a good run!</string>
+    <string name="tooltip_whilerunning_title">Je eerste loop</string>
+    <string name="tooltip_whilerunning_explanation">Als je audio instructies hebt geconfigureerd, maak dan zeker om je volume aan te zetten! Als je loopt met muziek, dimmen we de muziek lichtjes tijdens de audio instructies. </string>
+    <string name="tooltip_whilerunning_dynamic_buttons_explanation">Gebruik deze knoppen om een korter of een trager route te vragen tijdens het lopen.\n\n\nHave a good run!</string>
 
 </resources>

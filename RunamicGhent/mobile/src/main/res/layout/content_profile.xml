@@ -66,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/name"
                     android:layout_marginTop="2dp"
-                    android:text="Name"
+                    android:text="@string/name"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="#727272" />
             </LinearLayout>
@@ -161,7 +161,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:layout_toEndOf="@id/ivContactItem2"
-                    android:text="Total distance ran"
+                    android:text="@string/total_distance_ran"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="#727272" />
             </LinearLayout>
@@ -207,7 +207,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="Average distance"
+                    android:text="@string/average_distance"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="#727272" />
             </LinearLayout>
@@ -254,7 +254,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="Total duration"
+                    android:text="@string/total_duration"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="#727272" />
             </LinearLayout>
@@ -300,7 +300,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="Average duration"
+                    android:text="@string/average_duration"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="#727272" />
 
@@ -348,7 +348,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="Average running speed"
+                    android:text="@string/average_running_speed"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="#727272" />
             </LinearLayout>
@@ -395,7 +395,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="Number of runs"
+                    android:text="@string/number_of_runs"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="#727272" />
             </LinearLayout>
@@ -441,7 +441,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="Average heart rate"
+                    android:text="@string/average_heart_rate"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="#727272" />
             </LinearLayout>
@@ -464,7 +464,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:text="Log out"
+                android:text="@string/logout"
                 android:background="@drawable/button_rounded"
                 android:backgroundTint="@color/colorRed"
                 android:textColor="@drawable/button_text_color"

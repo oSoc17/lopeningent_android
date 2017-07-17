@@ -78,9 +78,7 @@ public class StartFragment extends Fragment implements EventListener, OnMapReady
 
     private Button buttonGenerateRoute;
     private Button buttonFreeRunning;
-    private DistanceNumberPicker distanceNumberPicker;
     private FloatingActionButton myLocationButton;
-
     private InCityChecker inCityChecker;
 
     private Boolean requestRunningMap = true;
@@ -131,9 +129,6 @@ public class StartFragment extends Fragment implements EventListener, OnMapReady
                 startRunningView(false);
             }
         });
-
-        // Get DistanceNumberPicker
-        distanceNumberPicker = (DistanceNumberPicker) getView().findViewById(R.id.route_length);
 
         // Get FloatingActionButton
         myLocationButton = (FloatingActionButton) getView().findViewById(R.id.myLocationButton);
@@ -375,15 +370,6 @@ public class StartFragment extends Fragment implements EventListener, OnMapReady
                         //.setDismissText(getString(R.string.tooltip_start_snapto_got_it))
                         .setDismissOnTouch(true)
                         .setContentText(getString(R.string.tooltip_start_snapto_explanation))
-                        .build()
-        );
-
-        sequence.addSequenceItem(
-                new MaterialShowcaseView.Builder(this.getActivity())
-                        .setTarget(distanceNumberPicker)
-                        //.setDismissText(getString(R.string.tooltip_start_distancepicker_got_it))
-                        .setDismissOnTouch(true)
-                        .setContentText(getString(R.string.tooltip_start_distancepicker_explanation))
                         .build()
         );
 

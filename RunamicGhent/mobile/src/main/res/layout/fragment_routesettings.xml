@@ -15,336 +15,307 @@
     android:weightSum="1"
     tools:context="com.dp16.runamicghent.Activities.MainScreen.Fragments.ProfileFragment">
 
-        <LinearLayout
+    <LinearLayout
+        android:id="@+id/rootLL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:orientation="vertical">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.00">
+
+            <RadioGroup
+                android:id="@+id/parDistanceTime"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:layout_below="@+id/linearLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="33dp"
+                android:layout_weight="0.07"
+                android:background="@drawable/button_round_corners"
+                android:checkedButton="@+id/rdbDistance"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rdbDistance"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle_button_background_left"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/distance"
+                    android:textColor="@color/cardview_shadow_start_color" />
+
+                <RadioButton
+                    android:id="@+id/rdbTime"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle_button_background_right"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/time"
+                    android:textColor="@color/cardview_shadow_start_color"
+                    android:transitionName="rdbtime" />
+
+            </RadioGroup>
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/rootLL">
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dp"
+            android:elevation="1dp"
+            android:inputType="textPersonName"
+            android:text="@string/around"
+            android:textAlignment="center"
+            android:textSize="18sp" />
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="36dp">
 
-
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.00">
+                android:orientation="horizontal"
+                android:textAlignment="center">
 
-                <RadioGroup
-                    android:id="@+id/parDistanceTime"
-                    android:layout_width="match_parent"
-                    android:layout_height="34dp"
-                    android:layout_below="@+id/linearLayout"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="35dp"
-                    android:layout_marginRight="85dp"
-                    android:layout_marginTop="33dp"
-                    android:layout_weight="0.07"
-                    android:background="@drawable/button_round_corners"
-                    android:checkedButton="@+id/rdbDistance"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/rdbDistance"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_background_left"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:text="@string/distance"
-                        android:textColor="@color/cardview_shadow_start_color" />
-
-                    <RadioButton
-                        android:id="@+id/rdbTime"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_background_right"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:text="@string/time"
-                        android:textColor="@color/cardview_shadow_start_color"
-                        android:transitionName="rdbtime" />
-
-                </RadioGroup>
-            </FrameLayout>
-
-            <TextView
-                android:id="@+id/editText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="10dp"
-                android:elevation="1dp"
-                android:inputType="textPersonName"
-                android:paddingRight="50dp"
-                android:text="@string/around"
-                android:textAlignment="center"
-                android:textSize="18sp" />
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="36dp"
-                android:layout_marginLeft="25dp"
-                android:paddingLeft="10dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/btnSubsDTValue"
+                    android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="0dp"
-                    android:orientation="horizontal"
-                    android:textAlignment="center">
+                    android:layout_weight="0.46"
+                    android:background="@drawable/button_corners_left"
+                    android:text="-"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-                    <Button
-                        android:id="@+id/btnSubsDTValue"
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/button_corners_left"
-                        android:text="-"
-                        android:textColor="@color/cardview_light_background"
-                        android:textSize="30sp"
-                        android:textStyle="bold"
-                        android:layout_weight="0.21"
-                        android:scaleX="1"
-                        android:scaleY="1"/>
+                <TextView
+                    android:id="@+id/tvDTValue"
+                    android:layout_width="69dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.94"
+                    android:background="@color/colorAccent"
+                    android:paddingTop="3dp"
+                    android:text="0.0"
+                    android:textAlignment="center"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="24sp"
+                    tools:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tvDTValue"
-                        android:layout_width="131dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/colorAccent"
-                        android:text="0.0"
-                        android:textAlignment="center"
-                        android:textColor="@color/cardview_light_background"
-                        android:textSize="30sp"
-                        tools:textStyle="bold" />
+                <Button
+                    android:id="@+id/btnAddDTValue"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.53"
+                    android:background="@drawable/button_corners_right"
+                    android:text="+"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="24sp" />
 
-                    <Button
-                        android:id="@+id/btnAddDTValue"
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.53"
-                        android:background="@drawable/button_corners_right"
-                        android:text="+"
-                        android:textColor="@color/cardview_light_background"
-                        android:textSize="30sp"
-                        android:scaleX="1"
-                        android:scaleY="1"/>
+            </LinearLayout>
+        </FrameLayout>
 
-                    <TextView
-                        android:id="@+id/tvDT"
-                        android:layout_width="wrap_content"
-                        android:layout_height="31dp"
-                        android:layout_weight="3.34"
-                        android:text="km"
-                        android:textAlignment="center"
-                        android:textSize="18sp" />
+        <Spinner
+            android:id="@+id/spDifficulty"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/corners_spinner"
+            android:dropDownSelector="@color/cardview_light_background"
+            android:textColor="@color/cardview_light_background" />
 
-                </LinearLayout>
-            </FrameLayout>
+        <TextView
+            android:id="@+id/editText2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_weight="0.00"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="@string/select_poi"
+            android:textAlignment="center"
+            android:textSize="18sp" />
 
-            <Spinner
-                android:id="@+id/spDifficulty"
-                android:textColor="@color/cardview_light_background"
+        <Spinner
+            android:id="@+id/spPOI"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/corners_spinner"
+            android:dropDownSelector="@color/cardview_light_background"
+            android:textColor="@color/cardview_light_background" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.00">
+
+            <RadioGroup
+                android:id="@+id/parNatureCity"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginLeft="35dp"
-                android:layout_marginRight="85dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/corners_spinner"
-                android:dropDownSelector="@color/cardview_light_background" />
+                android:layout_height="34dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="33dp"
+                android:background="@drawable/button_round_corners"
+                android:checkedButton="@+id/rdbNature"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/editText2"
+                <RadioButton
+                    android:id="@+id/rdbNature"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle_button_background_left"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/nature"
+                    android:textColor="@color/cardview_shadow_start_color" />
+
+                <RadioButton
+                    android:id="@+id/rdbCity"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle_button_background_right"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/city"
+                    android:textColor="@color/cardview_shadow_start_color" />
+            </RadioGroup>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.00">
+
+            <RadioGroup
+                android:id="@+id/parPaved"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_weight="0.00"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:paddingRight="50dp"
-                android:text="@string/select_poi"
-                android:textAlignment="center"
-                android:textSize="18sp" />
+                android:layout_height="34dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="33dp"
+                android:background="@drawable/button_round_corners"
+                android:checkedButton="@+id/rdbUnpaved"
+                android:orientation="horizontal">
 
-            <Spinner
-                android:id="@+id/spPOI"
-                android:textColor="@color/cardview_light_background"
+                <RadioButton
+                    android:id="@+id/rdbUnpaved"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle_button_background_left"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/paved"
+                    android:textColor="@color/cardview_shadow_start_color" />
+
+                <RadioButton
+                    android:id="@+id/rdbPaved"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle_button_background_right"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/unpaved"
+                    android:textColor="@color/cardview_shadow_start_color" />
+            </RadioGroup>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.00">
+
+            <RadioGroup
+                android:id="@+id/parHillsFlat"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginLeft="35dp"
-                android:layout_marginRight="85dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/corners_spinner"
-                android:dropDownSelector="@color/cardview_light_background" />
+                android:layout_height="34dp"
+                android:layout_below="@+id/linearLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="33dp"
+                android:layout_weight="0.07"
+                android:background="@drawable/button_round_corners"
+                android:checkedButton="@+id/rdbHills"
+                android:orientation="horizontal">
 
-            <FrameLayout
+                <RadioButton
+                    android:id="@+id/rdbHills"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle_button_background_left"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/hills"
+                    android:textColor="@color/cardview_shadow_start_color" />
+
+                <RadioButton
+                    android:id="@+id/rdbFlat"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle_button_background_right"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/flat"
+                    android:textColor="@color/cardview_shadow_start_color" />
+            </RadioGroup>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.00">
+
+            <RadioGroup
+                android:id="@+id/parSafetyAction"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.00">
+                android:layout_height="34dp"
+                android:layout_below="@+id/linearLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="33dp"
+                android:layout_weight="0.07"
+                android:background="@drawable/button_round_corners"
+                android:checkedButton="@+id/rdbSafety"
+                android:orientation="horizontal">
 
-                <RadioGroup
-                    android:id="@+id/parNatureCity"
-                    android:layout_width="match_parent"
-                    android:layout_height="34dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="35dp"
-                    android:layout_marginRight="85dp"
-                    android:layout_marginTop="33dp"
-                    android:background="@drawable/button_round_corners"
-                    android:checkedButton="@+id/rdbNature"
-                    android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rdbSafety"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle_button_background_left"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/safety"
+                    android:textColor="@color/cardview_shadow_start_color" />
 
-                    <RadioButton
-                        android:id="@+id/rdbNature"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_background_left"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:text="@string/nature"
-                        android:textColor="@color/cardview_shadow_start_color" />
+                <RadioButton
+                    android:id="@+id/rdbAction"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle_button_background_right"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/action"
+                    android:textColor="@color/cardview_shadow_start_color" />
 
-                    <RadioButton
-                        android:id="@+id/rdbCity"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_background_right"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:text="@string/city"
-                        android:textColor="@color/cardview_shadow_start_color" />
-                </RadioGroup>
-            </FrameLayout>
+            </RadioGroup>
+        </FrameLayout>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.00">
-
-                <RadioGroup
-                    android:id="@+id/parPaved"
-                    android:layout_width="match_parent"
-                    android:layout_height="34dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="35dp"
-                    android:layout_marginRight="85dp"
-                    android:layout_marginTop="33dp"
-                    android:background="@drawable/button_round_corners"
-                    android:checkedButton="@+id/rdbUnpaved"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/rdbUnpaved"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_background_left"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:text="@string/paved"
-                        android:textColor="@color/cardview_shadow_start_color" />
-
-                    <RadioButton
-                        android:id="@+id/rdbPaved"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_background_right"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:text="@string/unpaved"
-                        android:textColor="@color/cardview_shadow_start_color" />
-                </RadioGroup>
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.00">
-
-                <RadioGroup
-                    android:id="@+id/parHillsFlat"
-                    android:layout_width="match_parent"
-                    android:layout_height="34dp"
-                    android:layout_below="@+id/linearLayout"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="35dp"
-                    android:layout_marginRight="85dp"
-                    android:layout_marginTop="33dp"
-                    android:layout_weight="0.07"
-                    android:background="@drawable/button_round_corners"
-                    android:checkedButton="@+id/rdbHills"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/rdbHills"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_background_left"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:text="@string/hills"
-                        android:textColor="@color/cardview_shadow_start_color" />
-
-                    <RadioButton
-                        android:id="@+id/rdbFlat"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_background_right"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:text="@string/flat"
-                        android:textColor="@color/cardview_shadow_start_color" />
-                </RadioGroup>
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.00">
-
-                <RadioGroup
-                    android:id="@+id/parSafetyAction"
-                    android:layout_width="match_parent"
-                    android:layout_height="34dp"
-                    android:layout_below="@+id/linearLayout"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="35dp"
-                    android:layout_marginRight="85dp"
-                    android:layout_marginTop="33dp"
-                    android:layout_weight="0.07"
-                    android:background="@drawable/button_round_corners"
-                    android:checkedButton="@+id/rdbSafety"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/rdbSafety"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_background_left"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:text="@string/safety"
-                        android:textColor="@color/cardview_shadow_start_color" />
-
-                    <RadioButton
-                        android:id="@+id/rdbAction"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_background_right"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:text="@string/action"
-                        android:textColor="@color/cardview_shadow_start_color" />
-
-                </RadioGroup>
-            </FrameLayout>
-
-        </LinearLayout>
+    </LinearLayout>
 </ScrollView>

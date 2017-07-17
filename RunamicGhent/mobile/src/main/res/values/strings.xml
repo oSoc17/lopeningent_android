@@ -79,6 +79,16 @@
     <string name="wrong_old_pw">Wrong old password</string>
     <string name="pw_to_weak">Password to weak, length minimum 6</string>
     <string name="changepicture">Give in URL picture</string>
+    <!--content_profile-->
+    <string name="name">Name</string>
+    <string name="total_distance_ran">Total distance ran</string>
+    <string name="average_distance">Average_distance</string>
+    <string name="total_duration">Total duration</string>
+    <string name="average_duration">Average duration</string>
+    <string name="average_running_speed">Average running speed</string>
+    <string name="number_of_runs">Number of runs</string>
+    <string name="average_heart_rate">Average heart rate</string>
+    <string name="logout">LOG OUT</string>
 
     <!-- Running Fragment -->
     <string name="generating_route">Generating Route…</string>
