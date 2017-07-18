@@ -144,7 +144,7 @@ public class DistanceProvider implements EventListener, EventPublisher, DataProv
             if (previousLocation == null) {
                 previousLocation = currentLocation;
             } else {
-                double distance = previousLocation.distanceTo(currentLocation);
+                float distance = previousLocation.distanceTo(currentLocation);
 
                 if (distance > minimumDistance && (distance * relativeAccuracy) > currentLocation.getAccuracy()) {
                     distanceCovered += distance;

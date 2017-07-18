@@ -13,6 +13,7 @@
 
 package com.dp16.runamicghent.StatTracker;
 
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.util.Log;
 import android.preference.PreferenceManager;
@@ -181,13 +182,43 @@ public class RouteEngine implements EventListener, EventPublisher {
 
 
     public void requestTrackStatic(LatLng location){
-        RunDistance distance = new RunDistance(PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext()).getInt("pref_key_routing_length", Constants.RouteGenerator.DEFAULT_LENGTH));
-        requestTrack(location, distance, false, "");
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+        Boolean timeChecked = preferences.getBoolean("Time",false);
+        double km;
+        if (!timeChecked){
+
+            km = Double.parseDouble(preferences.getString("distanceValue", "5"));
+        }
+        else {
+            //time values
+            String time = preferences.getString("timeValue", "00:10");
+            int h = Integer.parseInt(time.substring(0,2));
+            int m = Integer.parseInt(time.substring(3,5)) + (h/60) ;
+
+            //difficulty
+            int difficulty = preferences.getInt("difficulty", 0);
+            switch (difficulty){
+                case 0: km = (Constants.RouteGenerator.BEGINNER_SPEED/60) *m;
+                    break;
+                case 1: km = (Constants.RouteGenerator.AVERAGE_SPEED/60) *m;
+                    break;
+                case 2: km = (Constants.RouteGenerator.EXPERT_SPEED/60) *m;
+                    break;
+                default: km = (Constants.RouteGenerator.AVERAGE_SPEED/60) *m;
+            }
+
+            RunDistance distance = new RunDistance((int) (km*1000));
+            requestTrack(location,distance,false,"");
+
+
+        }
+       /* RunDistance distance = new RunDistance(PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext()).getInt("pref_key_routing_length", Constants.RouteGenerator.DEFAULT_LENGTH));
+        requestTrack(location, distance, false, "");*/
     }
 
     public void requestTrackDynamic(DynamicRouteType dynamicRouteType){
         RunRoute route = routeList[onRoute];
-        int currentDistance = route.getRouteLength().getDistance();
+        double currentDistance = route.getRouteLength().getDistance();
         RunDistance distance;
 
         switch (dynamicRouteType){
