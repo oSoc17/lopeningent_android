@@ -72,7 +72,6 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="0.47"
                 android:background="@drawable/button_rounded"
-                android:backgroundTint="@drawable/generate_route_button"
                 android:elevation="1dp"
                 android:text="@string/generate_route"
                 android:textColor="@drawable/button_text_color" />

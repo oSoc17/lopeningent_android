@@ -61,15 +61,15 @@
     <string name="avg_heart_rate_label">Gem. Hartslag</string>
     <string name="total_distance_label">Totale Afstand</string>
     <string name="distance_label">Afstand</string>
-    <string name="total_route_length_label">Totale route lengte</string>
+    <string name="total_route_length_label">/</string>
     <string name="total_duration_label">Totale duur</string>
     <string name="duration_label">Duur</string>
 
     <!-- History Fragment -->
     <string name="delete">Verwijder</string>
     <string name="your_rating_label">Your Rating</string>
-    <string name="no_runs">Je hebt nog niet geloopt of er zijn nog geen lopen opgeslagen </string>
-    <string name="go_for_run">Ga voor een loop!</string>
+    <string name="no_runs">Je hebt nog niet geloopt of je hebt nog niets opgeslagen </string>
+    <string name="go_for_run">Ga lopen!</string>
     <string name="string_divider">•</string>
 
     <!-- Profile Fragment -->
@@ -92,7 +92,7 @@
     <!-- Running Fragment -->
     <string name="generating_route">Genereren van route…</string>
     <string name="generate_alternative">Alternatieven genereren</string>
-    <string name="start_running">Start loop</string>
+    <string name="start_running">Start met lopen</string>
     <string name="pause_run">Pause</string>
     <string name="resume_run">Hervatten</string>
     <string name="stop_run">Stop</string>
@@ -172,8 +172,8 @@
     <string name="pref_summaryOff_audio_situational_volume">Voor linkse bochten, linker volume hoger, bij rechtse bochten, rechter volume hoger.</string>
     <string name="pref_audio_right_sound">Het geluid dat zich afspeelt wanneer de route die je volgt rechts afslaat.</string>
     <string name="pref_audio_left_sound">Het geluid dat zich afspeelt wanneer de route die je volgt links afslaat.</string>
-    <string name="pref_summaryOff_audio_custom_sound">Zelfgekozen geluiden worden gebruikt om jou te leiden tijdens het lopen.</string>
-    <string name="pref_summaryOn_audio_custom_sound">In plaats van geluiden worden er ingesproken instructies gebruikt om jou te leiden tijdens het lopen.</string>
+    <string name="pref_summaryOff_audio_custom_sound">Zelfgekozen geluiden worden gebruikt om je te leiden tijdens het lopen.</string>
+    <string name="pref_summaryOn_audio_custom_sound">In plaats van geluiden worden er ingesproken instructies gebruikt om je te leiden tijdens het lopen.</string>
     <string name="pref_summaryOff_audio_directions">Geen audio instructies tijdens het lopen.</string>
     <string name="pref_audio_customOn_audio_directions">Je wordt geholpen via audio instructies tijdens het lopen.</string>
 
@@ -211,23 +211,23 @@
     <string name="tooltip_history_bottombar_got_it">› Ok, volgende!</string>
     <string name="tooltip_history_bottombar_explanation">In de geschiedenis tab vind je alle vorige lopen samen met extra info zoals gemiddelde snelheid en afstand.</string>
     <string name="tooltip_settings_bottombar_got_it">› Start lopen.</string>
-    <string name="tooltip_settings_bottombar_explanation">In the profiel tab zal je jou persoonlijke informatie vinden en kunnen wijzigen. Jou voorkeur settings bevinden zich daar ook.</string>
-    <string name="tooltip_settings_button_edit_explanation">Je kan jou profiel hier wijzigen.</string>
+    <string name="tooltip_settings_bottombar_explanation">In the profiel tab zal je jouw persoonlijke informatie vinden en kunnen wijzigen. Jouw voorkeur settings bevinden zich daar ook.</string>
+    <string name="tooltip_settings_button_edit_explanation">Je kan je profiel hier wijzigen.</string>
     <string name="tooltip_settings_button_edit_got_it">› Ok!</string>
     <string name="tooltip_settings_button_settings_got_it">› Ok!</string>
-    <string name="tooltip_settings_button_settings_explanation">Hier kun je jou voorkeuren wijzigen.</string>
+    <string name="tooltip_settings_button_settings_explanation">Hier kun je jouw voorkeuren wijzigen.</string>
     <string name="tooltip_settings_profile_picture_got_it">› Ok.</string>
-    <string name="tooltip_settings_profile_picture_explanation">Op het profielscherm vind je jou persoonlijke informatie als ook jou loop statistieken. \n\nIn de rechter bovenhoek kun je jou profiel en voorkeuren aanpassen.</string>
+    <string name="tooltip_settings_profile_picture_explanation">Op het profielscherm vind je persoonlijke informatie als ook jouw loop statistieken. \n\nIn de rechter bovenhoek kun je jouw profiel en voorkeuren aanpassen.</string>
     <string name="tooltip_settings_statistics_got_it">› Ok.</string>
-    <string name="tooltip_settings_statistics_explanation">Onderaan zie je jou persoonlijke informatie en enkele statistieken gebaseerd op vorige lopen.</string>
+    <string name="tooltip_settings_statistics_explanation">Onderaan zie je persoonlijke informatie en enkele statistieken gebaseerd op vorige lopen.</string>
     <string name="tooltip_history_explanation">Hier in de geschiedenis tab vind je alle lopen die je hebt opgeslaan.\n\nKlik op één van je opgeslagen lopen voor meer informatie.\n\n Een opgeslagen loop een tijdje ingedrukt houden, zal een voorbeeld geven van die route.</string>
     <string name="tooltip_history_got_it">› Ok!</string>
     <string name="tooltip_history_expanded_got_it">› Ok.</string>
-    <string name="tooltip_history_expanded_pager_explanation">Dit scherm zal jou meer informatie geven over de loop die je geselecteerd hebt. Gemiddelde snelheid, duur, hartslag, afstand en jou rating worden weergegeven.</string>
+    <string name="tooltip_history_expanded_pager_explanation">Dit scherm zal je meer informatie geven over de loop die je geselecteerd hebt. Gemiddelde snelheid, duur, hartslag, afstand en de rating worden weergegeven.</string>
     <string name="tooltip_history_expanded_tabs_got_it">› Ok.</string>
     <string name="tooltip_history_expanded_tabs_explanation">Gebruik deze tabs of swipe rechts om te wisselen naar een gedetaileerde scherm.</string>
     <string name="tooltip_history_expanded_detail_pager_explanation">In de \"Details\" tab vind je meer information over je huidige loop. Gebruik de slider onderaan om informatie te zien op een bepaald tijdstip.</string>
-    <string name="tooltip_start_free_running_explanation">Uiteindelijk zal deze knop je laten lopen zonder een route. Jou route en andere statistieken worden natuurlijk nog steeds bijgehouden.</string>
+    <string name="tooltip_start_free_running_explanation">Uiteindelijk zal deze knop je laten lopen zonder een route. Je route en andere statistieken worden natuurlijk nog steeds bijgehouden.</string>
     <string name="tooltip_start_free_running_got_it">› Ok!</string>
     <string name="tooltip_postrunning_ratingbar_got_it">› Ok.</string>
     <string name="tooltip_postrunning_raringbar_explanation">Gefeliciteerd bij het afronden van je eerste loop!\n\nBy door te sliden met je vinger over de sterren kun je een rating geven aan deze route.</string>

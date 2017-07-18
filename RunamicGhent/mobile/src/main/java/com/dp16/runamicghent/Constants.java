@@ -348,6 +348,8 @@ public class Constants {
         public static final double AVERAGE_SPEED = 10;
         public static final double EXPERT_SPEED = 12;
 
+        public static final double AVERAGE_SPEED_DIFFERENCE = 1.5;
+
         private RouteGenerator() {
             throw new IllegalAccessError(UTILITY_CLASS_ERROR);
         }

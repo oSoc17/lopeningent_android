@@ -43,6 +43,7 @@
 
                 <RadioButton
                     android:id="@+id/rdbDistance"
+                    android:tag="Distance"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -54,6 +55,7 @@
 
                 <RadioButton
                     android:id="@+id/rdbTime"
+                    android:tag="Time"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -173,6 +175,7 @@
 
                 <RadioButton
                     android:id="@+id/rdbNature"
+                    android:tag="Nature"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -184,6 +187,7 @@
 
                 <RadioButton
                     android:id="@+id/rdbCity"
+                    android:tag="City"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -212,6 +216,7 @@
 
                 <RadioButton
                     android:id="@+id/rdbUnpaved"
+                    android:tag="Unpaved"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -223,6 +228,7 @@
 
                 <RadioButton
                     android:id="@+id/rdbPaved"
+                    android:tag="Paved"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -253,6 +259,7 @@
 
                 <RadioButton
                     android:id="@+id/rdbHills"
+                    android:tag="Hills"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -264,6 +271,7 @@
 
                 <RadioButton
                     android:id="@+id/rdbFlat"
+                    android:tag="Flat"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -294,6 +302,7 @@
 
                 <RadioButton
                     android:id="@+id/rdbSafety"
+                    android:tag="Safety"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -305,6 +314,7 @@
 
                 <RadioButton
                     android:id="@+id/rdbAction"
+                    android:tag="Action"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

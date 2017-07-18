@@ -52,6 +52,9 @@ public class RouteSettingsFragment extends Fragment {
     private static int REP_DELAY = 50;
     private Handler repeatUpdateHandler = new Handler();
 
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+
     /*
     *
     *   Variables for the parameters of the route: to be added
@@ -61,7 +64,8 @@ public class RouteSettingsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getCurrentSettings();
-
+        preferences =PreferenceManager.getDefaultSharedPreferences(getContext());
+        editor = preferences.edit();
 
 
 
@@ -103,7 +107,7 @@ public class RouteSettingsFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 changePreference(group);
                 //First save value then get new value of corresponding parameter
-                saveDTvalue();
+                //saveDTvalue();
                 getDTvalue();
                 setButtons();
             }
@@ -255,10 +259,9 @@ public class RouteSettingsFragment extends Fragment {
     //Get preference method
     public void  getPreference(RadioGroup radioGroup){
         boolean checked = false;
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         RadioButton radioButton = (RadioButton)radioGroup.getChildAt(1);
         RadioButton radioButton2 = (RadioButton)radioGroup.getChildAt(0);
-        checked = preferences.getBoolean(radioButton.getText().toString(),false);
+        checked = preferences.getBoolean(radioButton.getTag().toString(),false);
         if (checked){
             radioButton.setChecked(true);
             radioButton.setTextColor(getResources().getColorStateList(R.color.cardview_light_background));
@@ -273,19 +276,17 @@ public class RouteSettingsFragment extends Fragment {
     public void changePreference(RadioGroup radioGroup){
         RadioButton radioButton = (RadioButton)radioGroup.getChildAt(1);
         RadioButton radioButton2 = (RadioButton)radioGroup.getChildAt(0);
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        SharedPreferences.Editor editor = preferences.edit();
-
+        //radioButton2.getId()
         if (radioButton.isChecked())
         {
-            editor.putBoolean(radioButton.getText().toString(), true);
+            editor.putBoolean(radioButton.getTag().toString(), true);
             radioButton.setTextColor(getResources().getColorStateList(R.color.cardview_light_background));
             radioButton2.setTextColor(getResources().getColorStateList(R.color.cardview_shadow_start_color));
         }
 
         else
         {
-            editor.putBoolean(radioButton.getText().toString(),false);
+            editor.putBoolean(radioButton.getTag().toString(),false);
             radioButton.setTextColor(getResources().getColorStateList(R.color.cardview_shadow_start_color));
             radioButton2.setTextColor(getResources().getColorStateList(R.color.cardview_light_background));
         }
@@ -297,7 +298,6 @@ public class RouteSettingsFragment extends Fragment {
        // final TextView tvDT = (TextView)view.findViewById(R.id.tvDT);
         TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
         RadioButton rdbDistance = (RadioButton)view.findViewById(R.id.rdbDistance);
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         String getValue;
         if (rdbDistance.isChecked()){
             hideSpinner();
@@ -312,10 +312,9 @@ public class RouteSettingsFragment extends Fragment {
         tvValue.setText(getValue);
     }
     //Save DTvalue
+    /*
     public void saveDTvalue(){
         TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        SharedPreferences.Editor editor = preferences.edit();
         RadioButton rdbDistance = (RadioButton)view.findViewById(R.id.rdbDistance);
         String value = tvValue.getText().toString();
         if (rdbDistance.isChecked()){
@@ -326,28 +325,22 @@ public class RouteSettingsFragment extends Fragment {
             editor.putString("distanceValue",value);
         }
         editor.apply();
-    }
+    }*/
 
     //get and set combobox value
     public void savePoi(){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        SharedPreferences.Editor editor = preferences.edit();
         Spinner spinner = (Spinner)view.findViewById(R.id.spPOI);
         int index = spinner.getSelectedItemPosition();
         editor.putInt("poi",index);
         editor.apply();
     }
     public void getPoi(){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        SharedPreferences.Editor editor = preferences.edit();
         Spinner spinner = (Spinner)view.findViewById(R.id.spPOI);
         int index = preferences.getInt("poi",0);
         spinner.setSelection(index);
     }
 
     public void saveDifficulty(){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        SharedPreferences.Editor editor = preferences.edit();
         Spinner spinner = (Spinner)view.findViewById(R.id.spDifficulty);
         int index = spinner.getSelectedItemPosition();
         editor.putInt("difficulty",index);
@@ -355,8 +348,6 @@ public class RouteSettingsFragment extends Fragment {
     }
 
     public void getDifficulty(){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        SharedPreferences.Editor editor = preferences.edit();
         Spinner spinner = (Spinner)view.findViewById(R.id.spDifficulty);
         int index = preferences.getInt("difficulty",0);
         spinner.setSelection(index);
@@ -397,6 +388,8 @@ public class RouteSettingsFragment extends Fragment {
            value += 0.1;
            value = (double) Math.round(((value * 100) * 10) / 10)/100;
            tvValue.setText(String.valueOf(value));
+           editor.putString("distanceValue",String.valueOf(value));
+
        }
        else {
            String time = tvValue.getText().toString();
@@ -408,8 +401,10 @@ public class RouteSettingsFragment extends Fragment {
                h += 1;
            }
            String newtime = String.format("%02d", h)+":"+String.format("%02d", m);
+           editor.putString("timeValue",newtime);
            tvValue.setText(newtime);
        }
+       editor.apply();
 
    }
 
@@ -428,7 +423,7 @@ public class RouteSettingsFragment extends Fragment {
            }
 
            tvValue.setText(String.valueOf(value));
-
+           editor.putString("distanceValue",tvValue.getText().toString());
        }
        else {
            String time = tvValue.getText().toString();
@@ -446,7 +441,9 @@ public class RouteSettingsFragment extends Fragment {
            }
            String newtime = String.format("%02d", h)+":"+String.format("%02d", m);
            tvValue.setText(newtime);
+           editor.putString("timeValue",tvValue.getText().toString());
        }
+       editor.apply();
    }
 
     /**
