@@ -69,7 +69,7 @@
     <string name="delete">Verwijder</string>
     <string name="your_rating_label">Your Rating</string>
     <string name="no_runs">Je hebt nog niet geloopt of je hebt nog niets opgeslagen </string>
-    <string name="go_for_run">Ga lopen!</string>
+    <string name="go_for_run">Ga eens lopen!</string>
     <string name="string_divider">•</string>
 
     <!-- Profile Fragment -->
@@ -147,6 +147,10 @@
     <string name="pref_summary_velocity">Snelheid in km/h of min/km weergeven</string>
 
     <string name="pref_title_dynamic_routing">Dynamische routing</string>
+    <string name="pref_title_dynamic_averagespeed_routing_on_off">Activeer dynamische routing via gemiddelde snelheid.</string>
+    <string name="pref_summary_off_dynamic_averagespeed_routing_on_off">Dynamische gemiddelde snelheid routing is uitgeschakelt.</string>
+    <string name="pref_summary_on_dynamic_averagespeed_routing_on_off">Dynamische gemmiddelde snelheid routing is ingeschakeld.</string>
+
     <string name="pref_title_dynamic_routing_on_off">Activeer dynamishce routing met hartslag.</string>
     <string name="pref_summary_off_dynamic_routing_on_off">Dynamische hartslag routing is uitgeschakelt.</string>
     <string name="pref_summary_on_dynamic_routing_on_off">Dynamische hartslag routing is ingeschakeld</string>

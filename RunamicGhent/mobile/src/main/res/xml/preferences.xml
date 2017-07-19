@@ -34,11 +34,20 @@
         android:title="@string/pref_title_dynamic_routing"
         android:key="pref_key_dynamic_routing">
 
-       <CheckBoxPreference
+        <com.dp16.runamicghent.Activities.MainScreen.CustomSettings.CustomCbPref
+            android:key="pref_key_avgspeed_routing_on_off"
+            android:title="@string/pref_title_dynamic_averagespeed_routing_on_off"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:summaryOff="@string/pref_summary_off_dynamic_averagespeed_routing_on_off"
+            android:summaryOn="@string/pref_summary_on_dynamic_averagespeed_routing_on_off"
+            android:defaultValue="true"/>
+
+       <com.dp16.runamicghent.Activities.MainScreen.CustomSettings.CustomCbPref
            android:key="pref_key_dynamic_heart_routing_on_off"
            android:title="@string/pref_title_dynamic_routing_on_off"
            android:summaryOff="@string/pref_summary_off_dynamic_routing_on_off"
            android:summaryOn="@string/pref_summary_on_dynamic_routing_on_off"
+           android:textAppearance="?android:attr/textAppearanceSmall"
            android:defaultValue="true"/>
 
         <com.dp16.runamicghent.Activities.MainScreen.CustomSettings.RangebarPreference

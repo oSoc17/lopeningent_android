@@ -15,6 +15,7 @@ package com.dp16.runamicghent.Activities.RunningScreen;
 
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -97,11 +98,13 @@ public class WhileRunningFragment extends Fragment implements EventListener {
 
     private HeartRateChecker heartRateChecker = null;
 
-    //Run stats
+    //Dynamic run time
     private RunningStatistics runningStatistics;
     private double currentSpeed;
     Timer timer = new Timer();
     TimerTask timerTask;
+    boolean dynamicAvgSpeedRouting;
+
 
 
 
@@ -178,7 +181,7 @@ public class WhileRunningFragment extends Fragment implements EventListener {
 
                 // Build and display the AlertDialog.
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setMessage("Are you sure you want to stop running?").setPositiveButton("Yes", dialogClickListener)
+                builder.setMessage(getResources().getString(R.string.confirm_stop)).setPositiveButton("Yes", dialogClickListener)
                         .setNegativeButton("No", dialogClickListener).show();
 
             }
@@ -208,11 +211,11 @@ public class WhileRunningFragment extends Fragment implements EventListener {
          */
         minusButton = (FloatingActionButton) view.findViewById(R.id.minusButton);
         plusButton = (FloatingActionButton) view.findViewById(R.id.plusButton);
+        //dynamic routing avgspeed
+        dynamicAvgSpeedRouting = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext()).getBoolean("pref_key_avgspeed_routing_on_off", false);
 
         // If user chose to run with a route
         if (runningWithRoute) {
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-
             minusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -228,30 +231,11 @@ public class WhileRunningFragment extends Fragment implements EventListener {
                     Toast.makeText(getActivity().getBaseContext(), R.string.longer_route, Toast.LENGTH_SHORT).show();
                 }
             });
-
             //ADDED
-            if (preferences.getBoolean("Time",false)){
-                runningStatistics = ((RunningActivity) getActivity()).getStatTracker().getRunningStatistics();
-                int difficulty = preferences.getInt("difficulty", 0);
-                switch (difficulty){
-                    case 0: currentSpeed = Constants.RouteGenerator.BEGINNER_SPEED;
-                        break;
-                    case 1: currentSpeed = Constants.RouteGenerator.AVERAGE_SPEED;
-                        break;
-                    case 2: currentSpeed = Constants.RouteGenerator.EXPERT_SPEED;
-                        break;
-                    default: currentSpeed = Constants.RouteGenerator.AVERAGE_SPEED;
-                }
-                timerTask = new TimerTask () {
-                    @Override
-                    public void run () {
+            if (PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext()).getBoolean("Time", false) && dynamicAvgSpeedRouting){
 
-                        checkAverageSpeed();
-                    }
-                };
-                timer.schedule(timerTask,1000*60*2, 1000*60*2);
-                minusButton.setVisibility(View.GONE);
-                plusButton.setVisibility(View.GONE);
+                setDynamicRoutingTimerTask();
+
             }
         } else {
             // Not running with a route -> no plus and minus button
@@ -319,6 +303,30 @@ public class WhileRunningFragment extends Fragment implements EventListener {
     /*
 TimerTask
 */
+    public void setDynamicRoutingTimerTask(){
+            runningStatistics = ((RunningActivity) getActivity()).getStatTracker().getRunningStatistics();
+            int difficulty = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext()).getInt("difficulty", 0);
+            //Get avg speed
+            switch (difficulty){
+                case 0: currentSpeed = Constants.RouteGenerator.BEGINNER_SPEED;
+                    break;
+                case 1: currentSpeed = Constants.RouteGenerator.AVERAGE_SPEED;
+                    break;
+                case 2: currentSpeed = Constants.RouteGenerator.EXPERT_SPEED;
+                    break;
+                default: currentSpeed = Constants.RouteGenerator.AVERAGE_SPEED;
+            }
+
+            timerTask = new TimerTask () {
+                @Override
+                public void run () {
+
+                    checkAverageSpeed();
+                }
+            };
+            timer.schedule(timerTask,1000*60*2, 1000*60*2);
+
+    }
     public void checkAverageSpeed(){
         double avgSpeed = runningStatistics.getAverageSpeed().getSpeed();
         double difference = avgSpeed - currentSpeed;
