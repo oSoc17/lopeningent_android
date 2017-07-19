@@ -286,6 +286,7 @@ public class StartFragment extends Fragment implements EventListener, OnMapReady
     @Override
     public void onMapReady(GoogleMap googleMap) {
         if (requestRunningMap) {
+
             runningMap = new RunningMap(googleMap, this);
         }
     }

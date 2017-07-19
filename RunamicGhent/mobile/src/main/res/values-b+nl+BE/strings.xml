@@ -108,8 +108,10 @@
     <string name="shorter_route">Er werd een kortere route aangevraagd</string>
     <string name="longer_route">Er werd een langere route aangevraagd</string>
 
+    <string name="confirm_stop">Ben je zeker dat je wilt stoppen met lopen?</string>
+
     <!-- End Run Activity -->
-    <string name="save_run">Save</string>
+    <string name="save_run">Opslaan</string>
     <string name="discard_run">Afwijzen</string>
     <string name="rating_label">Rate your run</string>
 

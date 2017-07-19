@@ -224,6 +224,8 @@ public class Constants {
 
         // Desired zoom level for google map
         public static final float DESIRED_ZOOM = 17.0f;
+        // Maximum desired zoom
+        public static final float MAX_DESIRED_ZOOM = 22.0f;
 
         // Does Google RunningMap need compass
         public static final boolean COMPASS = true;
