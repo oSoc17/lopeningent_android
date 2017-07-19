@@ -14,6 +14,7 @@
 package com.dp16.runamicghent.Activities.RunningScreen;
 
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -44,8 +45,12 @@ import com.dp16.runamicghent.StatTracker.RouteEngine;
 import com.dp16.eventbroker.EventBroker;
 import com.dp16.eventbroker.EventListener;
 import com.dp16.eventbroker.EventPublisherClass;
+import com.dp16.runamicghent.StatTracker.RunningStatistics;
 import com.google.android.gms.maps.model.Marker;
 import com.google.maps.android.ui.IconGenerator;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
@@ -91,6 +96,14 @@ public class WhileRunningFragment extends Fragment implements EventListener {
     private boolean dynamicHeartRateOn;
 
     private HeartRateChecker heartRateChecker = null;
+
+    //Run stats
+    private RunningStatistics runningStatistics;
+    private double currentSpeed;
+    Timer timer = new Timer();
+    TimerTask timerTask;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -198,6 +211,8 @@ public class WhileRunningFragment extends Fragment implements EventListener {
 
         // If user chose to run with a route
         if (runningWithRoute) {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+
             minusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -213,6 +228,31 @@ public class WhileRunningFragment extends Fragment implements EventListener {
                     Toast.makeText(getActivity().getBaseContext(), R.string.longer_route, Toast.LENGTH_SHORT).show();
                 }
             });
+
+            //ADDED
+            if (preferences.getBoolean("Time",false)){
+                runningStatistics = ((RunningActivity) getActivity()).getStatTracker().getRunningStatistics();
+                int difficulty = preferences.getInt("difficulty", 0);
+                switch (difficulty){
+                    case 0: currentSpeed = Constants.RouteGenerator.BEGINNER_SPEED;
+                        break;
+                    case 1: currentSpeed = Constants.RouteGenerator.AVERAGE_SPEED;
+                        break;
+                    case 2: currentSpeed = Constants.RouteGenerator.EXPERT_SPEED;
+                        break;
+                    default: currentSpeed = Constants.RouteGenerator.AVERAGE_SPEED;
+                }
+                timerTask = new TimerTask () {
+                    @Override
+                    public void run () {
+
+                        checkAverageSpeed();
+                    }
+                };
+                timer.schedule(timerTask,1000*60*2, 1000*60*2);
+                minusButton.setVisibility(View.GONE);
+                plusButton.setVisibility(View.GONE);
+            }
         } else {
             // Not running with a route -> no plus and minus button
             minusButton.setVisibility(View.GONE);
@@ -276,6 +316,20 @@ public class WhileRunningFragment extends Fragment implements EventListener {
         return view;
     }
 
+    /*
+TimerTask
+*/
+    public void checkAverageSpeed(){
+        double avgSpeed = runningStatistics.getAverageSpeed().getSpeed();
+        double difference = avgSpeed - currentSpeed;
+        if (difference >= - Constants.RouteGenerator.AVERAGE_SPEED_DIFFERENCE && difference <= Constants.RouteGenerator.AVERAGE_SPEED_DIFFERENCE ){
+            ((RunningActivity) getActivity()).getRouteEngine().requestTrackDynamicTime(avgSpeed);
+            Toast.makeText(getActivity().getBaseContext(), R.string.shorter_route, Toast.LENGTH_SHORT).show();
+        }
+        currentSpeed = avgSpeed;
+    }
+
+
     public TextView getRouteTotalText() {
         return routeTotal;
     }
@@ -283,7 +337,8 @@ public class WhileRunningFragment extends Fragment implements EventListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
-
+        //stop timer
+        timer.cancel();
         // stop heart rate checker if it exists
         if (heartRateChecker != null) {
             heartRateChecker.stop();
@@ -335,6 +390,8 @@ public class WhileRunningFragment extends Fragment implements EventListener {
                 break;
         }
     }
+
+
 
     /**
      * Update the UI on the main thread.

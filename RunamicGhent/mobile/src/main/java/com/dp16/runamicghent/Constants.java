@@ -224,6 +224,8 @@ public class Constants {
 
         // Desired zoom level for google map
         public static final float DESIRED_ZOOM = 17.0f;
+        // Maximum desired zoom
+        public static final float MAX_DESIRED_ZOOM = 22.0f;
 
         // Does Google RunningMap need compass
         public static final boolean COMPASS = true;
@@ -347,6 +349,8 @@ public class Constants {
         public static final double BEGINNER_SPEED = 8;
         public static final double AVERAGE_SPEED = 10;
         public static final double EXPERT_SPEED = 12;
+
+        public static final double AVERAGE_SPEED_DIFFERENCE = 1.5;
 
         private RouteGenerator() {
             throw new IllegalAccessError(UTILITY_CLASS_ERROR);

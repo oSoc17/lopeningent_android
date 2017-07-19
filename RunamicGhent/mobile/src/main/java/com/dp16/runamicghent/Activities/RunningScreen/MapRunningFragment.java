@@ -132,7 +132,7 @@ public class MapRunningFragment extends Fragment implements OnMapReadyCallback, 
 
         // Set parameters for Google RunningMap
         googleMap.setMinZoomPreference(Constants.MapSettings.MIN_ZOOM);
-        googleMap.setMaxZoomPreference(Constants.MapSettings.MAX_ZOOM);
+       // googleMap.setMaxZoomPreference(Constants.MapSettings.MAX_ZOOM);
         googleMap.getUiSettings().setCompassEnabled(Constants.MapSettings.COMPASS);
         googleMap.getUiSettings().setTiltGesturesEnabled(Constants.MapSettings.TILT);
         // Disable toolbar such that 'navigation' and 'gps pointer' buttons don't appear when marker is clicked
@@ -231,8 +231,10 @@ public class MapRunningFragment extends Fragment implements OnMapReadyCallback, 
 //                }
 
                 CameraPosition position = new CameraPosition.Builder()
-                        .zoom(Constants.MapSettings.DESIRED_ZOOM)
+                        //.zoom(Constants.MapSettings.DESIRED_ZOOM)
+                        .zoom(Constants.MapSettings.MAX_DESIRED_ZOOM)
                         .bearing(bearingCalculator.calculateBearing(currentLocation))
+                        .tilt(20)
                         .target(currentLocation)
                         .build();
                 update = CameraUpdateFactory.newCameraPosition(position);

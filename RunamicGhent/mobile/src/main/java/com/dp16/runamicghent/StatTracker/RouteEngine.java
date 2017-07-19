@@ -182,7 +182,7 @@ public class RouteEngine implements EventListener, EventPublisher {
 
 
     public void requestTrackStatic(LatLng location){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+       SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
         Boolean timeChecked = preferences.getBoolean("Time",false);
         double km;
         if (!timeChecked){
@@ -207,12 +207,10 @@ public class RouteEngine implements EventListener, EventPublisher {
                 default: km = (Constants.RouteGenerator.AVERAGE_SPEED/60) *m;
             }
 
-            RunDistance distance = new RunDistance((int) (km*1000));
-            requestTrack(location,distance,false,"");
-
-
         }
-       /* RunDistance distance = new RunDistance(PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext()).getInt("pref_key_routing_length", Constants.RouteGenerator.DEFAULT_LENGTH));
+        RunDistance distance = new RunDistance((int) (km*1000));
+        requestTrack(location,distance,false,"");
+        /*RunDistance distance = new RunDistance(PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext()).getInt("pref_key_routing_length", Constants.RouteGenerator.DEFAULT_LENGTH));
         requestTrack(location, distance, false, "");*/
     }
 
@@ -233,6 +231,26 @@ public class RouteEngine implements EventListener, EventPublisher {
                 distance = new RunDistance(0);
                 break;
         }
+
+        LatLng loc;
+        RunRoutePoint point = route.getRoute().get(progress+1);
+        loc = point.getLocation();
+        requestTrack(loc, distance, true, route.getTag());
+    }
+
+    public void requestTrackDynamicTime(double avgSpeed){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+        //time values
+        String time = preferences.getString("timeValue", "00:10");
+        int h = Integer.parseInt(time.substring(0,2));
+        int m = Integer.parseInt(time.substring(3,5)) + (h/60) ;
+
+
+        //distance
+        RunRoute route = routeList[onRoute];
+        RunDistance distance;
+        //Calc
+            distance = new RunDistance((int) ((avgSpeed/60)*m));
 
         LatLng loc;
         RunRoutePoint point = route.getRoute().get(progress+1);

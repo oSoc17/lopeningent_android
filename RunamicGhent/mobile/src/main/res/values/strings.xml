@@ -109,6 +109,8 @@
     <string name="shorter_route">A shorter route has been requested</string>
     <string name="longer_route">A longer route has been requested</string>
 
+    <string name="confirm_stop">Are you sure you want to stop running?</string>
+
     <!-- End Run Activity -->
     <string name="save_run">Save</string>
     <string name="discard_run">Discard</string>
