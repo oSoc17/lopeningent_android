@@ -103,6 +103,8 @@ public class WhileRunningFragment extends Fragment implements EventListener {
     Timer timer = new Timer();
     TimerTask timerTask;
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
