@@ -54,6 +54,7 @@ import java.util.concurrent.Executors;
  * @see EventPublisher
  * @see EventListener
  * Created by Nick on 25-2-2017. (and Simon?)
+ * Edited by Redouane Arroubai on 17-07-2017 (new API/ post requests)
  */
 public class RouteProvider implements EventListener, EventPublisher, DataProvider {
 
@@ -138,11 +139,11 @@ public class RouteProvider implements EventListener, EventPublisher, DataProvide
             String body  = "";
             try {
                 if (trackRequest.getDynamic()) {
-                    urlString = "https://groep16.cammaert.me/develop/route/generate/";
+                    urlString = "http://192.168.1.22:8000/route/generate/";
                     body = constructDynamicBody();
                 }
                 else{
-                    urlString = "https://groep16.cammaert.me/develop/route/return/";
+                    urlString = "http://192.168.1.22:8000/route/return/";
                     body = constructStaticBody();
                 }
 
@@ -224,12 +225,14 @@ public class RouteProvider implements EventListener, EventPublisher, DataProvide
                     + "=" + URLEncoder.encode(trackRequest.getLocation().longitude + "", "UTF-8");
             body += "&" + URLEncoder.encode("type", "UTF-8")
                     + "=" + URLEncoder.encode("directions", "UTF-8");
+            body += "&" + URLEncoder.encode("android_token", "UTF-8")
+                    + "=" + URLEncoder.encode("1223", "UTF-8");
 
             /*
             tags for POI ----> ask gregory
              */
             body += "&" + URLEncoder.encode("tags", "UTF-8")
-                    + "=" + URLEncoder.encode(trackRequest.getLocation().longitude + "", "UTF-8");
+                    + "=" + URLEncoder.encode(preferences.getString("poi",""), "UTF-8");
 
 
 

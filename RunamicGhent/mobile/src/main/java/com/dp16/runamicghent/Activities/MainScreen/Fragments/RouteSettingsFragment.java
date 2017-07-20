@@ -330,8 +330,8 @@ public class RouteSettingsFragment extends Fragment {
     //get and set combobox value
     public void savePoi(){
         Spinner spinner = (Spinner)view.findViewById(R.id.spPOI);
-        int index = spinner.getSelectedItemPosition();
-        editor.putInt("poi",index);
+        String tagPoi = spinner.getSelectedItem().toString();
+        editor.putString("poi",tagPoi);
         editor.apply();
     }
     public void getPoi(){

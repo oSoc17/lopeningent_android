@@ -205,8 +205,9 @@ public class ServerStorage implements StorageComponent {
         }
         // make query
         Document query = new Document(USER_KEY, userId);
-
+        Log.d("Stats",((AggregateRunningStatistics) getObjectFromQuery(aggregateRunningStatisticsCollection, query, AggregateRunningStatistics.class)).toString());
         return (AggregateRunningStatistics) getObjectFromQuery(aggregateRunningStatisticsCollection, query, AggregateRunningStatistics.class);
+
     }
 
 
