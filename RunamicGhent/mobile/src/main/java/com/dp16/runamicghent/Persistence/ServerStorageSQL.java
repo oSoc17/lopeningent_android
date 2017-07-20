@@ -119,7 +119,7 @@ public class ServerStorageSQL implements StorageComponent {
                         String result = reader.readLine();
 
                         //create JSON + publish event
-                        serverStats = new JSONObject(((new JSONObject(result)).get("values").toString()))
+                        serverStats = new JSONObject(((new JSONObject(result)).get("values").toString()));
                         connected = true;
                     } catch (Exception e) {
                         Log.e("InputStream", e.getLocalizedMessage(), e);
@@ -150,58 +150,146 @@ public class ServerStorageSQL implements StorageComponent {
     @Nullable
     @Override
     public List<String> getFilenamesRunningStatistics() {
+        return new ArrayList<String>(){};
 
     }
 
     @Override
     public List<String> getFilenamesRunningStatisticsGhosts() {
-
+        return new ArrayList<String>(){};
     }
 
     @Nullable
     @Override
     public RunningStatistics getRunningStatisticsFromFilename(String filename) {
 
+        return new RunningStatistics();
     }
 
 
     @Override
     public boolean saveRunningStatistics(RunningStatistics runningStatistics, long editTime) {
 
+        return true;
     }
 
     @Override
     public boolean saveRunningStatisticsGhost(String filename) {
 
-
+        return true;
     }
 
     @Override
     public long getRunningStatisticsEditTime(String filename) {
 
+        return 0;
     }
 
     @Override
     public boolean deleteRunningStatistics(String filename) {
-
+        return false;
     }
 
     @Override
     public boolean deleteRunningStatisticsGhost(String filename) {
 
+        return true;
     }
 
     @Nullable
     @Override
     public AggregateRunningStatistics getAggregateRunningStatistics() {
-
+        if (!connected) {
+            return null;
+        }
+        try {
+            String jsonAgg = "{ \"averageDistance\" : { \"distance\" : "+ serverStats.get("avg_distance") +"} " +
+                             ", \"averageDuration\" : { \"secondsPassed\" : "+ serverStats.get("avg_duration")+
+                             "} , \"averageHeartRate\" : { \"heartRate\" : " + serverStats.get("avg_heartrate") +
+                             "} , \"averageRunSpeed\" : { \"speed\" : "+ serverStats.get("avg_speed") +
+                             "} , \"numberOfRuns\" : " + serverStats.get("runs") +
+                             " , \"totalDistance\" : { \"distance\" : "+ serverStats.get("tot_distance") +
+                             "} , \"totalDuration\" : { \"secondsPassed\" : "+ serverStats.get("tot_duration") +"}}";
+            return new Gson().fromJson(jsonAgg, AggregateRunningStatistics.class);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 
     @Override
     public boolean saveAggregateRunningStatistics(AggregateRunningStatistics aggregateRunningStatistics, long editTime) {
+        if (!connected) {
+            return false;
+        }
+        boolean isPosted = false;
+        URL url = null;
+        try {
+            url = new URL(("http://95.85.5.226:8000/stats/update/").toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        String body = null;
+        try {
+            body = URLEncoder.encode("userid", "UTF-8")
+                    + "=" + URLEncoder.encode(userId, "UTF-8");
+            body += "&" + URLEncoder.encode("android_token", "UTF-8")
+                    + "=" + URLEncoder.encode("1223", "UTF-8");
+            body += "&" + URLEncoder.encode("avg_speed", "UTF-8")
+                    + "=" + URLEncoder.encode(aggregateRunningStatistics.getAverageRunSpeed().getSpeed() + "", "UTF-8");
+            body += "&" + URLEncoder.encode("avg_duration", "UTF-8")
+                    + "=" + URLEncoder.encode(aggregateRunningStatistics.getAverageDuration().getSecondsPassed() + "", "UTF-8");
+            body += "&" + URLEncoder.encode("tot_duration", "UTF-8")
+                    + "=" + URLEncoder.encode(aggregateRunningStatistics.getTotalDuration().getSecondsPassed() + "", "UTF-8");
+            body += "&" + URLEncoder.encode("avg_distance", "UTF-8")
+                    + "=" + URLEncoder.encode(aggregateRunningStatistics.getAverageDistance().getDistance() + "", "UTF-8");
+            body += "&" + URLEncoder.encode("tot_distance", "UTF-8")
+                    + "=" + URLEncoder.encode(aggregateRunningStatistics.getTotalDistance() + "", "UTF-8");
+            body += "&" + URLEncoder.encode("runs", "UTF-8")
+                    + "=" + URLEncoder.encode(aggregateRunningStatistics.getNumberOfRuns() + "", "UTF-8");
+            body += "&" + URLEncoder.encode("avg_heartrate", "UTF-8")
+                    + "=" + URLEncoder.encode(aggregateRunningStatistics.getAverageHeartRate().getHeartRate() + "", "UTF-8");
+            body += "&" + URLEncoder.encode("edit_time", "UTF-8")
+                    + "=" + URLEncoder.encode( editTime + "", "UTF-8");
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        int amountOfTries = 3;
+        int status = 0;
+        while (amountOfTries > 0 && !isPosted) {
+            if (url != null) {
+                try {
+                    //open connection w/ URL
+                    InputStream stream = null;
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    httpURLConnection.setRequestMethod("POST");
+                    httpURLConnection.setDoOutput(true);
 
 
+                    httpURLConnection.connect();
+
+                    OutputStreamWriter wr = new OutputStreamWriter(httpURLConnection.getOutputStream());
+                    wr.write(body);
+                    wr.flush();
+
+                    stream = httpURLConnection.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"), 8);
+                    String result = reader.readLine();
+
+                    //create JSON + publish event
+                    serverStats = new JSONObject(((new JSONObject(result)).get("values").toString()));
+                    isPosted = true;
+                } catch (Exception e) {
+                    Log.e("InputStream", e.getLocalizedMessage(), e);
+                    amountOfTries--;
+                    isPosted = false;
+                }
+            }
+        }
+        return isPosted;
     }
 
     /**
@@ -222,6 +310,7 @@ public class ServerStorageSQL implements StorageComponent {
 
     /**
      * Warning: really deleting the AggregateRunningStatistics will cause problems with server synchronization.
+     * For legal reasons this will need to be implemented if this app goes public in the play store
      * It is recommended to just do {@link #saveAggregateRunningStatistics(AggregateRunningStatistics, long)} with an empty object.
      */
     @Override
