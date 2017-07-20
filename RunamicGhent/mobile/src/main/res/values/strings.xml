@@ -151,6 +151,10 @@
     <string name="pref_summary_velocity">Choose whether your velocity is displayed in km/h or min/km</string>
 
     <string name="pref_title_dynamic_routing">Dynamic routing</string>
+    <string name="pref_title_dynamic_averagespeed_routing_on_off">Enable dynamic average speed routing</string>
+    <string name="pref_summary_off_dynamic_averagespeed_routing_on_off">Dynamic average speed routing is turned off</string>
+    <string name="pref_summary_on_dynamic_averagespeed_routing_on_off">Dynamic average speed routing is turned on</string>
+
     <string name="pref_title_dynamic_routing_on_off">Enable dynamic heart rate routing</string>
     <string name="pref_summary_off_dynamic_routing_on_off">Dynamic heart rate routing is turned off</string>
     <string name="pref_summary_on_dynamic_routing_on_off">Dynamic heart rate routing is turned on</string>
