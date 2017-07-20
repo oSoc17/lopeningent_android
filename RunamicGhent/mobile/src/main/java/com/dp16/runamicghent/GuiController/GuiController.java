@@ -17,7 +17,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import org.apache.commons.math3.analysis.function.Add;
+
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,11 +46,16 @@ import java.util.Map;
  */
 
 public class GuiController {
-    private static final GuiController ourInstance = new GuiController();
+    private static final GuiController ourInstance = new GuiController(new ArrayList<String>(Arrays.asList("Tourism","Water","Park","pubs","Restaurant", "Farms","ddddddddd", "ahahahahahahah")));
     private Map<String, Class> mapping = new HashMap<>();
     private Context mContext;
+    private ArrayList<String> poiTags;
 
     private GuiController() {
+    }
+
+    private GuiController(ArrayList<String> array) {
+        poiTags = array;
     }
 
     public static GuiController getInstance() {
@@ -199,6 +209,9 @@ public class GuiController {
     }
     public void setContext(Context context){
         this.mContext = context;
+    }
+    public ArrayList<String> getPoiTags(){
+        return poiTags;
     }
 
 }

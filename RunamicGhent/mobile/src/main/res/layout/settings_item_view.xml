@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <RadioGroup
+        android:id="@+id/rdgPoi"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:layout_weight="0.01"
+        android:background="@drawable/button_round_corners"
+        android:checkedButton="@+id/rdbPoi2"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rdbPoi1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_button_background_left"
+            android:button="@null"
+            android:gravity="center"
+            android:tag="Distance"
+            android:textColor="@color/cardview_shadow_start_color" />
+
+        <RadioButton
+            android:id="@+id/rdbPoi2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_button_background_right"
+            android:button="@null"
+            android:gravity="center"
+            android:tag="Time"
+            android:textColor="@color/cardview_shadow_start_color"
+            android:transitionName="rdbtime" />
+
+    </RadioGroup>
+
+</LinearLayout>

@@ -27,6 +27,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -35,7 +36,12 @@ import android.widget.Toast;
 
 import com.dp16.eventbroker.EventListener;
 import com.dp16.eventbroker.EventPublisher;
+import com.dp16.runamicghent.Activities.MainScreen.CustomSettings.SettingsAdapter;
+import com.dp16.runamicghent.GuiController.GuiController;
 import com.dp16.runamicghent.R;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import static android.support.constraint.R.id.parent;
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -55,6 +61,12 @@ public class RouteSettingsFragment extends Fragment {
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
+    ListView lstPoi;
+
+    private ArrayList<String > poiList;
+
+    private Context fgContext = getContext();
+
     /*
     *
     *   Variables for the parameters of the route: to be added
@@ -63,9 +75,12 @@ public class RouteSettingsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getCurrentSettings();
         preferences =PreferenceManager.getDefaultSharedPreferences(getContext());
         editor = preferences.edit();
+        //gui
+        GuiController guiController = GuiController.getInstance();
+        poiList = guiController.getPoiTags();
+
 
 
 
@@ -76,28 +91,19 @@ public class RouteSettingsFragment extends Fragment {
                              final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_routesettings, container, false);
-        //POI dropdownlist
-        Spinner spinner = (Spinner) view.findViewById(R.id.spPOI);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),R.array.poi, R.layout.spinner_item_view);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
         //difficulty dropdownlist
         Spinner spinnerDif = (Spinner) view.findViewById(R.id.spDifficulty);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getContext(),R.array.difficulty, R.layout.spinner_item_view);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDif.setAdapter(adapter2);
+        //fill listview
+         lstPoi = (ListView) view.findViewById(R.id.lstPoi);
+        SettingsAdapter workoutListAdapter = new SettingsAdapter(this.getActivity(), poiList);
+        lstPoi.setAdapter(workoutListAdapter);
         //Radiogroups
         RadioGroup rdgDistanceTime = (RadioGroup) view.findViewById(R.id.parDistanceTime);
-        RadioGroup rdgNatureCity = (RadioGroup) view.findViewById(R.id.parNatureCity);
-        RadioGroup rdgPaved = (RadioGroup) view.findViewById(R.id.parPaved);
-        RadioGroup rdgHillsFlat = (RadioGroup) view.findViewById(R.id.parHillsFlat);
-        RadioGroup rdgSafetyAction = (RadioGroup) view.findViewById(R.id.parSafetyAction);
-        //get preferences
+        //get preference
         getPreference(rdgDistanceTime);
-        getPreference(rdgNatureCity);
-        getPreference(rdgPaved);
-        getPreference(rdgHillsFlat);
-        getPreference(rdgSafetyAction);
         //Set buttons
         getDTvalue();
         setButtons();
@@ -107,64 +113,9 @@ public class RouteSettingsFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 changePreference(group);
                 //First save value then get new value of corresponding parameter
-                //saveDTvalue();
                 getDTvalue();
                 setButtons();
             }
-        });
-        rdgNatureCity.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                changePreference(group);
-            }
-        });
-        rdgPaved.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                changePreference(group);
-            }
-        });
-        rdgHillsFlat.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                changePreference(group);
-            }
-        });
-        rdgSafetyAction.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                changePreference(group);
-            }
-        });
-        //preference combobox
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // your code here
-                /*Spinner SelectedListener excecutes TWICE:
-                   1: execute on build
-                   2: execute when user select
-                   Use boolean initialDisplay to be able to differentiate between those 2 executions
-                 */
-                if (initialDisplay)
-                {
-                    getPoi();
-                    initialDisplay = false;
-                }
-                else
-                {
-                    savePoi();
-                }
-
-               /* String item = (String) parentView.getItemAtPosition(position);
-                ((TextView) parentView.getChildAt(0)).setTextColor(getResources().getColorStateList(R.color.cardview_light_background));*/
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
-
         });
 
         spinnerDif.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -186,8 +137,6 @@ public class RouteSettingsFragment extends Fragment {
                     saveDifficulty();
                 }
 
-                /*String item = (String) parentView.getItemAtPosition(position);
-                ((TextView) parentView.getChildAt(0)).setTextColor(getResources().getColorStateList(R.color.cardview_light_background));*/
             }
 
             @Override
@@ -257,7 +206,7 @@ public class RouteSettingsFragment extends Fragment {
         });
     }
     //Get preference method
-    public void  getPreference(RadioGroup radioGroup){
+    public void getPreference(RadioGroup radioGroup){
         boolean checked = false;
         RadioButton radioButton = (RadioButton)radioGroup.getChildAt(1);
         RadioButton radioButton2 = (RadioButton)radioGroup.getChildAt(0);
@@ -274,6 +223,7 @@ public class RouteSettingsFragment extends Fragment {
     }
     //Change preference method
     public void changePreference(RadioGroup radioGroup){
+
         RadioButton radioButton = (RadioButton)radioGroup.getChildAt(1);
         RadioButton radioButton2 = (RadioButton)radioGroup.getChildAt(0);
         //radioButton2.getId()
@@ -326,20 +276,6 @@ public class RouteSettingsFragment extends Fragment {
         }
         editor.apply();
     }*/
-
-    //get and set combobox value
-    public void savePoi(){
-        Spinner spinner = (Spinner)view.findViewById(R.id.spPOI);
-        int index = spinner.getSelectedItemPosition();
-        String poi  = spinner.getSelectedItem().toString();
-        editor.putString("poi",poi);
-        editor.putInt("poiId", index);
-        editor.apply();
-    }
-    public void getPoi(){
-        Spinner spinner = (Spinner)view.findViewById(R.id.spPOI);
-        spinner.setSelection(preferences.getInt("poiId", 0));
-    }
 
     public void saveDifficulty(){
         Spinner spinner = (Spinner)view.findViewById(R.id.spDifficulty);
