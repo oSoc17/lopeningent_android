@@ -331,13 +331,14 @@ public class RouteSettingsFragment extends Fragment {
     public void savePoi(){
         Spinner spinner = (Spinner)view.findViewById(R.id.spPOI);
         int index = spinner.getSelectedItemPosition();
-        editor.putInt("poi",index);
+        String poi  = spinner.getSelectedItem().toString();
+        editor.putString("poi",poi);
+        editor.putInt("poiId", index);
         editor.apply();
     }
     public void getPoi(){
         Spinner spinner = (Spinner)view.findViewById(R.id.spPOI);
-        int index = preferences.getInt("poi",0);
-        spinner.setSelection(index);
+        spinner.setSelection(preferences.getInt("poiId", 0));
     }
 
     public void saveDifficulty(){

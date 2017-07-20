@@ -56,12 +56,6 @@
             android:title="@string/pref_title_dynamic_routing_heartrate"
             android:summary="@string/pref_summary_dynamic_routing_heartrate"/>
 
-        <com.dp16.runamicghent.Activities.MainScreen.CustomSettings.ParkPreference
-            android:key="pref_key_park"/>
-
-        <com.dp16.runamicghent.Activities.MainScreen.CustomSettings.WaterPreference
-            android:key="pref_key_water"/>
-
     </PreferenceCategory>
 
     <PreferenceCategory
