@@ -82,7 +82,7 @@ public class ServerStorage implements StorageComponent {
         if (!connected) {
             URL url = null;
             try {
-                url = new URL(("http://192.168.1.22:8000/stats/check/").toString());
+                url = new URL(("http://95.85.5.226:8000/stats/check/").toString());
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -225,7 +225,7 @@ public class ServerStorage implements StorageComponent {
         boolean isPosted = false;
         URL url = null;
         try {
-            url = new URL(("http://192.168.1.22:8000/stats/update/").toString());
+            url = new URL(("http://95.85.5.226:8000/stats/update/").toString());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

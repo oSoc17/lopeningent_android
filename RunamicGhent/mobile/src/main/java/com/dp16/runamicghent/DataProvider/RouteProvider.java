@@ -139,11 +139,11 @@ public class RouteProvider implements EventListener, EventPublisher, DataProvide
             String body  = "";
             try {
                 if (trackRequest.getDynamic()) {
-                    urlString = "http://192.168.1.22:8000/route/generate/";
+                    urlString = "http://95.85.5.226:8000/route/generate/";
                     body = constructDynamicBody();
                 }
                 else{
-                    urlString = "http://192.168.1.22:8000/route/return/";
+                    urlString = "http://95.85.5.226:8000/route/return/";
                     body = constructStaticBody();
                 }
 
