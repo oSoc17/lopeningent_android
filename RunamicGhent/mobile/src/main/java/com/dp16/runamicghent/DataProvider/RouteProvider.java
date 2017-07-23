@@ -19,6 +19,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.dp16.runamicghent.Constants;
+import com.dp16.runamicghent.GuiController.GuiController;
 import com.dp16.runamicghent.TrackRequest;
 import com.dp16.runamicghent.TrackResponse;
 import com.dp16.eventbroker.EventBroker;
@@ -231,8 +232,14 @@ public class RouteProvider implements EventListener, EventPublisher, DataProvide
             /*
             tags for POI ----> ask gregory
              */
-            body += "&" + URLEncoder.encode("tags", "UTF-8")
-                    + "=" + URLEncoder.encode(preferences.getString("poi",""), "UTF-8");
+            for (String poiTag : GuiController.getInstance().getPoiTags()) {
+                if(preferences.getBoolean(poiTag,false)){
+                    body += "&" + URLEncoder.encode("tags", "UTF-8")
+                            + "=" + URLEncoder.encode(poiTag, "UTF-8");
+                }
+
+            }
+
 
 
 
