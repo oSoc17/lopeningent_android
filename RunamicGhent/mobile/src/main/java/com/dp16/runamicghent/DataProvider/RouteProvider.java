@@ -31,9 +31,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -51,6 +54,7 @@ import java.util.concurrent.Executors;
  * @see EventPublisher
  * @see EventListener
  * Created by Nick on 25-2-2017. (and Simon?)
+ * Edited by Redouane Arroubai on 17-07-2017 (new API/ post requests)
  */
 public class RouteProvider implements EventListener, EventPublisher, DataProvider {
 
@@ -130,11 +134,26 @@ public class RouteProvider implements EventListener, EventPublisher, DataProvide
         public void run() {
 
             // Construct the URL.
-            URL url;
-            if (trackRequest.getDynamic()) {
-                url = constructURLDynamic();
-            } else {
-                url = constructURLStatic();
+            URL url = null;
+            String urlString = "";
+            String body  = "";
+            try {
+                if (trackRequest.getDynamic()) {
+                    urlString = "http://192.168.1.22:8000/route/generate/";
+                    body = constructDynamicBody();
+                }
+                else{
+                    urlString = "http://192.168.1.22:8000/route/return/";
+                    body = constructStaticBody();
+                }
+
+                url = new URL(urlString.toString());
+            }
+            catch (MalformedURLException e) {
+                urlString = "";
+                Log.e("constructURL", e.getMessage(), e);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
             }
 
             boolean goodRequest = false;
@@ -144,12 +163,22 @@ public class RouteProvider implements EventListener, EventPublisher, DataProvide
                 if (url != null) {
                     try {
                         //open connection w/ URL
+                        InputStream stream = null;
                         HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                        status = httpURLConnection.getResponseCode();
-                        InputStream inputStream = httpURLConnection.getInputStream();
+                        httpURLConnection.setRequestMethod("POST");
+                        httpURLConnection.setDoOutput(true);
 
-                        //convert Input Stream to String
-                        String result = convertInputStreamToString(inputStream);
+
+
+                        httpURLConnection.connect();
+
+                        OutputStreamWriter wr = new OutputStreamWriter(httpURLConnection.getOutputStream());
+                        wr.write(body);
+                        wr.flush();
+
+                        stream = httpURLConnection.getInputStream();
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"), 8);
+                        String result = reader.readLine();
 
                         //create JSON + publish event
                         JSONObject json = new JSONObject(result);
@@ -171,12 +200,11 @@ public class RouteProvider implements EventListener, EventPublisher, DataProvide
             }
         }
 
-        /**
-         * Construct the URL that will be used to fetch a static route from the server.
-         *
-         * @return {@link String} URL with the server request
+
+        /*
+         * Construct the body for the POST-request of de static route
          */
-        private URL constructURLStatic() {
+        private String constructStaticBody() throws UnsupportedEncodingException {
             double[] bounds = calculateDistanceBounds();
 
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -185,59 +213,52 @@ public class RouteProvider implements EventListener, EventPublisher, DataProvide
             int waterPreference = preferences.getInt(Constants.SettingTypes.PREF_KEY_ROUTING_WATER, Constants.DynamicRouting.DEFAULT_SLIDER);
             double scaledWaterPreference = ((double) waterPreference) / Constants.DynamicRouting.SLIDER_HIGH;
 
-            StringBuilder urlString = new StringBuilder();
 
-            if (Constants.DEVELOP) {
-                urlString.append("https://groep16.cammaert.me/develop/route/generate?"); //Develop server
-            } else {
-                urlString.append("https://groep16.cammaert.me/app/route/generate?"); //Master server
-            }
 
-            urlString.append("lat=").append(trackRequest.getLocation().latitude);
-            urlString.append("&&lon=").append(trackRequest.getLocation().longitude);
-            urlString.append("&&min_length=").append(bounds[0]);
-            urlString.append("&&max_length=").append(bounds[1]);
-            urlString.append("&&type=directions");
-            urlString.append("&&measure_park=").append(scaledParkPreference);
-            urlString.append("&&measure_water=").append(scaledWaterPreference);
+            String body = URLEncoder.encode("lat", "UTF-8")
+                    + "=" + URLEncoder.encode(trackRequest.getLocation().latitude + "", "UTF-8");
+            body += "&" + URLEncoder.encode("lon", "UTF-8")
+                    + "=" + URLEncoder.encode(trackRequest.getLocation().longitude + "", "UTF-8");
+            body += "&" + URLEncoder.encode("min_length", "UTF-8")
+                    + "=" + URLEncoder.encode(trackRequest.getLocation().longitude + "", "UTF-8");
+            body += "&" + URLEncoder.encode("max_length", "UTF-8")
+                    + "=" + URLEncoder.encode(trackRequest.getLocation().longitude + "", "UTF-8");
+            body += "&" + URLEncoder.encode("type", "UTF-8")
+                    + "=" + URLEncoder.encode("directions", "UTF-8");
+            body += "&" + URLEncoder.encode("android_token", "UTF-8")
+                    + "=" + URLEncoder.encode("1223", "UTF-8");
 
-            URL url = null;
-            try {
-                url = new URL(urlString.toString());
-            } catch (MalformedURLException e) {
-                Log.e("constructURL", e.getMessage(), e);
-            }
+            /*
+            tags for POI ----> ask gregory
+             */
+            body += "&" + URLEncoder.encode("tags", "UTF-8")
+                    + "=" + URLEncoder.encode(preferences.getString("poi",""), "UTF-8");
 
-            return url;
+
+
+            return body;
         }
 
-        /**
-         * Construct the URL that will be used to fetch a dynamic route from the server.
-         *
-         * @return {@link String} URL with the server request
+
+
+        /*
+         * Construct the body for the POST-request of de static route
          */
-        private URL constructURLDynamic() {
-            String urlString;
+        private String constructDynamicBody() throws UnsupportedEncodingException {
 
-            if (Constants.DEVELOP) {
-                urlString = "https://groep16.cammaert.me/develop/route/return?"; //Develop server
-            } else {
-                urlString = "https://groep16.cammaert.me/app/route/return?"; //Master server
-            }
 
-            urlString = urlString.concat("lat=" + trackRequest.getLocation().latitude + "&&lon=" + trackRequest.getLocation().longitude);
-            urlString = urlString.concat("&&distance=" + ((double) trackRequest.getDistance().getDistance()) / 1000);
-            urlString = urlString.concat("&&tag=" + trackRequest.getTag());
-            urlString = urlString.concat("&&type=directions");
+            String body = URLEncoder.encode("lat", "UTF-8")
+                    + "=" + URLEncoder.encode(trackRequest.getLocation().latitude + "", "UTF-8");
+            body += "&" + URLEncoder.encode("lon", "UTF-8")
+                    + "=" + URLEncoder.encode(trackRequest.getLocation().longitude + "", "UTF-8");
+            body += "&" + URLEncoder.encode("distance", "UTF-8")
+                    + "=" + URLEncoder.encode( (((double) trackRequest.getDistance().getDistance()) / 1000) + "", "UTF-8");
+            body += "&" + URLEncoder.encode("visited_path", "UTF-8")
+                    + "=" + URLEncoder.encode(trackRequest.getTag() + "", "UTF-8");
+            body += "&" + URLEncoder.encode("type", "UTF-8")
+                    + "=" + URLEncoder.encode("directions", "UTF-8");
+            return body;
 
-            URL url = null;
-            try {
-                url = new URL(urlString);
-            } catch (MalformedURLException e) {
-                Log.e("constructURL", e.getMessage(), e);
-            }
-
-            return url;
         }
 
         /**

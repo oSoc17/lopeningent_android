@@ -97,7 +97,7 @@ public class RouteSettingsFragment extends Fragment {
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDif.setAdapter(adapter2);
         //fill listview
-         lstPoi = (ListView) view.findViewById(R.id.lstPoi);
+        lstPoi = (ListView) view.findViewById(R.id.lstPoi);
         SettingsAdapter workoutListAdapter = new SettingsAdapter(this.getActivity(), poiList);
         lstPoi.setAdapter(workoutListAdapter);
         //Radiogroups
@@ -245,19 +245,19 @@ public class RouteSettingsFragment extends Fragment {
     }
     //Store and get preference value
     public void getDTvalue(){
-       // final TextView tvDT = (TextView)view.findViewById(R.id.tvDT);
+        // final TextView tvDT = (TextView)view.findViewById(R.id.tvDT);
         TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
         RadioButton rdbDistance = (RadioButton)view.findViewById(R.id.rdbDistance);
         String getValue;
         if (rdbDistance.isChecked()){
             hideSpinner();
             getValue = preferences.getString("distanceValue", "0.0");
-           // tvDT.setText("km");
+            // tvDT.setText("km");
         }
         else {
             addSpinner();
             getValue = preferences.getString("timeValue", "00:00");
-           // tvDT.setText("h:m");
+            // tvDT.setText("h:m");
         }
         tvValue.setText(getValue);
     }
@@ -269,7 +269,6 @@ public class RouteSettingsFragment extends Fragment {
         String value = tvValue.getText().toString();
         if (rdbDistance.isChecked()){
             editor.putString("timeValue",value);
-
         }
         else{
             editor.putString("distanceValue",value);
@@ -317,71 +316,71 @@ public class RouteSettingsFragment extends Fragment {
     }
 
     //button pressed increment/decrement
-   public void increment(){
-       RadioButton rdbDistance = (RadioButton)view.findViewById(R.id.rdbDistance);
-       TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
-       if (rdbDistance.isChecked()){
-           double value = Double.parseDouble(tvValue.getText().toString());
-           value += 0.1;
-           value = (double) Math.round(((value * 100) * 10) / 10)/100;
-           tvValue.setText(String.valueOf(value));
-           editor.putString("distanceValue",String.valueOf(value));
+    public void increment(){
+        RadioButton rdbDistance = (RadioButton)view.findViewById(R.id.rdbDistance);
+        TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
+        if (rdbDistance.isChecked()){
+            double value = Double.parseDouble(tvValue.getText().toString());
+            value += 0.1;
+            value = (double) Math.round(((value * 100) * 10) / 10)/100;
+            tvValue.setText(String.valueOf(value));
+            editor.putString("distanceValue",String.valueOf(value));
 
-       }
-       else {
-           String time = tvValue.getText().toString();
-           int h = Integer.parseInt(time.substring(0,2));
-           int m = Integer.parseInt(time.substring(3,5));
-           m += 1;
-           if(m >= 60){
-               m = 00;
-               h += 1;
-           }
-           String newtime = String.format("%02d", h)+":"+String.format("%02d", m);
-           editor.putString("timeValue",newtime);
-           tvValue.setText(newtime);
-       }
-       editor.apply();
+        }
+        else {
+            String time = tvValue.getText().toString();
+            int h = Integer.parseInt(time.substring(0,2));
+            int m = Integer.parseInt(time.substring(3,5));
+            m += 1;
+            if(m >= 60){
+                m = 00;
+                h += 1;
+            }
+            String newtime = String.format("%02d", h)+":"+String.format("%02d", m);
+            editor.putString("timeValue",newtime);
+            tvValue.setText(newtime);
+        }
+        editor.apply();
 
-   }
+    }
 
-   public void decrement(){
-       RadioButton rdbDistance = (RadioButton)view.findViewById(R.id.rdbDistance);
-       TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
-       if (rdbDistance.isChecked()){
-           double value = Double.parseDouble(tvValue.getText().toString());
-           if (value - 0.1 <0 )
-           {
-               value = 0;
-           }
-           else {
-               value -= 0.1;
-               value = (double) Math.round(((value * 100) * 10) / 10)/100;
-           }
+    public void decrement(){
+        RadioButton rdbDistance = (RadioButton)view.findViewById(R.id.rdbDistance);
+        TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
+        if (rdbDistance.isChecked()){
+            double value = Double.parseDouble(tvValue.getText().toString());
+            if (value - 0.1 <0 )
+            {
+                value = 0;
+            }
+            else {
+                value -= 0.1;
+                value = (double) Math.round(((value * 100) * 10) / 10)/100;
+            }
 
-           tvValue.setText(String.valueOf(value));
-           editor.putString("distanceValue",tvValue.getText().toString());
-       }
-       else {
-           String time = tvValue.getText().toString();
-           int h = Integer.parseInt(time.substring(0,2));
-           int m = Integer.parseInt(time.substring(3,5));
-           m -= 1;
-           if(m < 0){
-               if (h>0){
-                   h--;
-                   m=59;
-               }
-               else {
-                   m = 0;
-               }
-           }
-           String newtime = String.format("%02d", h)+":"+String.format("%02d", m);
-           tvValue.setText(newtime);
-           editor.putString("timeValue",tvValue.getText().toString());
-       }
-       editor.apply();
-   }
+            tvValue.setText(String.valueOf(value));
+            editor.putString("distanceValue",tvValue.getText().toString());
+        }
+        else {
+            String time = tvValue.getText().toString();
+            int h = Integer.parseInt(time.substring(0,2));
+            int m = Integer.parseInt(time.substring(3,5));
+            m -= 1;
+            if(m < 0){
+                if (h>0){
+                    h--;
+                    m=59;
+                }
+                else {
+                    m = 0;
+                }
+            }
+            String newtime = String.format("%02d", h)+":"+String.format("%02d", m);
+            tvValue.setText(newtime);
+            editor.putString("timeValue",tvValue.getText().toString());
+        }
+        editor.apply();
+    }
 
     /**
      * Retrieves the route settings that have been defined
