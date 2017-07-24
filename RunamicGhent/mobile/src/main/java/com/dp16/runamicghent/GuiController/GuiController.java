@@ -46,7 +46,7 @@ import java.util.Map;
  */
 
 public class GuiController {
-    private static final GuiController ourInstance = new GuiController(new ArrayList<String>(Arrays.asList("Tourism","Water","Park","pubs","Restaurant", "Farms","ddddddddd", "ahahahahahahah")));
+    private static final GuiController ourInstance = new GuiController(new ArrayList<String>(Arrays.asList("tourism","Water","Park","pubs","Restaurant", "Farms","ddddddddd", "ahahahahahahah")));
     private Map<String, Class> mapping = new HashMap<>();
     private Context mContext;
     private ArrayList<String> poiTags;
