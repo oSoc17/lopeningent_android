@@ -45,11 +45,9 @@
     <string name="safety">Safety</string>
     <string name="action">Action</string>
     <string name="around">Around:</string>
-    <string name="select_poi">Select POI:</string>
 
     <string name="no">No </string>
-    <string name="tourism">Tourism</string>
-    <string name="art">Art</string>
+    <string name="preferences">Preferences: </string>
 
     <string name="beginner">Beginner</string>
     <string name="average">Average</string>
@@ -218,6 +216,7 @@
     <string name="tooltip_welcome_tile">Welcome to\nRunamic Ghent!</string>
     <string name="tooltip_bottombar_explanation">The area below is the Navigation Bar, which lets you access every window of the application. \n\n\ </string>
     <string name="tooltip_start_bottombar_explanation">The current tab is the \"Start Running\" tab. Set your desired route length and get going!</string>
+    <string name="tooltip_routesettings_bottombar_explanation">In the route settings tab you\'ll find your route preferences. Generated route will be based on these settings.</string>
     <string name="tooltip_start_bottombar_got_it">› Continue.</string>
     <string name="tooltip_history_bottombar_got_it">› Ok, next!</string>
     <string name="tooltip_history_bottombar_explanation">In the history tab, you\'ll find all your previous runs along with extra info such as average running time, run distance, and so on.</string>

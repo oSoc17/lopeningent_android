@@ -34,6 +34,7 @@ import com.dp16.eventbroker.EventBroker;
 import com.dp16.eventbroker.EventListener;
 import com.dp16.eventbroker.EventPublisher;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 
 /**
  * This Fragment is meant to be loaded on top of the MapRunningFragment.
@@ -101,7 +102,17 @@ public class PreRunningFragment extends Fragment implements EventPublisher, Even
             }
         });
 
+
         return view;
+    }
+    //Set markers
+    public void setPoiMarkers(){
+        //Test variable
+        LatLng testMarker = new LatLng(51.0535,3.7304);
+        String title = "Gent";
+        ((RunningActivity) getActivity()).getMapRunningFragment().addPoiMarker(title, testMarker);
+
+
     }
 
     @Override
@@ -145,6 +156,9 @@ public class PreRunningFragment extends Fragment implements EventPublisher, Even
 
                         // Draw arrow to show direction runner has to start running in, delete previous arrow if there is one
                         ((RunningActivity) getActivity()).getMapRunningFragment().addStartArrow();
+
+                        //add poi marker
+                        setPoiMarkers();
 
                         // Calculate route length and display it
                         RunDistance totalRouteLength = ((RunningActivity) getActivity()).getRunRoute().getRouteLength();

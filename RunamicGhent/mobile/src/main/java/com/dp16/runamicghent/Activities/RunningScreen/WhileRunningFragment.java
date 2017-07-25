@@ -47,6 +47,7 @@ import com.dp16.eventbroker.EventBroker;
 import com.dp16.eventbroker.EventListener;
 import com.dp16.eventbroker.EventPublisherClass;
 import com.dp16.runamicghent.StatTracker.RunningStatistics;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.maps.android.ui.IconGenerator;
 
@@ -104,6 +105,8 @@ public class WhileRunningFragment extends Fragment implements EventListener {
     Timer timer = new Timer();
     TimerTask timerTask;
     boolean dynamicAvgSpeedRouting;
+    //marker test
+    private Marker poiMarker;
 
 
 
@@ -276,6 +279,8 @@ public class WhileRunningFragment extends Fragment implements EventListener {
             iconFactory.setRotation(180);
             iconFactory.setContentRotation(180);
             startMarker = ((RunningActivity) getActivity()).getMapRunningFragment().addStartMarker(iconFactory, "Start");
+            poiMarker = ((RunningActivity) getActivity()).getMapRunningFragment().addPoiMarker("gent", new LatLng(51.0535,3.7304));
+
         }
 
         /*
@@ -332,8 +337,8 @@ TimerTask
         double difference = avgSpeed - currentSpeed;
         if (difference >= - Constants.RouteGenerator.AVERAGE_SPEED_DIFFERENCE && difference <= Constants.RouteGenerator.AVERAGE_SPEED_DIFFERENCE ){
             ((RunningActivity) getActivity()).getRouteEngine().requestTrackDynamicTime(avgSpeed);
-            Toast.makeText(getActivity().getBaseContext(), R.string.shorter_route, Toast.LENGTH_SHORT).show();
         }
+       // Toast.makeText(getActivity().getBaseContext(), R.string.shorter_route, Toast.LENGTH_SHORT).show();
         currentSpeed = avgSpeed;
     }
 

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="poi">
-        <item>None</item>
-        <item>@string/tourism</item>
-        <item>@string/art</item>
-        <item>Placeholder</item>
-    </string-array>
-</resources>

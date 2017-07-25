@@ -419,7 +419,16 @@ public class MapRunningFragment extends Fragment implements OnMapReadyCallback, 
                 anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
         return googleMap.addMarker(markerOptions);
     }
+    /*
+    POI MARKER
+     */
+    public Marker addPoiMarker(String title, LatLng poiPosition){
+        MarkerOptions markerOptions = new MarkerOptions()
 
+                .position(poiPosition)
+                .title(title);
+        return googleMap.addMarker(markerOptions);
+    }
     /**
      * Add start arrow to map with direction dependent on beginning of the route
      */

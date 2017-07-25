@@ -45,11 +45,9 @@
     <string name="safety">Veilig</string>
     <string name="action">Actie</string>
     <string name="around">Rond:</string>
-    <string name="select_poi">Selecteer POI:</string>
 
     <string name="no">Geen </string>
-    <string name="tourism">Toerisme</string>
-    <string name="art">Kunst</string>
+    <string name="preferences">Voorkeuren: </string>
 
     <string name="beginner">Beginner</string>
     <string name="average">Gemiddeld</string>
@@ -215,6 +213,7 @@
     <string name="tooltip_bottombar_explanation">Het gebied onderaan is de navigatie balk, die je toegang biedt tot de verschillende vensters van deze applicatie. \n\n\ </string>
     <string name="tooltip_start_bottombar_explanation">De huidige tab is de \"Start lopen\" tab. Stel je gewenste routelengte in en ga van start!</string>
     <string name="tooltip_start_bottombar_got_it">› Doorgaan.</string>
+    <string name="tooltip_routesettings_bottombar_explanation">In de route settings tab vind je jouw route voorkeuren. Routes worden gegenereerd op basis van deze settings.</string>
     <string name="tooltip_history_bottombar_got_it">› Ok, volgende!</string>
     <string name="tooltip_history_bottombar_explanation">In de geschiedenis tab vind je alle vorige lopen samen met extra info zoals gemiddelde snelheid en afstand.</string>
     <string name="tooltip_settings_bottombar_got_it">› Start lopen.</string>
