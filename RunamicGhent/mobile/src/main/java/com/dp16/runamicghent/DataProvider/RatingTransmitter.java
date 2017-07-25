@@ -15,15 +15,20 @@ package com.dp16.runamicghent.DataProvider;
 
 import android.util.Log;
 
+import com.dp16.runamicghent.Activities.Utils;
 import com.dp16.runamicghent.Constants;
 import com.dp16.runamicghent.RunData.RunRating;
 import com.dp16.eventbroker.EventBroker;
 import com.dp16.eventbroker.EventListener;
 import com.dp16.eventbroker.EventPublisher;
 
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -102,65 +107,48 @@ public class RatingTransmitter implements EventPublisher, EventListener, DataPro
          */
         @Override
         public void run() {
-            // Construct the URL.
-            URL url = constructURL();
 
             boolean goodRequest = false;
-            int amountOfTries = 3;
-            int status = 0;
-            while (amountOfTries > 0 && !goodRequest) {
-                if (url != null) {
-                    try {
-                        //open connection w/ URL
-                        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                        status = httpURLConnection.getResponseCode();
 
-                        if (status == 200) {
-                            goodRequest = true;
-                            Log.d("tag", runRating.getTag());
-                        }
-                    } catch (Exception e) {
-                        Log.e("Sending Rating", e.getLocalizedMessage(), e);
-                        amountOfTries--;
-                    }
+            String body = null;
+            try {
+
+                body = URLEncoder.encode("tag", "UTF-8")
+                        + "=" + URLEncoder.encode(runRating.getTag(), "UTF-8");
+                body += "&" + URLEncoder.encode("rating", "UTF-8")
+                        + "=" + URLEncoder.encode(runRating.getStringRating(), "UTF-8");
+
+
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+
+            JSONObject response = Utils.PostRequest(body,"http://95.85.5.226/route/rate/");
+            if (response!=null){
+                goodRequest = true;
+                Log.d("tag", runRating.getTag());
+                // If statusReponse is set to true, an event will be published with the status code.
+                if (statusReponse){
+                    EventBroker.getInstance().addEvent(Constants.EventTypes.STATUS_CODE, 200, this.ratingTransmitter);
+                }
+            }else{
+                // If rating was not able to be sent in 3 requests, too bad. This is not such a big problem.
+                if (statusReponse){
+                    EventBroker.getInstance().addEvent(Constants.EventTypes.STATUS_CODE, 500, this.ratingTransmitter);
                 }
             }
-            // If rating was not able to be sent in 3 requests, too bad. This is not such a big problem.
             Log.d("Rating sent", Boolean.toString(goodRequest));
 
-            // If statusReponse is set to true, an event will be published with the status code.
-            if (statusReponse){
-                EventBroker.getInstance().addEvent(Constants.EventTypes.STATUS_CODE, status, this.ratingTransmitter);
-            }
+
+
+
+
+
+
+
         }
 
-        /**
-         * Construct the URL that will be used to publish rating on server
-         *
-         * @return {@link String} URL
-         */
-        private URL constructURL() {
-            String urlString;
 
-            if (Constants.DEVELOP) {
-                urlString = "https://groep16.cammaert.me/develop/route/rate?"; //Develop server
-            } else {
-                urlString = "https://groep16.cammaert.me/app/route/rate?"; //Master server
-            }
-
-            // Add Tag and Rating to url
-            urlString = urlString.concat("tag=" + runRating.getTag());
-            urlString = urlString.concat("&rating=" + runRating.getStringRating());
-
-            URL url = null;
-            try {
-                url = new URL(urlString);
-            } catch (MalformedURLException e) {
-                Log.e("constructURL", e.getMessage(), e);
-            }
-
-            return url;
-        }
     }
 
 }

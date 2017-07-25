@@ -16,12 +16,24 @@ package com.dp16.runamicghent.Activities;
 import android.content.Context;
 import android.location.Location;
 import android.util.DisplayMetrics;
+import android.util.Log;
 
 import com.dp16.runamicghent.Constants;
 import com.google.android.gms.maps.model.LatLng;
+import com.mongodb.util.JSON;
 
 import org.apache.commons.math3.analysis.interpolation.LoessInterpolator;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -203,5 +215,66 @@ public class Utils {
     public static int pxToDp(Context context, int px) {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         return Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+    }
+
+    public static JSONObject PostRequest(String body,String urlString){
+        JSONObject resultJSON = null;
+        URL url = null;
+        try {
+
+
+            url = new URL(urlString.toString());
+        }
+        catch (MalformedURLException e) {
+            urlString = "";
+            Log.e("constructURL", e.getMessage(), e);
+        }
+        boolean goodRequest = false;
+        int amountOfTries = 3;
+        while (amountOfTries > 0 && !goodRequest) {
+            if (url != null) {
+                try {
+                    //open connection w/ URL
+                    InputStream stream = null;
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    httpURLConnection.setRequestMethod("POST");
+                    httpURLConnection.setDoOutput(true);
+
+
+
+                    httpURLConnection.connect();
+
+                    OutputStreamWriter wr = new OutputStreamWriter(httpURLConnection.getOutputStream());
+                    wr.write(body);
+                    wr.flush();
+
+                    stream = httpURLConnection.getInputStream();
+                    String result = convertInputStreamToString(stream);
+                    Log.d("Json",result);
+
+                    //create JSON + publish event
+                    resultJSON = new JSONObject(result);
+                    goodRequest = true;
+                } catch (Exception e) {
+                    Log.e("InputStream", e.getLocalizedMessage(), e);
+                    amountOfTries--;
+                }
+            }
+        }
+
+        return resultJSON;
+    }
+    /**
+     * Auxiliary method that outputs the content of an InputStream in the form of a string.
+     */
+    private static String convertInputStreamToString(InputStream inputStream) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        String line;
+        StringBuilder result = new StringBuilder();
+        while ((line = bufferedReader.readLine()) != null)
+            result.append(line);
+
+        inputStream.close();
+        return result.toString();
     }
 }

@@ -18,6 +18,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
+import com.dp16.runamicghent.Activities.Utils;
 import com.dp16.runamicghent.Constants;
 import com.dp16.runamicghent.StatTracker.AggregateRunningStatistics;
 import com.dp16.runamicghent.StatTracker.RunningStatistics;
@@ -71,7 +72,7 @@ public class ServerStorage implements StorageComponent {
                     public void onComplete(@NonNull Task<GetTokenResult> task) {
                         if (task.isSuccessful()) {
                             userToken = task.getResult().getToken();
-
+                            Log.d("userToken", userToken);
                         } else {
                             userToken = "";
                         }
@@ -100,12 +101,7 @@ public class ServerStorage implements StorageComponent {
     void connect() {
         if (!connected ) {
             if(userToken != ""){
-                URL url = null;
-                try {
-                    url = new URL(("http://95.85.5.226/stats/check/").toString());
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                }
+
                 String body = null;
                 try {
                     body = URLEncoder.encode("android_token", "UTF-8")
@@ -114,38 +110,18 @@ public class ServerStorage implements StorageComponent {
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
+                JSONObject result = Utils.PostRequest(body,"http://95.85.5.226/stats/check/");
+                if (result!=null){
+                    try {
+                        serverStats = new JSONObject((result.get("values").toString()));
+                        connected = true;
 
-                int amountOfTries = 3;
-                int status = 0;
-                while (amountOfTries > 0 && !connected) {
-                    if (url != null) {
-                        try {
-                            //open connection w/ URL
-                            InputStream stream = null;
-                            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                            httpURLConnection.setRequestMethod("POST");
-                            httpURLConnection.setDoOutput(true);
-
-
-                            httpURLConnection.connect();
-
-                            OutputStreamWriter wr = new OutputStreamWriter(httpURLConnection.getOutputStream());
-                            wr.write(body);
-                            wr.flush();
-
-                            stream = httpURLConnection.getInputStream();
-                            BufferedReader reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"), 8);
-                            String result = reader.readLine();
-                            //create JSON + publish event
-                            serverStats = new JSONObject(((new JSONObject(result)).get("values").toString()));
-                            connected = true;
-                        } catch (Exception e) {
-                            Log.e("InputStream", e.getLocalizedMessage(), e);
-                            amountOfTries--;
-                            connected = false;
-                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        connected = false;
                     }
-                }
+                }else{connected = false;}
+
             }else{
                 connected = false;
             }
@@ -247,12 +223,7 @@ public class ServerStorage implements StorageComponent {
             return false;
         }
         boolean isPosted = false;
-        URL url = null;
-        try {
-            url = new URL(("http://95.85.5.226/stats/update/").toString());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+
         String body = null;
         try {
 
@@ -279,37 +250,12 @@ public class ServerStorage implements StorageComponent {
             e.printStackTrace();
         }
 
-        int amountOfTries = 3;
-        int status = 0;
-        while (amountOfTries > 0 && !isPosted) {
-            if (url != null) {
-                try {
-                    //open connection w/ URL
-                    InputStream stream = null;
-                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                    httpURLConnection.setRequestMethod("POST");
-                    httpURLConnection.setDoOutput(true);
+        JSONObject response = Utils.PostRequest(body,"http://95.85.5.226/stats/update/");
 
-
-                    httpURLConnection.connect();
-
-                    OutputStreamWriter wr = new OutputStreamWriter(httpURLConnection.getOutputStream());
-                    wr.write(body);
-                    wr.flush();
-
-                    stream = httpURLConnection.getInputStream();
-                    String result = convertInputStreamToString(stream);
-
-
-                    //create JSON + publish event
-                    serverStats = new JSONObject(((new JSONObject(result)).get("values").toString()));
-                    isPosted = true;
-                } catch (Exception e) {
-                    Log.e("InputStream", e.getLocalizedMessage(), e);
-                    amountOfTries--;
-                    isPosted = false;
-                }
-            }
+        if (response!=null){
+            isPosted = true;
+        }else{
+            isPosted=false;
         }
         return isPosted;
     }
@@ -340,19 +286,7 @@ public class ServerStorage implements StorageComponent {
         return true;
     }
 
-    /**
-     * Auxiliary method that outputs the content of an InputStream in the form of a string.
-     */
-    private String convertInputStreamToString(InputStream inputStream) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        String line;
-        StringBuilder result = new StringBuilder();
-        while ((line = bufferedReader.readLine()) != null)
-            result.append(line);
 
-        inputStream.close();
-        return result.toString();
-    }
 
 
 }

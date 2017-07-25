@@ -15,6 +15,7 @@ package com.dp16.runamicghent;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.mongodb.util.JSON;
 
 import java.util.Objects;
 
@@ -41,6 +42,8 @@ public class Constants {
         private Server() {
             throw new IllegalAccessError(UTILITY_CLASS_ERROR);
         }
+
+
     }
 
     /**
@@ -394,5 +397,7 @@ public class Constants {
         }
 
     }
+
+
 
 }
