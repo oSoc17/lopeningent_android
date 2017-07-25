@@ -193,7 +193,7 @@ public class RouteEngine implements EventListener, EventPublisher {
             //time values
             String time = preferences.getString("timeValue", "00:10");
             int h = Integer.parseInt(time.substring(0,2));
-            int m = Integer.parseInt(time.substring(3,5)) + (h/60) ;
+            int m = Integer.parseInt(time.substring(3,5)) + (h*60) ;
 
             //difficulty
             int difficulty = preferences.getInt("difficulty", 0);

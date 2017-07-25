@@ -140,7 +140,7 @@
 
                 <CheckBoxPreference
                     android:key="pref_key_audio_feedback_contents_avg_heartrate"
-                    android:title="@string/avg_heart_rate_label"
+                    android:title="@string/average_heart_rate"
                     android:defaultValue="false"/>
 
             </PreferenceCategory>

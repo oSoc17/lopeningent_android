@@ -241,7 +241,7 @@
     <string name="tooltip_settings_profile_picture_explanation">Op het profielscherm vind je persoonlijke informatie als ook jouw statistieken. \n\nIn de rechter bovenhoek kun je jouw profiel en voorkeuren aanpassen.</string>
     <string name="tooltip_settings_statistics_got_it">› Ok.</string>
     <string name="tooltip_settings_statistics_explanation">Onderaan zie je persoonlijke informatie en enkele statistieken gebaseerd op vorige routes.</string>
-    <string name="tooltip_history_explanation">Hier in de geschiedenis tab vind je alle routes die je hebt opgeslaan.\n\nKlik op één van je opgeslagen routes voor meer informatie.\n\nEen opgeslagen route een tijdje ingedrukt houden, zal een voorbeeld geven van die route.</string>
+    <string name="tooltip_history_explanation">Hier in de geschiedenis tab vind je alle routes die je hebt opgeslaan.\n\nKlik op één van je opgeslagen routes voor meer informatie.\n\nEen opgeslagen route een tijdje ingedrukt houden zal een voorbeeld geven van die route.</string>
     <string name="tooltip_history_got_it">› Ok!</string>
     <string name="tooltip_history_expanded_got_it">› Ok.</string>
     <string name="tooltip_history_expanded_pager_explanation">Dit scherm zal je meer informatie geven over de route die je geselecteerd hebt. Gemiddelde snelheid, duur, hartslag, afstand en de rating worden weergegeven.</string>

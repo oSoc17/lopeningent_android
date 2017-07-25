@@ -103,7 +103,7 @@
                     android:layout_weight="0.94"
                     android:background="@color/colorAccent"
                     android:paddingTop="3dp"
-                    android:text="0.0"
+                    android:text="HH:MM"
                     android:textAlignment="center"
                     android:textColor="@color/cardview_light_background"
                     android:textSize="24sp"
