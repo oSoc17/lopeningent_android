@@ -35,6 +35,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -241,6 +242,7 @@ public class ServerStorage implements StorageComponent {
 
     @Override
     public boolean saveAggregateRunningStatistics(AggregateRunningStatistics aggregateRunningStatistics, long editTime) {
+
         if (!connected || userToken == "") {
             return false;
         }
@@ -296,8 +298,8 @@ public class ServerStorage implements StorageComponent {
                     wr.flush();
 
                     stream = httpURLConnection.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"), 8);
-                    String result = reader.readLine();
+                    String result = convertInputStreamToString(stream);
+
 
                     //create JSON + publish event
                     serverStats = new JSONObject(((new JSONObject(result)).get("values").toString()));
@@ -336,6 +338,20 @@ public class ServerStorage implements StorageComponent {
     @Override
     public boolean deleteAggregateRunningStatistics() {
         return true;
+    }
+
+    /**
+     * Auxiliary method that outputs the content of an InputStream in the form of a string.
+     */
+    private String convertInputStreamToString(InputStream inputStream) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        String line;
+        StringBuilder result = new StringBuilder();
+        while ((line = bufferedReader.readLine()) != null)
+            result.append(line);
+
+        inputStream.close();
+        return result.toString();
     }
 
 

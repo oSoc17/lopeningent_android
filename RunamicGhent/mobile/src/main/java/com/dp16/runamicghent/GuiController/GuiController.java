@@ -16,14 +16,39 @@ package com.dp16.runamicghent.GuiController;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
+
+import com.dp16.eventbroker.EventBroker;
+import com.dp16.runamicghent.Constants;
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.services.translate.Translate;
+import com.google.api.services.translate.TranslateRequestInitializer;
 
 import org.apache.commons.math3.analysis.function.Add;
+import org.apache.commons.math3.analysis.function.Constant;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -60,12 +85,67 @@ public class GuiController {
 
     public static GuiController getInstance() {
         if (ourInstance==null){
+            ArrayList<String> poiTags = new ArrayList<String>(Arrays.asList("tourism","Water","Park"));
 
-            // try request else standard tags
-            ourInstance = new GuiController(new ArrayList<String>(Arrays.asList("tourism","Water","Park")));
+
+            // Construct the URL.
+            URL url = null;
+            String urlString = "";
+            try {
+
+                urlString = "http://95.85.5.226/poi/types/";
+
+
+                url = new URL(urlString.toString());
+            }
+            catch (MalformedURLException e) {
+                urlString = "";
+                Log.e("constructURL", e.getMessage(), e);
+            }
+
+            boolean goodRequest = false;
+            int amountOfTries = 3;
+            int status = 0;
+            while (amountOfTries > 0 && !goodRequest) {
+                if (url != null) {
+                    try {
+                        //open connection w/ URL
+                        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                        status = httpURLConnection.getResponseCode();
+                        Log.d("Status", status +"");
+                        InputStream inputStream = httpURLConnection.getInputStream();
+
+                        //convert Input Stream to String
+                        String result = convertInputStreamToString(inputStream);
+
+                        Log.d("Json",result);
+
+                        //create JSON + publish event
+                        JSONObject json = new JSONObject(result);
+                        goodRequest = true;
+                        JSONArray jsonArray = (JSONArray)(new JSONObject(result)).get("types");
+                        if (jsonArray != null) {
+                            int len = jsonArray.length();
+                            poiTags = new ArrayList<String>();
+                            for (int i=0;i<len;i++){
+                                poiTags.add(jsonArray.get(i).toString());
+                            }
+                        }
+                    } catch (Exception e) {
+                        Log.e("InputStream", e.getLocalizedMessage(), e);
+                        amountOfTries--;
+                    }
+                }
+            }
+
+
+            ourInstance = new GuiController(poiTags);
+
         }
         return ourInstance;
     }
+
+    
 
     /**
      * Registers an Activity class for a given type.
@@ -217,6 +297,20 @@ public class GuiController {
     }
     public ArrayList<String> getPoiTags(){
         return poiTags;
+    }
+
+    /**
+     * Auxiliary method that outputs the content of an InputStream in the form of a string.
+     */
+    private static String convertInputStreamToString(InputStream inputStream) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        String line;
+        StringBuilder result = new StringBuilder();
+        while ((line = bufferedReader.readLine()) != null)
+            result.append(line);
+
+        inputStream.close();
+        return result.toString();
     }
 
 }

@@ -35,7 +35,7 @@ public class Constants {
      * Server configuration constants.
      */
     public class Server {
-        public static final String ADDRESS = "95.85.5.226:8000";
+        public static final String ADDRESS = "95.85.5.226";
         public static final String MONGOPORT = "27017";
 
         private Server() {
