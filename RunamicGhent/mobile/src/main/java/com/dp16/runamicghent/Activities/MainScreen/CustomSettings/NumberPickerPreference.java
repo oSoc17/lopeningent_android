@@ -70,7 +70,7 @@ public class NumberPickerPreference extends DialogPreference{
         picker.setLayoutParams(layoutParams);
 
         TextView textViewLeft = new TextView(getContext());
-        textViewLeft.setText("Every");
+        textViewLeft.setText(getContext().getString(R.string.npicker_every));
         textViewLeft.setPadding(0, 0, 50, 0);
         textViewLeft.setLayoutParams(layoutParams);
 

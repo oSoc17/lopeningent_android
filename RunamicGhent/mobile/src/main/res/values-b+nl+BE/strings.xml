@@ -67,7 +67,7 @@
     <!-- History Fragment -->
     <string name="delete">Verwijder</string>
     <string name="your_rating_label">Your Rating</string>
-    <string name="no_runs">Je hebt nog niet geloopt of je hebt nog niets opgeslagen </string>
+    <string name="no_runs">Je hebt nog niet geloopt of je hebt nog geen routes opgeslagen </string>
     <string name="go_for_run">Ga eens lopen!</string>
     <string name="string_divider">•</string>
 
@@ -84,7 +84,7 @@
     <string name="total_duration">Totale duur</string>
     <string name="average_duration">Gemiddelde duur</string>
     <string name="average_running_speed">Gemiddelde snelheid</string>
-    <string name="number_of_runs">Aantal lopen</string>
+    <string name="number_of_runs">Aantal routes</string>
     <string name="average_heart_rate">Gemiddelde hartslag</string>
     <string name="logout">LOG UIT</string>
 
@@ -112,7 +112,7 @@
     <!-- End Run Activity -->
     <string name="save_run">Opslaan</string>
     <string name="discard_run">Afwijzen</string>
-    <string name="rating_label">Rate your run</string>
+    <string name="rating_label">Beoordeel deze route</string>
 
     <!-- Audio Instructions -->
     <string name="audio_please">gelieve</string>
@@ -163,6 +163,21 @@
     <string name="pref_title_dynamic_routing_water">Belangstelling van water</string>
     <string name="pref_summary_dynamic_routing_water">Bepaal hoeveel de route generator, routes met water verkiest</string>
 
+    <!-- audio preferences -->
+    <string name="enabled">Aan</string>
+    <string name="disabled">Uit</string>
+    <string name="pref_audio_directions">Audio instructies</string>
+    <string name="pref_audio_after_distance">Na een bepaalde afstand</string>
+    <string name="pref_audio_after_duration">Na een  bepaalde duur</string>
+    <string name="pref_distance_feedback_interval">Afstand feedback interval</string>
+    <string name="pref_duration_feedback_interval">Duur feedback interval</string>
+    <string name="pref_feedback_moments">Feedback momenten</string>
+    <string name="pref_feedback_contents">Feedback waarden</string>
+    <string name="interval_minutes">minuten</string>
+    <string name="npicker_every">Ieder</string>
+
+    <string name="introduction_tooltips">Reset introductie tips</string>
+
     <string name="pref_about_build_number">Versie nummer</string>
 
 
@@ -208,14 +223,14 @@
    <!-- <string name="tooltip_start_distancepicker_explanation">Use this slider to configure the length you wish to run.</string>
     <string name="tooltip_start_distancepicker_got_it">› Ok, got it!</string>-->
     <string name="tooltip_bottombar_got_it">› Volgende!</string>
-    <string name="tooltip_welcome_explanation">Voor we gaan starten, zouden we graag enkele eigenschappen highlighten. \n</string>
+    <string name="tooltip_welcome_explanation">Voor we gaan starten, zouden we graag enkele eigenschappen benadrukken. \n</string>
     <string name="tooltip_welcome_tile">Welkom bij\nRunamic Gent!</string>
     <string name="tooltip_bottombar_explanation">Het gebied onderaan is de navigatie balk, die je toegang biedt tot de verschillende vensters van deze applicatie. \n\n\ </string>
-    <string name="tooltip_start_bottombar_explanation">De huidige tab is de \"Start lopen\" tab. Stel je gewenste routelengte in en ga van start!</string>
+    <string name="tooltip_start_bottombar_explanation">De huidige tab is de \"Start lopen\" tab. Stel je gewenste routelengte in de settings tab en ga van start!</string>
     <string name="tooltip_start_bottombar_got_it">› Doorgaan.</string>
     <string name="tooltip_routesettings_bottombar_explanation">In de route settings tab vind je jouw route voorkeuren. Routes worden gegenereerd op basis van deze settings.</string>
     <string name="tooltip_history_bottombar_got_it">› Ok, volgende!</string>
-    <string name="tooltip_history_bottombar_explanation">In de geschiedenis tab vind je alle vorige lopen samen met extra info zoals gemiddelde snelheid en afstand.</string>
+    <string name="tooltip_history_bottombar_explanation">In de geschiedenis tab vind je alle vorige routes samen met extra info zoals gemiddelde snelheid en afstand.</string>
     <string name="tooltip_settings_bottombar_got_it">› Start lopen.</string>
     <string name="tooltip_settings_bottombar_explanation">In the profiel tab zal je jouw persoonlijke informatie vinden en kunnen wijzigen. Jouw voorkeur settings bevinden zich daar ook.</string>
     <string name="tooltip_settings_button_edit_explanation">Je kan je profiel hier wijzigen.</string>
@@ -223,20 +238,20 @@
     <string name="tooltip_settings_button_settings_got_it">› Ok!</string>
     <string name="tooltip_settings_button_settings_explanation">Hier kun je jouw voorkeuren wijzigen.</string>
     <string name="tooltip_settings_profile_picture_got_it">› Ok.</string>
-    <string name="tooltip_settings_profile_picture_explanation">Op het profielscherm vind je persoonlijke informatie als ook jouw loop statistieken. \n\nIn de rechter bovenhoek kun je jouw profiel en voorkeuren aanpassen.</string>
+    <string name="tooltip_settings_profile_picture_explanation">Op het profielscherm vind je persoonlijke informatie als ook jouw statistieken. \n\nIn de rechter bovenhoek kun je jouw profiel en voorkeuren aanpassen.</string>
     <string name="tooltip_settings_statistics_got_it">› Ok.</string>
-    <string name="tooltip_settings_statistics_explanation">Onderaan zie je persoonlijke informatie en enkele statistieken gebaseerd op vorige lopen.</string>
-    <string name="tooltip_history_explanation">Hier in de geschiedenis tab vind je alle lopen die je hebt opgeslaan.\n\nKlik op één van je opgeslagen lopen voor meer informatie.\n\n Een opgeslagen loop een tijdje ingedrukt houden, zal een voorbeeld geven van die route.</string>
+    <string name="tooltip_settings_statistics_explanation">Onderaan zie je persoonlijke informatie en enkele statistieken gebaseerd op vorige routes.</string>
+    <string name="tooltip_history_explanation">Hier in de geschiedenis tab vind je alle routes die je hebt opgeslaan.\n\nKlik op één van je opgeslagen routes voor meer informatie.\n\nEen opgeslagen route een tijdje ingedrukt houden, zal een voorbeeld geven van die route.</string>
     <string name="tooltip_history_got_it">› Ok!</string>
     <string name="tooltip_history_expanded_got_it">› Ok.</string>
-    <string name="tooltip_history_expanded_pager_explanation">Dit scherm zal je meer informatie geven over de loop die je geselecteerd hebt. Gemiddelde snelheid, duur, hartslag, afstand en de rating worden weergegeven.</string>
+    <string name="tooltip_history_expanded_pager_explanation">Dit scherm zal je meer informatie geven over de route die je geselecteerd hebt. Gemiddelde snelheid, duur, hartslag, afstand en de rating worden weergegeven.</string>
     <string name="tooltip_history_expanded_tabs_got_it">› Ok.</string>
     <string name="tooltip_history_expanded_tabs_explanation">Gebruik deze tabs of swipe rechts om te wisselen naar een gedetaileerde scherm.</string>
-    <string name="tooltip_history_expanded_detail_pager_explanation">In de \"Details\" tab vind je meer information over je huidige loop. Gebruik de slider onderaan om informatie te zien op een bepaald tijdstip.</string>
+    <string name="tooltip_history_expanded_detail_pager_explanation">In de \"Details\" tab vind je meer informatie over je huidige route. Gebruik de slider onderaan om informatie te zien op een bepaald tijdstip.</string>
     <string name="tooltip_start_free_running_explanation">Uiteindelijk zal deze knop je laten lopen zonder een route. Je route en andere statistieken worden natuurlijk nog steeds bijgehouden.</string>
     <string name="tooltip_start_free_running_got_it">› Ok!</string>
     <string name="tooltip_postrunning_ratingbar_got_it">› Ok.</string>
-    <string name="tooltip_postrunning_raringbar_explanation">Gefeliciteerd bij het afronden van je eerste loop!\n\nBy door te sliden met je vinger over de sterren kun je een rating geven aan deze route.</string>
+    <string name="tooltip_postrunning_raringbar_explanation">Gefeliciteerd bij het afronden van je eerste route!\n\nBy door te sliden met je vinger over de sterren kun je een rating geven aan deze route.</string>
     <string name="tooltip_postrunning_savebutton_got_it">› OK.</string>
     <string name="tooltip_postrunning_savebutton_explanation">Nadat je een rating ingediendt hebt, kun je dit opslaan door behulp van deze knop, anderzijds wordt het weggegooid.</string>
     <string name="pref_about">Over</string>
