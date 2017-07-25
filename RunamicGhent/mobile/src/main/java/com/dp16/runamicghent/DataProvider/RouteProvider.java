@@ -140,11 +140,11 @@ public class RouteProvider implements EventListener, EventPublisher, DataProvide
             String body  = "";
             try {
                 if (trackRequest.getDynamic()) {
-                    urlString = "http://95.85.5.226:8000/route/return/";
+                    urlString = "http://95.85.5.226/route/return/";
                     body = constructDynamicBody();
                 }
                 else{
-                    urlString = "http://95.85.5.226:8000/route/generate/";
+                    urlString = "http://95.85.5.226/route/generate/";
                     body = constructStaticBody();
                 }
 
@@ -178,8 +178,8 @@ public class RouteProvider implements EventListener, EventPublisher, DataProvide
                         wr.flush();
 
                         stream = httpURLConnection.getInputStream();
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"), 8);
-                        String result = reader.readLine();
+                        String result = convertInputStreamToString(stream);
+                        Log.d("Json",result);
 
                         //create JSON + publish event
                         JSONObject json = new JSONObject(result);
@@ -221,9 +221,9 @@ public class RouteProvider implements EventListener, EventPublisher, DataProvide
             body += "&" + URLEncoder.encode("lon", "UTF-8")
                     + "=" + URLEncoder.encode(trackRequest.getLocation().longitude + "", "UTF-8");
             body += "&" + URLEncoder.encode("min_length", "UTF-8")
-                    + "=" + URLEncoder.encode(trackRequest.getLocation().longitude + "", "UTF-8");
+                    + "=" + URLEncoder.encode(bounds[0] + "", "UTF-8");
             body += "&" + URLEncoder.encode("max_length", "UTF-8")
-                    + "=" + URLEncoder.encode(trackRequest.getLocation().longitude + "", "UTF-8");
+                    + "=" + URLEncoder.encode(bounds[1] + "", "UTF-8");
             body += "&" + URLEncoder.encode("type", "UTF-8")
                     + "=" + URLEncoder.encode("directions", "UTF-8");
             body += "&" + URLEncoder.encode("android_token", "UTF-8")

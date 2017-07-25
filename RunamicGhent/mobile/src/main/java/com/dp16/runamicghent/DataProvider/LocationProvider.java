@@ -294,8 +294,8 @@ public class LocationProvider implements DataProvider, EventPublisher, GoogleApi
     private void publishEvent(Location location) {
         //For testers not in Ghent, location spoofing
         if (fakeLatLng) {
-            location.setLatitude(51.056472);
-            location.setLongitude(3.721790);
+            location.setLatitude(51.057620);
+            location.setLongitude(3.743136);
         }
 
         // Publish Raw Location as location
