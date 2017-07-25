@@ -46,7 +46,7 @@ import java.util.Map;
  */
 
 public class GuiController {
-    private static final GuiController ourInstance = new GuiController(new ArrayList<String>(Arrays.asList("tourism","Water","Park","pubs","Restaurant", "Farms","ddddddddd", "ahahahahahahah")));
+    private static  GuiController ourInstance ;
     private Map<String, Class> mapping = new HashMap<>();
     private Context mContext;
     private ArrayList<String> poiTags;
@@ -59,6 +59,11 @@ public class GuiController {
     }
 
     public static GuiController getInstance() {
+        if (ourInstance==null){
+
+            // try request else standard tags
+            ourInstance = new GuiController(new ArrayList<String>(Arrays.asList("tourism","Water","Park")));
+        }
         return ourInstance;
     }
 
