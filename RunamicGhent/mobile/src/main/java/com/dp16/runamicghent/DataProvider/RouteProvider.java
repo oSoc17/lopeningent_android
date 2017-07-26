@@ -141,11 +141,11 @@ public class RouteProvider implements EventListener, EventPublisher, DataProvide
 
             try {
                 if (trackRequest.getDynamic()) {
-                    urlString = "http://95.85.5.226/route/return/";
+                    urlString = "http://" + Constants.Server.ADDRESS + "/route/return/";
                     body = constructDynamicBody();
                 }
 
-                urlString = "http://95.85.5.226/route/generate/";
+                urlString = "http://" + Constants.Server.ADDRESS + "/route/generate/";
                 body = constructStaticBody();
             }
 
@@ -215,6 +215,9 @@ public class RouteProvider implements EventListener, EventPublisher, DataProvide
             for (String poiTag : GuiController.getInstance().getPoiTags()) {
                 if(preferences.getBoolean(poiTag,false)){
                     body += "&" + URLEncoder.encode("tags", "UTF-8")
+                            + "=" + URLEncoder.encode(poiTag, "UTF-8");
+                }else{
+                    body += "&" + URLEncoder.encode("neg_tags", "UTF-8")
                             + "=" + URLEncoder.encode(poiTag, "UTF-8");
                 }
 

@@ -123,7 +123,7 @@ public class RatingTransmitter implements EventPublisher, EventListener, DataPro
                 e.printStackTrace();
             }
 
-            JSONObject response = Utils.PostRequest(body,"http://95.85.5.226/route/rate/");
+            JSONObject response = Utils.PostRequest(body,"http://" + Constants.Server.ADDRESS + "/route/rate/");
             if (response!=null){
                 goodRequest = true;
                 Log.d("tag", runRating.getTag());

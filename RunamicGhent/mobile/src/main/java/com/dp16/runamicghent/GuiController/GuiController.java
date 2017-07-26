@@ -93,7 +93,7 @@ public class GuiController {
             // Construct the URL.
             String urlString = "";
 
-            urlString = "http://95.85.5.226/poi/types/";
+            urlString = "http://" + Constants.Server.ADDRESS + "/poi/types/";
 
 
             JSONObject result = Utils.PostRequest("",urlString);

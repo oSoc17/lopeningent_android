@@ -110,7 +110,7 @@ public class ServerStorage implements StorageComponent {
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
-                JSONObject result = Utils.PostRequest(body,"http://95.85.5.226/stats/check/");
+                JSONObject result = Utils.PostRequest(body,"http://" + Constants.Server.ADDRESS + "/stats/check/");
                 if (result!=null){
                     try {
                         serverStats = new JSONObject((result.get("values").toString()));
@@ -250,7 +250,7 @@ public class ServerStorage implements StorageComponent {
             e.printStackTrace();
         }
 
-        JSONObject response = Utils.PostRequest(body,"http://95.85.5.226/stats/update/");
+        JSONObject response = Utils.PostRequest(body,"http://" + Constants.Server.ADDRESS + "/stats/update/");
 
         if (response!=null){
             isPosted = true;
