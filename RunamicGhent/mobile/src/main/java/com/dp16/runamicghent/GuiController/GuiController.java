@@ -16,14 +16,41 @@ package com.dp16.runamicghent.GuiController;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
+
+import com.dp16.eventbroker.EventBroker;
+import com.dp16.runamicghent.Activities.Utils;
+import com.dp16.runamicghent.Constants;
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.services.translate.Translate;
+import com.google.api.services.translate.TranslateRequestInitializer;
 
 import org.apache.commons.math3.analysis.function.Add;
+import org.apache.commons.math3.analysis.function.Constant;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -46,7 +73,7 @@ import java.util.Map;
  */
 
 public class GuiController {
-    private static final GuiController ourInstance = new GuiController(new ArrayList<String>(Arrays.asList("tourism","Water","Park","pubs","Restaurant", "Farms","ddddddddd", "ahahahahahahah")));
+    private static  GuiController ourInstance ;
     private Map<String, Class> mapping = new HashMap<>();
     private Context mContext;
     private ArrayList<String> poiTags;
@@ -59,8 +86,42 @@ public class GuiController {
     }
 
     public static GuiController getInstance() {
+        if (ourInstance==null){
+            ArrayList<String> poiTags = new ArrayList<String>(Arrays.asList("tourism","water","park"));
+
+
+            // Construct the URL.
+            String urlString = "";
+
+            urlString = "http://95.85.5.226/poi/types/";
+
+
+            JSONObject result = Utils.PostRequest("",urlString);
+            if (result!=null){
+                JSONArray jsonArray = null;
+                try {
+                    jsonArray = (JSONArray)result.get("types");
+                    if (jsonArray != null) {
+                        int len = jsonArray.length();
+                        poiTags = new ArrayList<String>();
+                        for (int i=0;i<len;i++){
+                            poiTags.add(jsonArray.get(i).toString());
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+
+            ourInstance = new GuiController(poiTags);
+
+        }
         return ourInstance;
     }
+
+
 
     /**
      * Registers an Activity class for a given type.
@@ -213,5 +274,6 @@ public class GuiController {
     public ArrayList<String> getPoiTags(){
         return poiTags;
     }
+
 
 }

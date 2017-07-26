@@ -48,7 +48,7 @@ public class PersistenceController {
         this.context = context;
         localStorage = new LocalStorage(context);
         String clientToken = PreferenceManager.getDefaultSharedPreferences(context).getString("client token", "");
-        serverStorage = new ServerStorage(clientToken);
+        serverStorage = new ServerStorage();
 
         // make a threadpool that allows to schedule tasks
         // this threadpool has only one thread and it is a daemon, meaning that it won't stall the app on shutdown
@@ -67,7 +67,7 @@ public class PersistenceController {
 
     private void renewClientToken() {
         String clientToken = PreferenceManager.getDefaultSharedPreferences(context).getString("client token", "");
-        serverStorage.setUserId(clientToken);
+        serverStorage.setUserToken();
     }
 
     /**

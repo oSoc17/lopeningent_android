@@ -18,6 +18,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.dp16.runamicghent.Activities.Utils;
 import com.dp16.runamicghent.Constants;
 import com.dp16.runamicghent.GuiController.GuiController;
 import com.dp16.runamicghent.TrackRequest;
@@ -135,70 +136,49 @@ public class RouteProvider implements EventListener, EventPublisher, DataProvide
         public void run() {
 
             // Construct the URL.
-            URL url = null;
             String urlString = "";
-            String body  = "";
+            String body = "";
+
             try {
                 if (trackRequest.getDynamic()) {
                     urlString = "http://95.85.5.226/route/return/";
                     body = constructDynamicBody();
                 }
-                else{
-                    urlString = "http://95.85.5.226/route/generate/";
-                    body = constructStaticBody();
-                }
 
-                url = new URL(urlString.toString());
+                urlString = "http://95.85.5.226/route/generate/";
+                body = constructStaticBody();
             }
-            catch (MalformedURLException e) {
-                urlString = "";
+
+            catch(
+            UnsupportedEncodingException e)
+
+            {
                 Log.e("constructURL", e.getMessage(), e);
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+                 e.printStackTrace();
             }
 
-            boolean goodRequest = false;
-            int amountOfTries = 3;
-            int status = 0;
-            while (amountOfTries > 0 && !goodRequest) {
-                if (url != null) {
-                    try {
-                        //open connection w/ URL
-                        InputStream stream = null;
-                        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                        httpURLConnection.setRequestMethod("POST");
-                        httpURLConnection.setDoOutput(true);
+            JSONObject response = Utils.PostRequest(body, urlString);
 
 
 
-                        httpURLConnection.connect();
 
-                        OutputStreamWriter wr = new OutputStreamWriter(httpURLConnection.getOutputStream());
-                        wr.write(body);
-                        wr.flush();
 
-                        stream = httpURLConnection.getInputStream();
-                        String result = convertInputStreamToString(stream);
-                        Log.d("Json",result);
 
-                        //create JSON + publish event
-                        JSONObject json = new JSONObject(result);
-                        publishEvent(json);
-                        goodRequest = true;
-                    } catch (Exception e) {
-                        Log.e("InputStream", e.getLocalizedMessage(), e);
-                        amountOfTries--;
-                    }
-                }
+            if(response ==null)
+
+            {
+            try {
+                //add bad request to event broker
+                EventBroker.getInstance().addEvent(Constants.EventTypes.STATUS_CODE, 500, this.routeProvider);
+            } catch (Exception e) {
+                Log.e("InputStream", e.getLocalizedMessage(), e);
             }
-            if (amountOfTries == 0) {
-                try {
-                    //add bad request to event broker
-                    EventBroker.getInstance().addEvent(Constants.EventTypes.STATUS_CODE, status, this.routeProvider);
-                } catch (Exception e) {
-                    Log.e("InputStream", e.getLocalizedMessage(), e);
-                }
+            }else
+
+            {
+                publishEvent(response);
             }
+
         }
 
 
@@ -294,19 +274,7 @@ public class RouteProvider implements EventListener, EventPublisher, DataProvide
             return bounds;
         }
 
-        /**
-         * Auxiliary method that outputs the content of an InputStream in the form of a string.
-         */
-        private String convertInputStreamToString(InputStream inputStream) throws IOException {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            String line;
-            StringBuilder result = new StringBuilder();
-            while ((line = bufferedReader.readLine()) != null)
-                result.append(line);
 
-            inputStream.close();
-            return result.toString();
-        }
     }
 }
 
