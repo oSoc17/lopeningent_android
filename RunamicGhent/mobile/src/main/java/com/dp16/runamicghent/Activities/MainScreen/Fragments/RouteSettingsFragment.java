@@ -257,6 +257,9 @@ public class RouteSettingsFragment extends Fragment {
         else {
             addSpinner();
             getValue = preferences.getString("timeValue", "00:00");
+            if (getValue.equals("00:00")){
+                getValue = "HH:MM";
+            }
             // tvDT.setText("h:m");
         }
         tvValue.setText(getValue);
@@ -320,7 +323,7 @@ public class RouteSettingsFragment extends Fragment {
         RadioButton rdbDistance = (RadioButton)view.findViewById(R.id.rdbDistance);
         TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
         if (rdbDistance.isChecked()){
-            double value = Double.parseDouble(tvValue.getText().toString());
+            double value = Double.parseDouble(preferences.getString("distanceValue","0.0"));
             value += 0.1;
             value = (double) Math.round(((value * 100) * 10) / 10)/100;
             tvValue.setText(String.valueOf(value));
@@ -328,7 +331,7 @@ public class RouteSettingsFragment extends Fragment {
 
         }
         else {
-            String time = tvValue.getText().toString();
+            String time = preferences.getString("timeValue","00:00");
             int h = Integer.parseInt(time.substring(0,2));
             int m = Integer.parseInt(time.substring(3,5));
             m += 1;
@@ -336,9 +339,18 @@ public class RouteSettingsFragment extends Fragment {
                 m = 00;
                 h += 1;
             }
-            String newtime = String.format("%02d", h)+":"+String.format("%02d", m);
-            editor.putString("timeValue",newtime);
-            tvValue.setText(newtime);
+
+            if (m == 00 && h ==00){
+                tvValue.setText("HH:MM");
+                editor.putString("timeValue","00:00");
+            }
+            else{
+                String newtime = String.format("%02d", h)+":"+String.format("%02d", m);
+                tvValue.setText(newtime);
+                editor.putString("timeValue",newtime);
+            }
+
+
         }
         editor.apply();
 
@@ -348,7 +360,7 @@ public class RouteSettingsFragment extends Fragment {
         RadioButton rdbDistance = (RadioButton)view.findViewById(R.id.rdbDistance);
         TextView tvValue = (TextView)view.findViewById(R.id.tvDTValue);
         if (rdbDistance.isChecked()){
-            double value = Double.parseDouble(tvValue.getText().toString());
+            double value = Double.parseDouble(preferences.getString("distanceValue","0.0"));
             if (value - 0.1 <0 )
             {
                 value = 0;
@@ -362,7 +374,7 @@ public class RouteSettingsFragment extends Fragment {
             editor.putString("distanceValue",tvValue.getText().toString());
         }
         else {
-            String time = tvValue.getText().toString();
+            String time = preferences.getString("timeValue","00:00");
             int h = Integer.parseInt(time.substring(0,2));
             int m = Integer.parseInt(time.substring(3,5));
             m -= 1;
@@ -375,9 +387,15 @@ public class RouteSettingsFragment extends Fragment {
                     m = 0;
                 }
             }
-            String newtime = String.format("%02d", h)+":"+String.format("%02d", m);
-            tvValue.setText(newtime);
-            editor.putString("timeValue",tvValue.getText().toString());
+            if (m == 00 && h ==00){
+                tvValue.setText("HH:MM");
+                editor.putString("timeValue","00:00");
+            }
+            else{
+                String newtime = String.format("%02d", h)+":"+String.format("%02d", m);
+                tvValue.setText(newtime);
+                editor.putString("timeValue",newtime);
+            }
         }
         editor.apply();
     }

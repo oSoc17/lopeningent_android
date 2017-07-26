@@ -45,11 +45,9 @@
     <string name="safety">Safety</string>
     <string name="action">Action</string>
     <string name="around">Around:</string>
-    <string name="select_poi">Select POI:</string>
 
     <string name="no">No </string>
-    <string name="tourism">Tourism</string>
-    <string name="art">Art</string>
+    <string name="preferences">Preferences: </string>
 
     <string name="beginner">Beginner</string>
     <string name="average">Average</string>
@@ -168,6 +166,20 @@
 
     <string name="pref_title_dynamic_routing_water">Importance of water</string>
     <string name="pref_summary_dynamic_routing_water">Determine how much the route generation favors routes next to water</string>
+    <!-- audio preferences -->
+    <string name="enabled">Enabled</string>
+    <string name="disabled">Disabled</string>
+    <string name="pref_audio_directions">Audio directions</string>
+    <string name="pref_audio_after_distance">After certain distance</string>
+    <string name="pref_audio_after_duration">After certain duration</string>
+    <string name="pref_distance_feedback_interval">Distance feedback interval</string>
+    <string name="pref_duration_feedback_interval">Duration feedback interval</string>
+    <string name="pref_feedback_moments">Feedback moments</string>
+    <string name="pref_feedback_contents">Feedback contents</string>
+    <string name="interval_minutes">minutes</string>
+    <string name="npicker_every">Every</string>
+
+    <string name="introduction_tooltips">Reset introduction tooltips</string>
 
     <string name="pref_about_build_number">Version Number</string>
 
@@ -217,7 +229,8 @@
     <string name="tooltip_welcome_explanation">Before you get started, we\'d like to highlight some of our features for you. \n</string>
     <string name="tooltip_welcome_tile">Welcome to\nRunamic Ghent!</string>
     <string name="tooltip_bottombar_explanation">The area below is the Navigation Bar, which lets you access every window of the application. \n\n\ </string>
-    <string name="tooltip_start_bottombar_explanation">The current tab is the \"Start Running\" tab. Set your desired route length and get going!</string>
+    <string name="tooltip_start_bottombar_explanation">The current tab is the \"Start Running\" tab. Set your desired route length in the settings tab and get going!</string>
+    <string name="tooltip_routesettings_bottombar_explanation">In the route settings tab you\'ll find your route preferences. Generated route will be based on these settings.</string>
     <string name="tooltip_start_bottombar_got_it">› Continue.</string>
     <string name="tooltip_history_bottombar_got_it">› Ok, next!</string>
     <string name="tooltip_history_bottombar_explanation">In the history tab, you\'ll find all your previous runs along with extra info such as average running time, run distance, and so on.</string>

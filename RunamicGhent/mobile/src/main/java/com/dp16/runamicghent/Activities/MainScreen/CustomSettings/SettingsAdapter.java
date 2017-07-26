@@ -99,13 +99,13 @@ public class SettingsAdapter extends BaseAdapter {
                 editor = preferences.edit();
                 RadioButton radioButton = (RadioButton) group.getChildAt(0);
                 RadioButton radioButton2 = (RadioButton) group.getChildAt(1);
-                if (radioButton.isChecked()){
-                    editor.putBoolean(radioButton2.getTag().toString(),true);
+                if (viewHolder.poi1.isChecked()){
+                    editor.putBoolean(radioButton.getTag().toString(),true);
                     radioButton2.setTextColor(context.getResources().getColorStateList(R.color.cardview_shadow_start_color));
                    radioButton.setTextColor(context.getResources().getColorStateList(R.color.cardview_light_background));
                 }
                 else {
-                    editor.putBoolean(radioButton2.getTag().toString(),false);
+                    editor.putBoolean(radioButton.getTag().toString(),false);
                     radioButton2.setTextColor(context.getResources().getColorStateList(R.color.cardview_light_background));
                     radioButton.setTextColor(context.getResources().getColorStateList(R.color.cardview_shadow_start_color));
                 }

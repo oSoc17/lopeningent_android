@@ -65,17 +65,17 @@
         <SwitchPreference
             android:defaultValue="true"
             android:key="pref_key_audio"
-            android:summaryOff="Disabled"
-            android:summaryOn="Enabled"
+            android:summaryOff="@string/disabled"
+            android:summaryOn="@string/enabled"
             android:title="Audio" />
 
         <SwitchPreference
             android:defaultValue="true"
             android:dependency="pref_key_audio"
             android:key="pref_key_audio_directions"
-            android:summaryOff="Disabled"
-            android:summaryOn="Enabled"
-            android:title="Audio directions" />
+            android:summaryOff="@string/disabled"
+            android:summaryOn="@string/enabled"
+            android:title="@string/pref_audio_directions" />
 
         <PreferenceScreen
             android:title="Audio feedback"
@@ -83,20 +83,20 @@
             android:dependency="pref_key_audio">
 
             <PreferenceCategory
-                android:title="Feedback moments">
+                android:title="@string/pref_feedback_moments">
 
                 <SwitchPreference
                     android:defaultValue="true"
                     android:key="pref_key_audio_feedback_distance"
-                    android:summaryOff="Disabled"
-                    android:summaryOn="Enabled"
-                    android:title="After certain distance" />
+                    android:summaryOff="@string/disabled"
+                    android:summaryOn="@string/enabled"
+                    android:title="@string/pref_audio_after_distance" />
 
                 <com.dp16.runamicghent.Activities.MainScreen.CustomSettings.NumberPickerPreference
                     android:defaultValue="1"
                     android:dependency="pref_key_audio_feedback_distance"
                     android:key="pref_key_audio_feedback_distance_interval"
-                    android:title="Distance feedback interval"
+                    android:title="@string/pref_distance_feedback_interval"
                     preference:maxValue="10"
                     preference:minValue="1"
                     preference:wrapSelectorWheel="true"
@@ -105,42 +105,42 @@
                 <SwitchPreference
                     android:defaultValue="false"
                     android:key="pref_key_audio_feedback_duration"
-                    android:summaryOff="Disabled"
-                    android:summaryOn="Enabled"
-                    android:title="After certain duration" />
+                    android:summaryOff="@string/disabled"
+                    android:summaryOn="@string/enabled"
+                    android:title="@string/pref_audio_after_duration" />
 
                 <com.dp16.runamicghent.Activities.MainScreen.CustomSettings.NumberPickerPreference
                     android:defaultValue="5"
                     android:dependency="pref_key_audio_feedback_duration"
                     android:key="pref_key_audio_feedback_duration_interval"
-                    android:title="Duration feedback interval"
+                    android:title="@string/pref_duration_feedback_interval"
                     preference:maxValue="60"
                     preference:minValue="1"
                     preference:wrapSelectorWheel="true"
-                    preference:unit="minutes"/>
+                    preference:unit="@string/interval_minutes"/>
             </PreferenceCategory>
 
             <PreferenceCategory
-                android:title="Feedback contents">
+                android:title="@string/pref_feedback_contents">
 
                 <CheckBoxPreference
                     android:key="pref_key_audio_feedback_contents_distance"
-                    android:title="Total distance"
+                    android:title="@string/total_distance_label"
                     android:defaultValue="true"/>
 
                 <CheckBoxPreference
                     android:key="pref_key_audio_feedback_contents_duration"
-                    android:title="Total duration"
+                    android:title="@string/total_duration"
                     android:defaultValue="true"/>
 
                 <CheckBoxPreference
                     android:key="pref_key_audio_feedback_contents_avg_speed"
-                    android:title="Average speed"
+                    android:title="@string/average_running_speed"
                     android:defaultValue="true"/>
 
                 <CheckBoxPreference
                     android:key="pref_key_audio_feedback_contents_avg_heartrate"
-                    android:title="Average heart rate"
+                    android:title="@string/average_heart_rate"
                     android:defaultValue="false"/>
 
             </PreferenceCategory>
@@ -151,7 +151,7 @@
 
     <PreferenceCategory
         android:key="pref_reset_tourguide_category"
-        android:title="Reset introduction Tooltips">
+        android:title="@string/introduction_tooltips">
 
         <com.dp16.runamicghent.Activities.MainScreen.CustomSettings.ResetTooltipDialogPreference
             android:title="@string/pref_title_reset_tooltip_dialog"

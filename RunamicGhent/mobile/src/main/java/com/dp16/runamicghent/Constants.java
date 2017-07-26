@@ -15,6 +15,7 @@ package com.dp16.runamicghent;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.mongodb.util.JSON;
 
 import java.util.Objects;
 
@@ -35,12 +36,14 @@ public class Constants {
      * Server configuration constants.
      */
     public class Server {
-        public static final String ADDRESS = "95.85.5.226:8000";
+        public static final String ADDRESS = "95.85.5.226";
         public static final String MONGOPORT = "27017";
 
         private Server() {
             throw new IllegalAccessError(UTILITY_CLASS_ERROR);
         }
+
+
     }
 
     /**
@@ -394,5 +397,7 @@ public class Constants {
         }
 
     }
+
+
 
 }

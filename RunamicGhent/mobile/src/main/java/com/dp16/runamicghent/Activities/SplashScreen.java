@@ -56,50 +56,56 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        new Thread(new Runnable() {
+            public void run() {
+                // do here some long operation
 
-        // Init Fabric with Crashlytics and Answers
-        if (!Constants.DEVELOP) {
-            Fabric.with(this, new Crashlytics(), new Answers());
-        }
 
-        // Register the activities with the GuiController
-        GuiController controller = GuiController.getInstance();
-        controller.setContext(this);
-        try {
-            controller.register(Constants.ActivityTypes.MAINMENU, IntroActivity.class);
-            controller.register(Constants.ActivityTypes.RUNNINGVIEW, RunningActivity.class);
-            controller.register(Constants.ActivityTypes.DEBUG, DebugActivity.class);
-            controller.register(Constants.ActivityTypes.HISTORYEXPANDED, HistoryExpandedFragment.class);
-            controller.register(Constants.ActivityTypes.LOGIN, LoginActivity.class);
-            controller.register(Constants.ActivityTypes.SETTINGS, SettingsActivity.class);
-            controller.register(Constants.ActivityTypes.CHANGEPROFILE, ChangeprofileActivity.class);
-            controller.register(Constants.ActivityTypes.LICENCES, LicenseActivity.class);
-        } catch (GuiControllerException e) {
-            Log.e(e.getClass().getName(), e.getMessage(), e);
-        }
+                // Init Fabric with Crashlytics and Answers
+                if (!Constants.DEVELOP) {
+                    Fabric.with(SplashScreen.this, new Crashlytics(), new Answers());
+                }
 
-        // Start the EventBroker! very important (Singleton)
-        EventBroker.getInstance().start();
+                // Register the activities with the GuiController
+                GuiController controller = GuiController.getInstance();
+                controller.setContext(SplashScreen.this);
+                try {
+                    controller.register(Constants.ActivityTypes.MAINMENU, IntroActivity.class);
+                    controller.register(Constants.ActivityTypes.RUNNINGVIEW, RunningActivity.class);
+                    controller.register(Constants.ActivityTypes.DEBUG, DebugActivity.class);
+                    controller.register(Constants.ActivityTypes.HISTORYEXPANDED, HistoryExpandedFragment.class);
+                    controller.register(Constants.ActivityTypes.LOGIN, LoginActivity.class);
+                    controller.register(Constants.ActivityTypes.SETTINGS, SettingsActivity.class);
+                    controller.register(Constants.ActivityTypes.CHANGEPROFILE, ChangeprofileActivity.class);
+                    controller.register(Constants.ActivityTypes.LICENCES, LicenseActivity.class);
+                } catch (GuiControllerException e) {
+                    Log.e(e.getClass().getName(), e.getMessage(), e);
+                }
 
-        // Start the RouteProvider
-        RouteProvider routeProvider = new RouteProvider(getApplicationContext());
-        routeProvider.start();
+                // Start the EventBroker! very important (Singleton)
+                EventBroker.getInstance().start();
 
-        // Start the persistence component
-        EventBasedPersistence persistence = new EventBasedPersistence(getApplicationContext());
-        persistence.start();
+                // Start the RouteProvider
+                RouteProvider routeProvider = new RouteProvider(getApplicationContext());
+                routeProvider.start();
 
-        // Start the RatingTransmitter component
-        RatingTransmitter ratingTransmitter = new RatingTransmitter(false);
-        ratingTransmitter.start();
+                // Start the persistence component
+                EventBasedPersistence persistence = new EventBasedPersistence(getApplicationContext());
+                persistence.start();
 
-        // Tell the mongodb driver to shut up. (Disable logging for trivial matters.)
-        if (Constants.Storage.TURNOFFLOGGING) {
-            Logger.getLogger(Constants.Storage.LOGGERNAME).setLevel(Level.WARNING);
-        }
+                // Start the RatingTransmitter component
+                RatingTransmitter ratingTransmitter = new RatingTransmitter(false);
+                ratingTransmitter.start();
 
-        // Start LoginActivity and finish this activity
-        controller.startActivity(this, Constants.ActivityTypes.LOGIN, null);
-        controller.exitActivity(this);
+                // Tell the mongodb driver to shut up. (Disable logging for trivial matters.)
+                if (Constants.Storage.TURNOFFLOGGING) {
+                    Logger.getLogger(Constants.Storage.LOGGERNAME).setLevel(Level.WARNING);
+                }
+
+                // Start LoginActivity and finish this activity
+                controller.startActivity(SplashScreen.this, Constants.ActivityTypes.LOGIN, null);
+                controller.exitActivity(SplashScreen.this);
+            }
+        }).start();
     }
 }

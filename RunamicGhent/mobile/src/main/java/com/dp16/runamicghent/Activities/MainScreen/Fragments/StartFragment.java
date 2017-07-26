@@ -348,6 +348,15 @@ public class StartFragment extends Fragment implements EventListener, OnMapReady
 
         sequence.addSequenceItem(
                 new MaterialShowcaseView.Builder(this.getActivity())
+                        .setTarget(getActivity().findViewById(R.id.action_routesettings))
+                        //.setDismissText(getString(R.string.tooltip_start_bottombar_got_it))
+                        .setContentText(getString(R.string.tooltip_routesettings_bottombar_explanation))
+                        .setDismissOnTouch(true)
+                        .build()
+        );
+
+        sequence.addSequenceItem(
+                new MaterialShowcaseView.Builder(this.getActivity())
                         .setTarget(getActivity().findViewById(R.id.action_history))
                         //.setDismissText(getString(R.string.tooltip_history_bottombar_got_it))
                         .setContentText(getString(R.string.tooltip_history_bottombar_explanation))

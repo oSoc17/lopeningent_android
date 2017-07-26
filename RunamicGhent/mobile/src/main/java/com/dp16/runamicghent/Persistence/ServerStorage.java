@@ -13,13 +13,20 @@
 
 package com.dp16.runamicghent.Persistence;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
+import com.dp16.runamicghent.Activities.Utils;
 import com.dp16.runamicghent.Constants;
 import com.dp16.runamicghent.StatTracker.AggregateRunningStatistics;
 import com.dp16.runamicghent.StatTracker.RunningStatistics;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.mongodb.util.JSON;
@@ -29,6 +36,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -49,15 +57,27 @@ import java.util.List;
 @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
 public class ServerStorage implements StorageComponent {
     private boolean connected;
-    private String userId;
+    private String userToken;
     private JSONObject serverStats;
 
-    ServerStorage(String clientToken) {
-        userId = clientToken;
+    ServerStorage() {
+        setUserToken();
     }
 
-    void setUserId(String clientToken) {
-        userId = clientToken;
+
+    void setUserToken() {
+        FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+        mUser.getToken(true)
+                .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                    public void onComplete(@NonNull Task<GetTokenResult> task) {
+                        if (task.isSuccessful()) {
+                            userToken = task.getResult().getToken();
+                            Log.d("userToken", userToken);
+                        } else {
+                            userToken = "";
+                        }
+                    }
+                });
     }
 
     /**
@@ -79,54 +99,33 @@ public class ServerStorage implements StorageComponent {
      * Does nothing if already connected.
      */
     void connect() {
-        if (!connected) {
-            URL url = null;
-            try {
-                url = new URL(("http://95.85.5.226:8000/stats/check/").toString());
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-            String body = null;
-            try {
-                body = URLEncoder.encode("userid", "UTF-8")
-                        + "=" + URLEncoder.encode(userId, "UTF-8");
-                body += "&" + URLEncoder.encode("android_token", "UTF-8")
-                        + "=" + URLEncoder.encode("1223", "UTF-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+        if (!connected ) {
+            if(userToken != ""){
 
-            int amountOfTries = 3;
-            int status = 0;
-            while (amountOfTries > 0 && !connected) {
-                if (url != null) {
+                String body = null;
+                try {
+                    body = URLEncoder.encode("android_token", "UTF-8")
+                            + "=" + URLEncoder.encode(userToken, "UTF-8");
+
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                JSONObject result = Utils.PostRequest(body,"http://95.85.5.226/stats/check/");
+                if (result!=null){
                     try {
-                        //open connection w/ URL
-                        InputStream stream = null;
-                        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                        httpURLConnection.setRequestMethod("POST");
-                        httpURLConnection.setDoOutput(true);
-
-
-                        httpURLConnection.connect();
-
-                        OutputStreamWriter wr = new OutputStreamWriter(httpURLConnection.getOutputStream());
-                        wr.write(body);
-                        wr.flush();
-
-                        stream = httpURLConnection.getInputStream();
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"), 8);
-                        String result = reader.readLine();
-                        //create JSON + publish event
-                        serverStats = new JSONObject(((new JSONObject(result)).get("values").toString()));
+                        serverStats = new JSONObject((result.get("values").toString()));
                         connected = true;
-                    } catch (Exception e) {
-                        Log.e("InputStream", e.getLocalizedMessage(), e);
-                        amountOfTries--;
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                         connected = false;
                     }
-                }
+                }else{connected = false;}
+
+            }else{
+                connected = false;
             }
+
         }
 
     }
@@ -219,22 +218,17 @@ public class ServerStorage implements StorageComponent {
 
     @Override
     public boolean saveAggregateRunningStatistics(AggregateRunningStatistics aggregateRunningStatistics, long editTime) {
-        if (!connected) {
+
+        if (!connected || userToken == "") {
             return false;
         }
         boolean isPosted = false;
-        URL url = null;
-        try {
-            url = new URL(("http://95.85.5.226:8000/stats/update/").toString());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+
         String body = null;
         try {
-            body = URLEncoder.encode("userid", "UTF-8")
-                    + "=" + URLEncoder.encode(userId, "UTF-8");
-            body += "&" + URLEncoder.encode("android_token", "UTF-8")
-                    + "=" + URLEncoder.encode("1223", "UTF-8");
+
+            body = URLEncoder.encode("android_token", "UTF-8")
+                    + "=" + URLEncoder.encode(userToken, "UTF-8");
             body += "&" + URLEncoder.encode("avg_speed", "UTF-8")
                     + "=" + URLEncoder.encode(aggregateRunningStatistics.getAverageRunSpeed().getSpeed() + "", "UTF-8");
             body += "&" + URLEncoder.encode("avg_duration", "UTF-8")
@@ -256,37 +250,12 @@ public class ServerStorage implements StorageComponent {
             e.printStackTrace();
         }
 
-        int amountOfTries = 3;
-        int status = 0;
-        while (amountOfTries > 0 && !isPosted) {
-            if (url != null) {
-                try {
-                    //open connection w/ URL
-                    InputStream stream = null;
-                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                    httpURLConnection.setRequestMethod("POST");
-                    httpURLConnection.setDoOutput(true);
+        JSONObject response = Utils.PostRequest(body,"http://95.85.5.226/stats/update/");
 
-
-                    httpURLConnection.connect();
-
-                    OutputStreamWriter wr = new OutputStreamWriter(httpURLConnection.getOutputStream());
-                    wr.write(body);
-                    wr.flush();
-
-                    stream = httpURLConnection.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"), 8);
-                    String result = reader.readLine();
-
-                    //create JSON + publish event
-                    serverStats = new JSONObject(((new JSONObject(result)).get("values").toString()));
-                    isPosted = true;
-                } catch (Exception e) {
-                    Log.e("InputStream", e.getLocalizedMessage(), e);
-                    amountOfTries--;
-                    isPosted = false;
-                }
-            }
+        if (response!=null){
+            isPosted = true;
+        }else{
+            isPosted=false;
         }
         return isPosted;
     }
@@ -316,6 +285,8 @@ public class ServerStorage implements StorageComponent {
     public boolean deleteAggregateRunningStatistics() {
         return true;
     }
+
+
 
 
 }
