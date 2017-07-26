@@ -279,7 +279,6 @@ public class WhileRunningFragment extends Fragment implements EventListener {
             iconFactory.setRotation(180);
             iconFactory.setContentRotation(180);
             startMarker = ((RunningActivity) getActivity()).getMapRunningFragment().addStartMarker(iconFactory, "Start");
-            poiMarker = ((RunningActivity) getActivity()).getMapRunningFragment().addPoiMarker("gent", new LatLng(51.0535,3.7304));
 
         }
 

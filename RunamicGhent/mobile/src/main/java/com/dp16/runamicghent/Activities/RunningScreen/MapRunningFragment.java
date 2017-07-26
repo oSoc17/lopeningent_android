@@ -13,8 +13,10 @@
 
 package com.dp16.runamicghent.Activities.RunningScreen;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -25,6 +27,7 @@ import android.view.ViewGroup;
 
 import com.dp16.runamicghent.Activities.Utils;
 import com.dp16.runamicghent.Constants;
+import com.dp16.runamicghent.GuiController.GuiController;
 import com.dp16.runamicghent.R;
 import com.dp16.runamicghent.RunningMapLocationSource;
 import com.dp16.eventbroker.EventBroker;
@@ -46,6 +49,12 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.SphericalUtil;
 import com.google.maps.android.ui.IconGenerator;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 /**
@@ -422,12 +431,36 @@ public class MapRunningFragment extends Fragment implements OnMapReadyCallback, 
     /*
     POI MARKER
      */
-    public Marker addPoiMarker(String title, LatLng poiPosition){
-        MarkerOptions markerOptions = new MarkerOptions()
+    public void addPoiMarker(JSONArray jsonArray){
 
-                .position(poiPosition)
-                .title(title);
-        return googleMap.addMarker(markerOptions);
+        Handler mainHandler = new Handler(getContext().getMainLooper());
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            ;
+            String title = null;
+            try {
+                title = jsonArray.getJSONObject(i).getString("name") + " (" + jsonArray.getJSONObject(i).getString("type") + ")";
+                String description = jsonArray.getJSONObject(i).getString("description");
+                LatLng location = new LatLng(jsonArray.getJSONObject(i).getDouble("lat"), jsonArray.getJSONObject(i).getDouble("lon"));
+                final MarkerOptions markerOptions = new MarkerOptions()
+
+                        .position(location)
+                        .title(title)
+                        .snippet(description);
+                Runnable myRunnable = new Runnable() {
+                    @Override
+                    public void run() {googleMap.addMarker(markerOptions);}
+                };
+                mainHandler.post(myRunnable);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+
     }
     /**
      * Add start arrow to map with direction dependent on beginning of the route

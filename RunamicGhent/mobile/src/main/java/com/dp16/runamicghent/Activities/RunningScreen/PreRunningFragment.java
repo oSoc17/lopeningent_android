@@ -15,8 +15,11 @@ package com.dp16.runamicghent.Activities.RunningScreen;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -26,6 +29,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.dp16.runamicghent.Activities.Utils;
 import com.dp16.runamicghent.Constants;
 import com.dp16.runamicghent.GuiController.GuiController;
 import com.dp16.runamicghent.R;
@@ -35,6 +39,18 @@ import com.dp16.eventbroker.EventListener;
 import com.dp16.eventbroker.EventPublisher;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.maps.android.data.Layer;
+import com.google.maps.android.data.geojson.GeoJsonLayer;
+import com.mongodb.util.JSON;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 /**
  * This Fragment is meant to be loaded on top of the MapRunningFragment.
@@ -107,13 +123,44 @@ public class PreRunningFragment extends Fragment implements EventPublisher, Even
     }
     //Set markers
     public void setPoiMarkers(){
-        //Test variable
-        LatLng testMarker = new LatLng(51.0535,3.7304);
-        String title = "Gent";
-        ((RunningActivity) getActivity()).getMapRunningFragment().addPoiMarker(title, testMarker);
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 
+        if (preferences.getBoolean("pref_mapmarkers",false)){
+            new Thread(new Runnable() {
+                public void run() {
+                    String urlString = "http://"+ Constants.Server.ADDRESS+"/poi/coords/";
+                    String body = "";
+                    try {
+                        for (String poiTag : GuiController.getInstance().getPoiTags()) {
+                            if (preferences.getBoolean(poiTag, false)) {
+
+                                body += "&" + URLEncoder.encode("tags", "UTF-8")
+                                        + "=" + URLEncoder.encode(poiTag, "UTF-8");
+
+                            }
+                        }
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    JSONObject result = Utils.PostRequest(body, urlString);
+                    if (result!=null){
+
+                        try {
+                            JSONArray arrayPOI = (JSONArray) result.get("coords");
+                            ((RunningActivity) getActivity()).getMapRunningFragment().addPoiMarker(arrayPOI);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }
+
+            }).start();
+        }
 
     }
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -157,7 +204,7 @@ public class PreRunningFragment extends Fragment implements EventPublisher, Even
                         // Draw arrow to show direction runner has to start running in, delete previous arrow if there is one
                         ((RunningActivity) getActivity()).getMapRunningFragment().addStartArrow();
 
-                        //add poi marker
+                        //add poi markers
                         setPoiMarkers();
 
                         // Calculate route length and display it

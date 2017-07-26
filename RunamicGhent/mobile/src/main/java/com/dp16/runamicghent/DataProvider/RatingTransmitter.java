@@ -113,7 +113,7 @@ public class RatingTransmitter implements EventPublisher, EventListener, DataPro
             String body = null;
             try {
 
-                body = URLEncoder.encode("tag", "UTF-8")
+                body = URLEncoder.encode("visited_path", "UTF-8")
                         + "=" + URLEncoder.encode(runRating.getTag(), "UTF-8");
                 body += "&" + URLEncoder.encode("rating", "UTF-8")
                         + "=" + URLEncoder.encode(runRating.getStringRating(), "UTF-8");
