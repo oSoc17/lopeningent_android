@@ -141,7 +141,8 @@
     <string name="audio_seconds"> secondes.</string>
 
     <!-- Preferences Screen -->
-    <string name="pref_title_units">Eenheden</string>
+    <string name="pref_title_general">Algemeen</string>
+    <string name="pref_title_mapmarkers">POI markers</string>
     <string name="pref_title_velocity">Snelheid eenheden</string>
     <string name="pref_summary_velocity">Snelheid in km/h of min/km weergeven</string>
 

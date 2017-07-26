@@ -18,7 +18,7 @@
 
     <PreferenceCategory
         android:key="pref_key_units"
-        android:title="@string/pref_title_units">
+        android:title="@string/pref_title_general">
 
         <ListPreference
             android:defaultValue="0"
@@ -27,6 +27,10 @@
             android:key="pref_key_speed_pace"
             android:summary="@string/pref_summary_velocity"
             android:title="@string/pref_title_velocity" />
+        <CheckBoxPreference
+            android:key="pref_mapmarkers"
+            android:title="@string/pref_title_mapmarkers"
+            android:defaultValue="true"/>
     </PreferenceCategory>
 
 
