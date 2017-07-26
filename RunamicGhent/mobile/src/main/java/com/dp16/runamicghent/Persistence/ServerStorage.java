@@ -67,17 +67,24 @@ public class ServerStorage implements StorageComponent {
 
     void setUserToken() {
         FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
-        mUser.getToken(true)
-                .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
-                    public void onComplete(@NonNull Task<GetTokenResult> task) {
-                        if (task.isSuccessful()) {
-                            userToken = task.getResult().getToken();
-                            Log.d("userToken", userToken);
-                        } else {
-                            userToken = "";
+        try {
+            mUser.getToken(true)
+                    .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                        public void onComplete(@NonNull Task<GetTokenResult> task) {
+
+                            if (task.isSuccessful()) {
+                                userToken = task.getResult().getToken();
+                                Log.d("userToken", userToken);
+                            } else {
+                                userToken = "";
+                            }
+
+
                         }
-                    }
-                });
+                    });
+        }catch (Exception e){
+            userToken = "";
+        }
     }
 
     /**
@@ -100,6 +107,7 @@ public class ServerStorage implements StorageComponent {
      */
     void connect() {
         if (!connected ) {
+            setUserToken();
             if(userToken != ""){
 
                 String body = null;
@@ -218,7 +226,7 @@ public class ServerStorage implements StorageComponent {
 
     @Override
     public boolean saveAggregateRunningStatistics(AggregateRunningStatistics aggregateRunningStatistics, long editTime) {
-
+        setUserToken();
         if (!connected || userToken == "") {
             return false;
         }

@@ -255,6 +255,8 @@
     <string name="tooltip_postrunning_raringbar_explanation">Gefeliciteerd bij het afronden van je eerste route!\n\nBy door te sliden met je vinger over de sterren kun je een rating geven aan deze route.</string>
     <string name="tooltip_postrunning_savebutton_got_it">› OK.</string>
     <string name="tooltip_postrunning_savebutton_explanation">Nadat je een rating ingediendt hebt, kun je dit opslaan door behulp van deze knop, anderzijds wordt het weggegooid.</string>
+    <string name="tooltip_start_distancepicker_explanation">Gebruik de slider om de lengte van de route te configureren</string>
+    <string name="tooltip_start_distancepicker_got_it">› Ok, got it!</string>
     <string name="pref_about">Over</string>
     <string name="open_source_libraries">Open Source Libraries</string>
     <string name="reset">reset</string>
@@ -300,5 +302,6 @@
     <string name="tooltip_whilerunning_title">Je eerste loop</string>
     <string name="tooltip_whilerunning_explanation">Als je audio instructies hebt geconfigureerd, maak dan zeker om je volume aan te zetten! Als je loopt met muziek, dimmen we de muziek lichtjes tijdens de audio instructies. </string>
     <string name="tooltip_whilerunning_dynamic_buttons_explanation">Gebruik deze knoppen om een korter of een trager route te vragen tijdens het lopen.\n\n\nHave a good run!</string>
+    <string name="pref_title_units">Eenheden</string>
 
 </resources>

@@ -303,5 +303,6 @@
     <string name="tooltip_whilerunning_title">Your first run!</string>
     <string name="tooltip_whilerunning_explanation">If you configured audio directions, be sure to put your volume up! If you\'re running with music, we\'ll dim it slightly while playing the directions.</string>
     <string name="tooltip_whilerunning_dynamic_buttons_explanation">Use these buttons to request a shorter or slower route while you are running.\n\n\nHave a good run!</string>
+    <string name="pref_title_units">Units</string>
 
 </resources>
