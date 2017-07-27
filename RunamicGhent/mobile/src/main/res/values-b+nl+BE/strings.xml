@@ -31,7 +31,7 @@
     <string name="location_inaccurate_wait">Wacht</string>
     <string name="location_inaccurate_continue">Doorgaan</string>
     <string name="location_inaccurate_message">Uw locatie is nog niet nauwkeurig gedefinieerd. U moet buiten zijn om een pad te definiëren. Uw pad kan niet goed getraceerd worden zonder goede nauwkeurigheid. Wilt u wachten op een beter signaal of doorgaan?</string>
-    <string name="internet_connection">Geen internet connectie</string>
+    <string name="internet_connection">Geen internet verbinding</string>
 
     <!-- Route Settings Fragment -->
     <string name="distance">Afstand</string>
@@ -67,7 +67,7 @@
     <!-- History Fragment -->
     <string name="delete">Verwijder</string>
     <string name="your_rating_label">Your Rating</string>
-    <string name="no_runs">Je hebt nog niet geloopt of je hebt nog geen routes opgeslagen </string>
+    <string name="no_runs">"Je hebt nog niet gelopen of je hebt nog geen routes opgeslagen "</string>
     <string name="go_for_run">Ga eens lopen!</string>
     <string name="string_divider">•</string>
 
@@ -90,9 +90,9 @@
 
     <!-- Running Fragment -->
     <string name="generating_route">Genereren van route…</string>
-    <string name="generate_alternative">Alternatieven genereren</string>
+    <string name="generate_alternative">Alternatief genereren</string>
     <string name="start_running">Start met lopen</string>
-    <string name="pause_run">Pause</string>
+    <string name="pause_run">Pauze</string>
     <string name="resume_run">Hervatten</string>
     <string name="stop_run">Stop</string>
 
@@ -170,8 +170,8 @@
     <string name="pref_audio_directions">Audio instructies</string>
     <string name="pref_audio_after_distance">Na een bepaalde afstand</string>
     <string name="pref_audio_after_duration">Na een  bepaalde duur</string>
-    <string name="pref_distance_feedback_interval">Afstand feedback interval</string>
-    <string name="pref_duration_feedback_interval">Duur feedback interval</string>
+    <string name="pref_distance_feedback_interval">Interval voor afstand feedback</string>
+    <string name="pref_duration_feedback_interval">Interval voor tijdsgebonden feedback</string>
     <string name="pref_feedback_moments">Feedback momenten</string>
     <string name="pref_feedback_contents">Feedback waarden</string>
     <string name="interval_minutes">minuten</string>
