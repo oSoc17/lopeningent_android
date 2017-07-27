@@ -180,7 +180,7 @@ public class RunningActivity extends FragmentActivity {
             if (PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(Constants.SettingTypes.PREF_KEY_DEBUG_LOCATION_MOCK, false)) {
                 locationProvider.pause();
                 locationProvider.stop();
-                locationProviderMock = new LocationProviderMock(runRoute.getRouteCoordinates(), 3.0, 12.0);
+                locationProviderMock = new LocationProviderMock(runRoute.getRouteCoordinates(), 3.0, 13.0); //12.0 speed
                 locationProviderMock.start();
             }
         }

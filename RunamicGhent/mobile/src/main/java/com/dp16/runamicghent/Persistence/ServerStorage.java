@@ -276,7 +276,7 @@ public class ServerStorage implements StorageComponent {
             return 0;
         }
         try {
-            return (int)serverStats.get("edit_time");
+            return (long)serverStats.get("edit_time");
         } catch (JSONException e) {
             e.printStackTrace();
             return 0;

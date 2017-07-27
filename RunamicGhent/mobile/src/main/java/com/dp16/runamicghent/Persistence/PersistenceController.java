@@ -66,7 +66,6 @@ public class PersistenceController {
     }
 
     private void renewClientToken() {
-        String clientToken = PreferenceManager.getDefaultSharedPreferences(context).getString("client token", "");
         serverStorage.setUserToken();
     }
 
