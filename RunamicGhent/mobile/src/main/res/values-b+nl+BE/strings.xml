@@ -144,7 +144,7 @@
     <string name="pref_title_general">Algemeen</string>
     <string name="pref_title_mapmarkers">POI markers</string>
     <string name="pref_title_velocity">Snelheid eenheden</string>
-    <string name="pref_summary_velocity">Snelheid in km/h of min/km weergeven</string>
+    <string name="pref_summary_velocity">Snelheid in km/u of min/km weergeven</string>
 
     <string name="pref_title_dynamic_routing">Dynamische routing</string>
     <string name="pref_title_dynamic_averagespeed_routing_on_off">Activeer dynamische routing via gemiddelde snelheid.</string>
@@ -210,7 +210,7 @@
     <!-- Answers labels -->
     <string name="duration_answers">Duration [min]</string>
     <string name="distance_answers">Distance [km]</string>
-    <string name="avg_speed_answers">Gem. Snelheid [km/h]</string>
+    <string name="avg_speed_answers">Gem. Snelheid [km/u]</string>
     <string name="rating_answers">rating</string>
     <string name="title_activity_change_profile">ChangeProfile</string>
     <string name="title_activity_changeprofile">ChangeprofileActivity</string>
