@@ -143,10 +143,12 @@ public class RouteProvider implements EventListener, EventPublisher, DataProvide
                 if (trackRequest.getDynamic()) {
                     urlString = "http://" + Constants.Server.ADDRESS + "/route/return/";
                     body = constructDynamicBody();
+                }else{
+                    urlString = "http://" + Constants.Server.ADDRESS + "/route/generate/";
+                    body = constructStaticBody();
                 }
 
-                urlString = "http://" + Constants.Server.ADDRESS + "/route/generate/";
-                body = constructStaticBody();
+                
             }
 
             catch(
